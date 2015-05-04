@@ -4,17 +4,17 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import Local.LocalTime;
-import datetime.DateTimeConstants;
-import datetime.LocalDateTime;
-import duration.Duration;
-import duration.DurationFieldType;
+import ignore.local.LocalTime;
+import ignore.datetime.DateTimeConstants;
+import ignore.datetime.LocalDateTime;
+import ignore.duration.Duration;
+import ignore.duration.DurationFieldType;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import period.Period;
-import period.PeriodType;
+import ignore.period.Period;
+import ignore.period.PeriodType;
 import timeunits.*;
-import utils.TimeOfDay;
+import ignore.TimeOfDay;
 
 public class TestMinutes extends TestCase {
     public static void main(String[] args) {

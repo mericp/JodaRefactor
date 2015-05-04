@@ -17,13 +17,13 @@ DateTimeZone represents a time zone.
  * The following definitions of time are generally used:
  * <ul>
  * <li>UTC - The reference time.
- * <li>Standard Time - The local time without a daylight saving time offset.
+ * <li>Standard Time - The misc.local time without a daylight saving time offset.
  * For example, in Paris, standard time is UTC+01:00.
- * <li>Daylight Saving Time - The local time with a daylight saving time
+ * <li>Daylight Saving Time - The misc.local time with a daylight saving time
  * offset. This offset is typically one hour, but not always. It is typically
  * used in most countries away from the equator.  In Paris, daylight saving
  * time is UTC+02:00.
- * <li>Wall Time - This is what a local clock on the wall reads. This will be
+ * <li>Wall Time - This is what a misc.local clock on the wall reads. This will be
  * either Standard Time or Daylight Saving Time depending on the time of year
  * and whether the location uses Daylight Saving Time.
  * </ul>
@@ -72,10 +72,10 @@ Gets a time zone instance for the specified time zone id.
      * All IDs must be specified in the long format.
      * The exception is UTC, which is an acceptable id.
      * <p>
-     * Alternatively a locale independent, fixed offset, datetime zone can
+     * Alternatively a locale independent, fixed offset, misc.datetime zone can
      * be specified. The form <code>[+-]hh:mm</code> can be used.
      *
-     * @param id  the ID of the datetime zone, null means default
+     * @param id  the ID of the misc.datetime zone, null means default
      * @return the DateTimeZone object for the ID
      * @throws IllegalArgumentException if the ID is not recognised
 
@@ -145,7 +145,7 @@ Gets a time zone instance for the specified offset to UTC in milliseconds.
       * @return the default name provider
 
 public int getOffsetFromLocal(long instantLocal):
-Gets the millisecond offset to subtract from local time to get UTC time.
+Gets the millisecond offset to subtract from misc.local time to get UTC time.
      * This offset can be used to undo adding the offset obtained by getOffset.
      *
      * <pre>
@@ -155,14 +155,14 @@ Gets the millisecond offset to subtract from local time to get UTC time.
      *
      * NOTE: After calculating millisLocal, some error may be introduced. At
      * offset transitions (due to DST or other historical changes), ranges of
-     * local times may map to different UTC times.
+     * misc.local times may map to different UTC times.
      * <p>
-     * For overlaps (where the local time is ambiguous), this method returns the
-     * offset applicable before the gap. The effect of this is that any instant
+     * For overlaps (where the misc.local time is ambiguous), this method returns the
+     * offset applicable before the gap. The effect of this is that any misc.instant
      * calculated using the offset from an overlap will be in "summer" time.
      * <p>
      * For gaps, this method returns the offset applicable before the gap, ie "winter" offset.
-     * However, the effect of this is that any instant calculated using the offset
+     * However, the effect of this is that any misc.instant calculated using the offset
      * from a gap will be after the gap, in "summer" time.
      * <p>
      * For example, consider a zone with a gap from 01:00 to 01:59:<br />
@@ -177,5 +177,5 @@ Gets the millisecond offset to subtract from local time to get UTC time.
      * Prior to v1.5, the DST gap behaviour was also not defined.
      * In v2.4, the documentation was clarified again.
      *
-     * @param instantLocal  the millisecond instant, relative to this time zone, to get the offset for
-     * @return the millisecond offset to subtract from local time to get UTC time
+     * @param instantLocal  the millisecond misc.instant, relative to this time zone, to get the offset for
+     * @return the millisecond offset to subtract from misc.local time to get UTC time

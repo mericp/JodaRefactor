@@ -1,5 +1,5 @@
-Wraps another field such that zero values are replaced with one more than
+Wraps another misc.field such that zero values are replaced with one more than
  * it's maximum. This is particularly useful for implementing an clockhourOfDay
- * field, where the midnight value of 0 is replaced with 24.
+ * misc.field, where the midnight value of 0 is replaced with 24.
  * <p>
  * ZeroIsMaxDateTimeField is thread-safe and immutable.

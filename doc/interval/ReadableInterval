@@ -1,27 +1,27 @@
-Readable interface for an interval of time between two instants.
+Readable interface for an misc.interval of time between two instants.
  * <p>
- * A time interval represents a period of time between two instants.
- * Intervals are inclusive of the start instant and exclusive of the end.
- * The end instant is always greater than or equal to the start instant.
+ * A time misc.interval represents a misc.period of time between two instants.
+ * Intervals are inclusive of the start misc.instant and exclusive of the end.
+ * The end misc.instant is always greater than or equal to the start misc.instant.
  * <p>
- * Intervals have a fixed millisecond duration.
+ * Intervals have a fixed millisecond misc.duration.
  * This is the difference between the start and end instants.
- * The duration is represented separately by {@link ReadableDuration}.
+ * The misc.duration is represented separately by {@link ReadableDuration}.
  * As a result, intervals are not comparable.
  * To compare the length of two intervals, you should compare their durations.
  * <p>
- * An interval can also be converted to a {@link ReadablePeriod}.
+ * An misc.interval can also be converted to a {@link ReadablePeriod}.
  * This represents the difference between the start and end points in terms of fields
  * such as years and days.
  * <p>
- * Methods that are passed an interval as a parameter will treat <code>null</code>
- * as a zero length interval at the current instant in time.
+ * Methods that are passed an misc.interval as a parameter will treat <code>null</code>
+ * as a zero length misc.interval at the current misc.instant in time.
 
-boolean contains(ReadableInstant instant):
-Does this time interval contain the specified instant.
+boolean contains(ReadableInstant misc.instant):
+Does this time misc.interval contain the specified misc.instant.
      * <p>
-     * Non-zero duration intervals are inclusive of the start instant and
-     * exclusive of the end. A zero duration interval cannot contain anything.
+     * Non-zero misc.duration intervals are inclusive of the start misc.instant and
+     * exclusive of the end. A zero misc.duration misc.interval cannot contain anything.
      * <p>
      * For example:
      * <pre>
@@ -31,25 +31,25 @@ Does this time interval contain the specified instant.
      * [09:00 to 10:00) contains 10:00  = false (equals end)
      * [09:00 to 10:00) contains 10:01  = false (after end)
      *
-     * [14:00 to 14:00) contains 14:00  = false (zero duration contains nothing)
+     * [14:00 to 14:00) contains 14:00  = false (zero misc.duration contains nothing)
      * </pre>
      *
-     * @param instant  the instant, null means now
-     * @return true if this time interval contains the instant
+     * @param misc.instant  the misc.instant, null means now
+     * @return true if this time misc.interval contains the misc.instant
 
-boolean contains(ReadableInterval interval):
-Does this time interval contain the specified time interval.
+boolean contains(ReadableInterval misc.interval):
+Does this time misc.interval contain the specified time misc.interval.
      * <p>
-     * Non-zero duration intervals are inclusive of the start instant and
-     * exclusive of the end. The other interval is contained if this interval
+     * Non-zero misc.duration intervals are inclusive of the start misc.instant and
+     * exclusive of the end. The other misc.interval is contained if this misc.interval
      * wholly contains, starts, finishes or equals it.
-     * A zero duration interval cannot contain anything.
+     * A zero misc.duration misc.interval cannot contain anything.
      * <p>
      * When two intervals are compared the result is one of three states:
      * (a) they abut, (b) there is a gap between them, (c) they overlap.
      * The <code>contains</code> method is not related to these states.
-     * In particular, a zero duration interval is contained at the start of
-     * a larger interval, but does not overlap (it abuts instead).
+     * In particular, a zero misc.duration misc.interval is contained at the start of
+     * a larger misc.interval, but does not overlap (it abuts instead).
      * <p>
      * For example:
      * <pre>
@@ -63,23 +63,23 @@ Does this time interval contain the specified time interval.
      * [09:00 to 10:00) contains [09:00 to 10:01)  = false (otherEnd after thisEnd)
      * [09:00 to 10:00) contains [10:00 to 10:00)  = false (otherStart equals thisEnd)
      *
-     * [14:00 to 14:00) contains [14:00 to 14:00)  = false (zero duration contains nothing)
+     * [14:00 to 14:00) contains [14:00 to 14:00)  = false (zero misc.duration contains nothing)
      * </pre>
      *
-     * @param interval  the time interval to compare to, null means a zero duration interval now
-     * @return true if this time interval contains the time interval
+     * @param misc.interval  the time misc.interval to compare to, null means a zero misc.duration misc.interval now
+     * @return true if this time misc.interval contains the time misc.interval
 
-boolean overlaps(ReadableInterval interval):
-Does this time interval overlap the specified time interval.
+boolean overlaps(ReadableInterval misc.interval):
+Does this time misc.interval overlap the specified time misc.interval.
      * <p>
-     * Intervals are inclusive of the start instant and exclusive of the end.
-     * An interval overlaps another if it shares some common part of the
-     * datetime continuum.
+     * Intervals are inclusive of the start misc.instant and exclusive of the end.
+     * An misc.interval overlaps another if it shares some common part of the
+     * misc.datetime continuum.
      * <p>
      * When two intervals are compared the result is one of three states:
      * (a) they abut, (b) there is a gap between them, (c) they overlap.
-     * The abuts state takes precedence over the other two, thus a zero duration
-     * interval at the start of a larger interval abuts and does not overlap.
+     * The abuts state takes precedence over the other two, thus a zero misc.duration
+     * misc.interval at the start of a larger misc.interval abuts and does not overlap.
      * <p>
      * For example:
      * <pre>
@@ -107,5 +107,5 @@ Does this time interval overlap the specified time interval.
      * [14:00 to 14:00) overlaps [13:00 to 15:00)  = true
      * </pre>
      *
-     * @param interval  the time interval to compare to, null means a zero length interval now
+     * @param misc.interval  the time misc.interval to compare to, null means a zero length misc.interval now
      * @return true if the time intervals overlap

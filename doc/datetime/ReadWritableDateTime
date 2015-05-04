@@ -1,4 +1,4 @@
-Defines an instant in time that can be queried and modified using datetime fields.
+Defines an misc.instant in time that can be queried and modified using misc.datetime fields.
  * <p>
  * The implementation of this interface will be mutable.
  * It may provide more advanced methods than those in the interface.

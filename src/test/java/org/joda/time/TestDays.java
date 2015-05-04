@@ -4,18 +4,18 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import datetime.DateTimeConstants;
-import datetime.LocalDate;
-import duration.Duration;
-import duration.DurationFieldType;
+import ignore.datetime.DateTimeConstants;
+import ignore.datetime.LocalDate;
+import ignore.duration.Duration;
+import ignore.duration.DurationFieldType;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import period.Period;
-import period.PeriodType;
+import ignore.period.Period;
+import ignore.period.PeriodType;
 import timeunits.*;
-import utils.MonthDay;
-import utils.YearMonth;
-import utils.YearMonthDay;
+import ignore.MonthDay;
+import ignore.YearMonth;
+import ignore.YearMonthDay;
 
 public class TestDays extends TestCase {
     public static void main(String[] args) {

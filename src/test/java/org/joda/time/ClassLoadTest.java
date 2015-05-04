@@ -1,6 +1,6 @@
 package test.java.org.joda.time;
 
-import datetime.DateTime;
+import ignore.datetime.DateTime;
 
 public class ClassLoadTest {
 

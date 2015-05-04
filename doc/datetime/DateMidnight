@@ -1,26 +1,26 @@
 DateMidnight defines a date where the time component is fixed at midnight.
- * The class uses a time zone, thus midnight is local unless a UTC time zone is used.
+ * The class uses a time zone, thus midnight is misc.local unless a UTC time zone is used.
  * <p>
  * It is important to emphasise that this class represents the time of midnight on
  * any given day.
  * Note that midnight is defined as 00:00, which is at the very start of a day.
  * <p>
- * This class does not represent a day, but the millisecond instant at midnight.
+ * This class does not represent a day, but the millisecond misc.instant at midnight.
  * If you need a class that represents the whole day, then an {@link Interval} or
  * a {@link LocalDate} may be more suitable.
  * <p>
  * This class uses a Chronology internally. The Chronology determines how the
- * millisecond instant value is converted into the date time fields.
+ * millisecond misc.instant value is converted into the date time fields.
  * The default Chronology is <code>ISOChronology</code> which is the agreed
  * international standard and compatable with the modern Gregorian calendar.
  *
- * <p>Each individual field can be queried in two ways:
+ * <p>Each individual misc.field can be queried in two ways:
  * <ul>
  * <li><code>getDayOfMonth()</code>
  * <li><code>dayOfMonth().get()</code>
  * </ul>
  * The second technique also provides access to other useful methods on the
- * field:
+ * misc.field:
  * <ul>
  * <li>numeric value
  * <li>text value
@@ -41,28 +41,28 @@ DateMidnight defines a date where the time component is fixed at midnight.
  * where the daylight saving time forward shift skips the midnight hour.
  * Use {@link LocalDate} to represent a date without a time zone.
  * Or use {@link DateTime} to represent a full date and time, perhaps
- * using {@link DateTime#withTimeAtStartOfDay()} to get an instant at the
+ * using {@link DateTime#withTimeAtStartOfDay()} to get an misc.instant at the
  * start of a day.
 
  public static DateMidnight now():
  Obtains a {@code DateMidnight} set to the current system millisecond time
       * using <code>ISOChronology</code> in the default time zone.
-      * The constructed object will have a local time of midnight.
+      * The constructed object will have a misc.local time of midnight.
       *
       * @return the current date, not null
 
 public static DateMidnight now:
 Obtains a {@code DateMidnight} set to the current system millisecond time
      * using <code>ISOChronology</code> in the specified time zone.
-     * The constructed object will have a local time of midnight.
+     * The constructed object will have a misc.local time of midnight.
      *
      * @param zone  the time zone, not null
      * @return the current date, not null
 
 public static DateMidnight now:
 Obtains a {@code DateMidnight} set to the current system millisecond time
-     * using the specified chronology.
-     * The constructed object will have a local time of midnight.
+     * using the specified misc.chronology.
+     * The constructed object will have a misc.local time of midnight.
      *
-     * @param chronology  the chronology, not null
+     * @param misc.chronology  the misc.chronology, not null
      * @return the current date, not null

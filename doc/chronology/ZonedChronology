@@ -3,14 +3,14 @@ Wraps another Chronology to add support for time zones.
  * ZonedChronology is thread-safe and immutable.
 
  public static ZonedChronology getInstance(Chronology base, DateTimeZone zone):
- Create a ZonedChronology for any chronology, overriding any time zone it
+ Create a ZonedChronology for any misc.chronology, overriding any time zone it
       * may already have.
       *
-      * @param base base chronology to wrap
+      * @param base base misc.chronology to wrap
       * @param zone the time zone
-      * @throws IllegalArgumentException if chronology or time zone is null
+      * @throws IllegalArgumentException if misc.chronology or time zone is null
 
-static boolean useTimeArithmetic(DurationField field):
+static boolean useTimeArithmetic(DurationField misc.field):
 Use time of day arithmetic rules for unit durations less than typical time zone offsets.
 
 static class ZonedDurationField extends BaseDurationField :

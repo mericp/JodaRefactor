@@ -1,6 +1,6 @@
-An immutable time period representing a number of years.
+An immutable time misc.period representing a number of years.
 <p>
-<code>Years</code> is an immutable period that can only store years.
+<code>Years</code> is an immutable misc.period that can only store years.
 It does not store months, days or hours for example. As such it is a
 type-safe way of representing a number of years in an application.
 <p>
@@ -21,27 +21,27 @@ This factory method provides access to shared instances.
 public static Years yearsBetween(ReadableInstant start, ReadableInstant end):
 Creates a <code>Years</code> representing the number of whole years
 between the two specified datetimes. This method corectly handles
-any daylight savings time changes that may occur during the interval.
-@param start  the start instant, must not be null
-@param end  the end instant, must not be null
-@return the period in years
+any daylight savings time changes that may occur during the misc.interval.
+@param start  the start misc.instant, must not be null
+@param end  the end misc.instant, must not be null
+@return the misc.period in years
 
 public static Years yearsBetween(ReadablePartial start, ReadablePartial end):
 Creates a <code>Years</code> representing the number of whole years
-between the two specified partial datetimes.
+between the two specified misc.partial datetimes.
 <p>
 The two partials must contain the same fields, for example you can specify
 two <code>LocalDate</code> objects.
-@param start  the start partial date, must not be null
-@param end  the end partial date, must not be null
-@return the period in years
+@param start  the start misc.partial date, must not be null
+@param end  the end misc.partial date, must not be null
+@return the misc.period in years
 
-public static Years yearsIn(ReadableInterval interval):
+public static Years yearsIn(ReadableInterval misc.interval):
 Creates a <code>Years</code> representing the number of whole years
-in the specified interval. This method corectly handles any daylight
-savings time changes that may occur during the interval.
-@param interval  the interval to extract years from, null returns zero
-@return the period in years
+in the specified misc.interval. This method corectly handles any daylight
+savings time changes that may occur during the misc.interval.
+@param misc.interval  the misc.interval to extract years from, null returns zero
+@return the misc.period in years
 
 public static Years parseYears(String periodStr):
 reates a new <code>Years</code> by parsing a string in the ISO8601 format 'PnY'.
@@ -49,8 +49,8 @@ reates a new <code>Years</code> by parsing a string in the ISO8601 format 'PnY'.
  The parse will accept the full ISO syntax of PnYnMnWnDTnHnMnS however only the
 years component may be non-zero. If any other component is non-zero, an exception
 will be thrown.
-@param periodStr  the period string, null returns zero
-@return the period in years
+@param periodStr  the misc.period string, null returns zero
+@return the misc.period in years
 
 protected Years(int years):
 Creates a new instance representing a number of years.
@@ -63,51 +63,51 @@ Resolves singletons.
 @return the singleton instance
 
 public DurationFieldType getFieldType():
-Gets the duration field type, which is <code>years</code>.
-@return the period type
+Gets the misc.duration misc.field type, which is <code>years</code>.
+@return the misc.period type
 
 public PeriodType getPeriodType():
-Gets the period type, which is <code>years</code>.
-@return the period type
+Gets the misc.period type, which is <code>years</code>.
+@return the misc.period type
 
 public int getYears():
-Gets the number of years that this period represents.
-@return the number of years in the period
+Gets the number of years that this misc.period represents.
+@return the number of years in the misc.period
 
 public Years plus(int years):
 Returns a new instance with the specified number of years added.
 <p>
 This instance is immutable and unaffected by this method call.
 @param years  the amount of years to add, may be negative
-@return the new period plus the specified number of years
+@return the new misc.period plus the specified number of years
 
 public Years plus(Years years):
 Returns a new instance with the specified number of years added.
 <p>
 This instance is immutable and unaffected by this method call.
 @param years  the amount of years to add, may be negative, null means zero
-@return the new period plus the specified number of years
+@return the new misc.period plus the specified number of years
 
 public Years minus(int years):
 Returns a new instance with the specified number of years taken away.
 <p>
 This instance is immutable and unaffected by this method call.
 @param years  the amount of years to take away, may be negative
-@return the new period minus the specified number of years
+@return the new misc.period minus the specified number of years
 
 public Years minus(Years years):
 Returns a new instance with the specified number of years taken away.
 <p>
 This instance is immutable and unaffected by this method call.
 @param years  the amount of years to take away, may be negative, null means zero
-@return the new period minus the specified number of years
+@return the new misc.period minus the specified number of years
 
 public Years multipliedBy(int scalar):
 Returns a new instance with the years multiplied by the specified scalar.
 <p>
 This instance is immutable and unaffected by this method call.
 @param scalar  the amount to multiply by, may be negative
-@return the new period multiplied by the specified scalar
+@return the new misc.period multiplied by the specified scalar
 
 public Years dividedBy(int divisor):
 Returns a new instance with the years divided by the specified divisor.
@@ -115,23 +115,23 @@ The calculation uses integer division, thus 3 divided by 2 is 1.
 <p>
 This instance is immutable and unaffected by this method call.
 @param divisor  the amount to divide by, may be negative
-@return the new period divided by the specified divisor
+@return the new misc.period divided by the specified divisor
 
 public Years negated():
 Returns a new instance with the years value negated.
-@return the new period with a negated value
+@return the new misc.period with a negated value
 
 public boolean isGreaterThan(Years other):
 Is this years instance greater than the specified number of years.
-@param other  the other period, null means zero
+@param other  the other misc.period, null means zero
 @return true if this years instance is greater than the specified one
 
 public boolean isLessThan(Years other):
 Is this years instance less than the specified number of years.
-@param other  the other period, null means zero
+@param other  the other misc.period, null means zero
 
 public String toString():
-Gets this instance as a String in the ISO8601 duration format.
+Gets this instance as a String in the ISO8601 misc.duration format.
 <p>
 For example, "P4Y" represents 4 years.
 @return the value as an ISO8601 string

@@ -1,4 +1,4 @@
-LocalDate is an immutable datetime class representing a date
+LocalDate is an immutable misc.datetime class representing a date
  * without a time zone.
  * <p>
  * LocalDate implements the {@link ReadablePartial} interface.
@@ -7,19 +7,19 @@ LocalDate is an immutable datetime class representing a date
  * However, <b>all</b> date fields may in fact be queried.
  * <p>
  * LocalDate differs from DateMidnight in that this class does not
- * have a time zone and does not represent a single instant in time.
+ * have a time zone and does not represent a single misc.instant in time.
  * <p>
- * Calculations on LocalDate are performed using a {@link chronology}.
- * This chronology will be set internally to be in the UTC time zone
+ * Calculations on LocalDate are performed using a {@link misc.chronology}.
+ * This misc.chronology will be set internally to be in the UTC time zone
  * for all calculations.
  *
- * <p>Each individual field can be queried in two ways:
+ * <p>Each individual misc.field can be queried in two ways:
  * <ul>
  * <li><code>getMonthOfYear()</code>
  * <li><code>monthOfYear().get()</code>
  * </ul>
  * The second technique also provides access to other useful methods on the
- * field:
+ * misc.field:
  * <ul>
  * <li>numeric value
  * <li>text value
@@ -47,11 +47,11 @@ Obtains a {@code LocalDate} set to the current system millisecond time
      * @param zone  the time zone, not null
      * @return the current date-time, not null
 
-public static LocalDate now(Chronology chronology):
+public static LocalDate now(Chronology misc.chronology):
 Obtains a {@code LocalDate} set to the current system millisecond time
-     * using the specified chronology.
+     * using the specified misc.chronology.
      *
-     * @param chronology  the chronology, not null
+     * @param misc.chronology  the misc.chronology, not null
      * @return the current date-time, not null
 
 public static LocalDate parse(String str):
@@ -69,58 +69,58 @@ Parses a {@code LocalDate} from the specified string using a formatter.
 
 public static LocalDate fromCalendarFields(Calendar calendar):
 Constructs a LocalDate from a <code>java.util.Calendar</code>
-     * using exactly the same field values.
+     * using exactly the same misc.field values.
      * <p>
-     * Each field is queried from the Calendar and assigned to the LocalDate.
-     * This is useful if you have been using the Calendar as a local date,
+     * Each misc.field is queried from the Calendar and assigned to the LocalDate.
+     * This is useful if you have been using the Calendar as a misc.local date,
      * ignoring the zone.
      * <p>
      * One advantage of this method is that this method is unaffected if the
      * version of the time zone data differs between the JDK and Joda-Time.
-     * That is because the local field values are transferred, calculated using
+     * That is because the misc.local misc.field values are transferred, calculated using
      * the JDK time zone data and without using the Joda-Time time zone data.
      * <p>
      * This factory method ignores the type of the calendar and always
-     * creates a LocalDate with ISO chronology. It is expected that you
+     * creates a LocalDate with ISO misc.chronology. It is expected that you
      * will only pass in instances of <code>GregorianCalendar</code> however
      * this is not validated.
      *
      * @param calendar  the Calendar to extract fields from, not null
-     * @return the created local date, not null
+     * @return the created misc.local date, not null
      * @throws IllegalArgumentException if the calendar is null
-     * @throws IllegalArgumentException if the date is invalid for the ISO chronology
+     * @throws IllegalArgumentException if the date is invalid for the ISO misc.chronology
 
  public static LocalDate fromDateFields(Date date):
  Constructs a LocalDate from a <code>java.util.Date</code>
-      * using exactly the same field values.
+      * using exactly the same misc.field values.
       * <p>
-      * Each field is queried from the Date and assigned to the LocalDate.
-      * This is useful if you have been using the Date as a local date,
+      * Each misc.field is queried from the Date and assigned to the LocalDate.
+      * This is useful if you have been using the Date as a misc.local date,
       * ignoring the zone.
       * <p>
       * One advantage of this method is that this method is unaffected if the
       * version of the time zone data differs between the JDK and Joda-Time.
-      * That is because the local field values are transferred, calculated using
+      * That is because the misc.local misc.field values are transferred, calculated using
       * the JDK time zone data and without using the Joda-Time time zone data.
       * <p>
-      * This factory method always creates a LocalDate with ISO chronology.
+      * This factory method always creates a LocalDate with ISO misc.chronology.
       *
       * @param date  the Date to extract fields from, not null
-      * @return the created local date, not null
+      * @return the created misc.local date, not null
       * @throws IllegalArgumentException if the calendar is null
-      * @throws IllegalArgumentException if the date is invalid for the ISO chronology
+      * @throws IllegalArgumentException if the date is invalid for the ISO misc.chronology
 
 public LocalDate():
-Constructs an instance set to the current local time evaluated using
-     * ISO chronology in the default zone.
+Constructs an instance set to the current misc.local time evaluated using
+     * ISO misc.chronology in the default zone.
      * <p>
      * Once the constructor is completed, the zone is no longer used.
      *
      * @see #now()
 
 public LocalDate(DateTimeZone zone):
-Constructs an instance set to the current local time evaluated using
-     * ISO chronology in the specified zone.
+Constructs an instance set to the current misc.local time evaluated using
+     * ISO misc.chronology in the specified zone.
      * <p>
      * If the specified time zone is null, the default zone is used.
      * Once the constructor is completed, the zone is no longer used.
@@ -128,66 +128,66 @@ Constructs an instance set to the current local time evaluated using
      * @param zone  the time zone, null means default zone
      * @see #now(DateTimeZone)
 
-public LocalDate(Chronology chronology):
-Constructs an instance set to the current local time evaluated using
-     * specified chronology.
+public LocalDate(Chronology misc.chronology):
+Constructs an instance set to the current misc.local time evaluated using
+     * specified misc.chronology.
      * <p>
-     * If the chronology is null, ISO chronology in the default time zone is used.
+     * If the misc.chronology is null, ISO misc.chronology in the default time zone is used.
      * Once the constructor is completed, the zone is no longer used.
      *
-     * @param chronology  the chronology, null means ISOChronology in default zone
+     * @param misc.chronology  the misc.chronology, null means ISOChronology in default zone
      * @see #now(Chronology)
 
-public LocalDate(long instant):
-Constructs an instance set to the local time defined by the specified
-     * instant evaluated using ISO chronology in the default zone.
+public LocalDate(long misc.instant):
+Constructs an instance set to the misc.local time defined by the specified
+     * misc.instant evaluated using ISO misc.chronology in the default zone.
      * <p>
      * Once the constructor is completed, the zone is no longer used.
      *
-     * @param instant  the milliseconds from 1970-01-01T00:00:00Z
+     * @param misc.instant  the milliseconds from 1970-01-01T00:00:00Z
 
-public LocalDate(long instant, DateTimeZone zone):
-Constructs an instance set to the local time defined by the specified
-     * instant evaluated using ISO chronology in the specified zone.
+public LocalDate(long misc.instant, DateTimeZone zone):
+Constructs an instance set to the misc.local time defined by the specified
+     * misc.instant evaluated using ISO misc.chronology in the specified zone.
      * <p>
      * If the specified time zone is null, the default zone is used.
      * Once the constructor is completed, the zone is no longer used.
      *
-     * @param instant  the milliseconds from 1970-01-01T00:00:00Z
+     * @param misc.instant  the milliseconds from 1970-01-01T00:00:00Z
      * @param zone  the time zone, null means default zone
 
-public LocalDate(long instant, Chronology chronology):
-Constructs an instance set to the local time defined by the specified
-     * instant evaluated using the specified chronology.
+public LocalDate(long misc.instant, Chronology misc.chronology):
+Constructs an instance set to the misc.local time defined by the specified
+     * misc.instant evaluated using the specified misc.chronology.
      * <p>
-     * If the chronology is null, ISO chronology in the default zone is used.
+     * If the misc.chronology is null, ISO misc.chronology in the default zone is used.
      * Once the constructor is completed, the zone is no longer used.
      *
-     * @param instant  the milliseconds from 1970-01-01T00:00:00Z
-     * @param chronology  the chronology, null means ISOChronology in default zone
+     * @param misc.instant  the milliseconds from 1970-01-01T00:00:00Z
+     * @param misc.chronology  the misc.chronology, null means ISOChronology in default zone
 
-public LocalDate(Object instant):
-Constructs an instance from an Object that represents a datetime.
+public LocalDate(Object misc.instant):
+Constructs an instance from an Object that represents a misc.datetime.
      * The time zone will be retrieved from the object if possible,
      * otherwise the default time zone will be used.
      * <p>
-     * If the object contains no chronology, <code>ISOChronology</code> is used.
+     * If the object contains no misc.chronology, <code>ISOChronology</code> is used.
      * Once the constructor is completed, the zone is no longer used.
      * <p>
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadablePartial, ReadableInstant, String, Calendar and Date.
      * The String formats are described by {@link ISODateTimeFormat#localDateParser()}.
-     * The default String converter ignores the zone and only parses the field values.
+     * The default String converter ignores the zone and only parses the misc.field values.
      *
-     * @param instant  the datetime object
-     * @throws IllegalArgumentException if the instant is invalid
+     * @param misc.instant  the misc.datetime object
+     * @throws IllegalArgumentException if the misc.instant is invalid
 
-public LocalDate(Object instant, DateTimeZone zone):
-Constructs an instance from an Object that represents a datetime,
+public LocalDate(Object misc.instant, DateTimeZone zone):
+Constructs an instance from an Object that represents a misc.datetime,
      * forcing the time zone to that specified.
      * <p>
-     * If the object contains no chronology, <code>ISOChronology</code> is used.
+     * If the object contains no misc.chronology, <code>ISOChronology</code> is used.
      * If the specified time zone is null, the default zone is used.
      * Once the constructor is completed, the zone is no longer used.
      * <p>
@@ -195,32 +195,32 @@ Constructs an instance from an Object that represents a datetime,
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadablePartial, ReadableInstant, String, Calendar and Date.
      * The String formats are described by {@link ISODateTimeFormat#localDateParser()}.
-     * The default String converter ignores the zone and only parses the field values.
+     * The default String converter ignores the zone and only parses the misc.field values.
      *
-     * @param instant  the datetime object
+     * @param misc.instant  the misc.datetime object
      * @param zone  the time zone
-     * @throws IllegalArgumentException if the instant is invalid
+     * @throws IllegalArgumentException if the misc.instant is invalid
 
-public LocalDate(Object instant, Chronology chronology):
-Constructs an instance from an Object that represents a datetime,
-     * using the specified chronology.
+public LocalDate(Object misc.instant, Chronology misc.chronology):
+Constructs an instance from an Object that represents a misc.datetime,
+     * using the specified misc.chronology.
      * <p>
-     * If the chronology is null, ISO in the default time zone is used.
+     * If the misc.chronology is null, ISO in the default time zone is used.
      * Once the constructor is completed, the zone is no longer used.
-     * If the instant contains a chronology, it will be ignored.
-     * For example, passing a {@code LocalDate} and a different chronology
+     * If the misc.instant contains a misc.chronology, it will be ignored.
+     * For example, passing a {@code LocalDate} and a different misc.chronology
      * will return a date with the year/month/day from the date applied
-     * unaltered to the specified chronology.
+     * unaltered to the specified misc.chronology.
      * <p>
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadablePartial, ReadableInstant, String, Calendar and Date.
      * The String formats are described by {@link ISODateTimeFormat#localDateParser()}.
-     * The default String converter ignores the zone and only parses the field values.
+     * The default String converter ignores the zone and only parses the misc.field values.
      *
-     * @param instant  the datetime object
-     * @param chronology  the chronology
-     * @throws IllegalArgumentException if the instant is invalid
+     * @param misc.instant  the misc.datetime object
+     * @param misc.chronology  the misc.chronology
+     * @throws IllegalArgumentException if the misc.instant is invalid
 
  public LocalDate(int year, int monthOfYear, int dayOfMonth):
  Constructs an instance set to the specified date and time

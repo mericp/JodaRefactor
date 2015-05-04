@@ -1,82 +1,82 @@
-Defines the calculation engine for duration fields.
- * The interface defines a set of methods that manipulate a millisecond duration
- * with regards to a single field, such as months or seconds.
+Defines the calculation engine for misc.duration fields.
+ * The interface defines a set of methods that manipulate a millisecond misc.duration
+ * with regards to a single misc.field, such as months or seconds.
  * <p>
- * This design is extensible so, if you wish, you can extract a different field from
- * the millisecond duration. A number of standard implementations are provided to assist.
+ * This design is extensible so, if you wish, you can extract a different misc.field from
+ * the millisecond misc.duration. A number of standard implementations are provided to assist.
 
 public abstract boolean isPrecise():
-Is this field precise. A precise field can calculate its value from
+Is this misc.field precise. A precise misc.field can calculate its value from
 milliseconds without needing a reference date. Put another way, a
-precise field's unit size is not variable.
+precise misc.field's unit size is not variable.
      *
 @return true if precise
 @see #getUnitMillis()
 
 public abstract long getUnitMillis():
-Returns the amount of milliseconds per unit value of this field. For
-example, if this field represents "seconds", then this returns the
+Returns the amount of milliseconds per unit value of this misc.field. For
+example, if this misc.field represents "seconds", then this returns the
 milliseconds in one second.
 <p>
 For imprecise fields, the unit size is variable, and so this method
 returns a suitable average value.
      *
-@return the unit size of this field, in milliseconds
+@return the unit size of this misc.field, in milliseconds
 @see #isPrecise()
 
- public abstract int getValue(long duration):
- Get the value of this field from the milliseconds, which is approximate
- if this field is imprecise.
+ public abstract int getValue(long misc.duration):
+ Get the value of this misc.field from the milliseconds, which is approximate
+ if this misc.field is imprecise.
       *
- @param duration  the milliseconds to query, which may be negative
- @return the value of the field, in the units of the field, which may be
+ @param misc.duration  the milliseconds to query, which may be negative
+ @return the value of the misc.field, in the units of the misc.field, which may be
  negative
  @throws ArithmeticException if the value is too large for an int
 
-public abstract long getValueAsLong(long duration):
-Get the value of this field from the milliseconds, which is approximate
-if this field is imprecise.
+public abstract long getValueAsLong(long misc.duration):
+Get the value of this misc.field from the milliseconds, which is approximate
+if this misc.field is imprecise.
      *
-@param duration  the milliseconds to query, which may be negative
-@return the value of the field, in the units of the field, which may be
+@param misc.duration  the milliseconds to query, which may be negative
+@return the value of the misc.field, in the units of the misc.field, which may be
 negative
 
-public abstract int getValue(long duration, long instant):
-Get the value of this field from the milliseconds relative to an
-instant. For precise fields this method produces the same result as for
+public abstract int getValue(long misc.duration, long misc.instant):
+Get the value of this misc.field from the milliseconds relative to an
+misc.instant. For precise fields this method produces the same result as for
 the single argument get method.
 <p>
-If the millisecond duration is positive, then the instant is treated as a
-"start instant". If negative, the instant is treated as an "end instant".
+If the millisecond misc.duration is positive, then the misc.instant is treated as a
+"start misc.instant". If negative, the misc.instant is treated as an "end misc.instant".
      *
-@param duration  the milliseconds to query, which may be negative
-@param instant  the start instant to calculate relative to
-@return the value of the field, in the units of the field, which may be
+@param misc.duration  the milliseconds to query, which may be negative
+@param misc.instant  the start misc.instant to calculate relative to
+@return the value of the misc.field, in the units of the misc.field, which may be
 negative
 @throws ArithmeticException if the value is too large for an int
 
-public abstract long getValueAsLong(long duration, long instant):
-Get the value of this field from the milliseconds relative to an
-instant. For precise fields this method produces the same result as for
+public abstract long getValueAsLong(long misc.duration, long misc.instant):
+Get the value of this misc.field from the milliseconds relative to an
+misc.instant. For precise fields this method produces the same result as for
 the single argument get method.
 <p>
-If the millisecond duration is positive, then the instant is treated as a
-"start instant". If negative, the instant is treated as an "end instant".
+If the millisecond misc.duration is positive, then the misc.instant is treated as a
+"start misc.instant". If negative, the misc.instant is treated as an "end misc.instant".
      *
-@param duration  the milliseconds to query, which may be negative
-@param instant  the start instant to calculate relative to
-@return the value of the field, in the units of the field, which may be
+@param misc.duration  the milliseconds to query, which may be negative
+@param misc.instant  the start misc.instant to calculate relative to
+@return the value of the misc.field, in the units of the misc.field, which may be
 negative
 
 public abstract int getDifference(long minuendInstant, long subtrahendInstant):
 Computes the difference between two instants, as measured in the units
-of this field. Any fractional units are dropped from the result. Calling
+of this misc.field. Any fractional units are dropped from the result. Calling
 getDifference reverses the effect of calling add. In the following code:
      *
 <pre>
-long instant = ...
+long misc.instant = ...
 int v = ...
-int age = getDifference(add(instant, v), instant);
+int age = getDifference(add(misc.instant, v), misc.instant);
 </pre>
      *
 The value 'age' is the same as the value 'v'.
@@ -85,4 +85,4 @@ The value 'age' is the same as the value 'v'.
 subtract from
 @param subtrahendInstant the milliseconds from 1970-01-01T00:00:00Z to
 subtract off the minuend
-@return the difference in the units of this field
+@return the difference in the units of this misc.field

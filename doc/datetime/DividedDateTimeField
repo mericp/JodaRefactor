@@ -1,25 +1,25 @@
 Divides a DateTimeField such that the retrieved values are reduced by a
- * fixed divisor. The field's unit duration is scaled accordingly, but the
- * range duration is unchanged.
+ * fixed divisor. The misc.field's unit misc.duration is scaled accordingly, but the
+ * range misc.duration is unchanged.
  * <p>
  * DividedDateTimeField is thread-safe and immutable.
  *
  * @see RemainderDateTimeField
 
- public DividedDateTimeField(DateTimeField field, DateTimeFieldType type, int divisor):
+ public DividedDateTimeField(DateTimeField misc.field, DateTimeFieldType type, int divisor):
  Constructor.
       *
-      * @param field  the field to wrap, like "year()".
-      * @param type  the field type this field will actually use
+      * @param misc.field  the misc.field to wrap, like "year()".
+      * @param type  the misc.field type this misc.field will actually use
       * @param divisor  divisor, such as 100 years in a century
       * @throws IllegalArgumentException if divisor is less than two
 
-public DividedDateTimeField(DateTimeField field, DurationField rangeField, DateTimeFieldType type, int divisor):
+public DividedDateTimeField(DateTimeField misc.field, DurationField rangeField, DateTimeFieldType type, int divisor):
 Constructor.
      *
-     * @param field  the field to wrap, like "year()".
-     * @param rangeField  the range field, null to derive
-     * @param type  the field type this field will actually use
+     * @param misc.field  the misc.field to wrap, like "year()".
+     * @param rangeField  the range misc.field, null to derive
+     * @param type  the misc.field type this misc.field will actually use
      * @param divisor  divisor, such as 100 years in a century
      * @throws IllegalArgumentException if divisor is less than two
 
@@ -27,13 +27,13 @@ public DividedDateTimeField(RemainderDateTimeField remainderField, DateTimeField
 Construct a DividedDateTimeField that compliments the given
      * RemainderDateTimeField.
      *
-     * @param remainderField  complimentary remainder field, like "yearOfCentury()".
-     * @param type  the field type this field will actually use
+     * @param remainderField  complimentary remainder misc.field, like "yearOfCentury()".
+     * @param type  the misc.field type this misc.field will actually use
 
 public DividedDateTimeField(RemainderDateTimeField remainderField, DurationField rangeField, DateTimeFieldType type):
 Construct a DividedDateTimeField that compliments the given
      * RemainderDateTimeField.
      *
-     * @param remainderField  complimentary remainder field, like "yearOfCentury()".
-     * @param rangeField  the range field, null to derive
-     * @param type  the field type this field will actually use
+     * @param remainderField  complimentary remainder misc.field, like "yearOfCentury()".
+     * @param rangeField  the range misc.field, null to derive
+     * @param type  the misc.field type this misc.field will actually use

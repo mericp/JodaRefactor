@@ -1,11 +1,11 @@
 <code>DecoratedDateTimeField</code> extends {@link BaseDateTimeField},
  * implementing only the minimum required set of methods. These implemented
- * methods delegate to a wrapped field.
+ * methods delegate to a wrapped misc.field.
  * <p>
  * This design allows new DateTimeField types to be defined that piggyback on
  * top of another, inheriting all the safe method implementations from
  * BaseDateTimeField. Should any method require pure delegation to the
- * wrapped field, simply override and use the provided getWrappedField method.
+ * wrapped misc.field, simply override and use the provided getWrappedField method.
  * <p>
  * DecoratedDateTimeField is thread-safe and immutable, and its subclasses must
  * be as well.

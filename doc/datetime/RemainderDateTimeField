@@ -1,15 +1,15 @@
-Counterpart remainder datetime field to {@link DividedDateTimeField}. The
- * field's unit duration is unchanged, but the range duration is scaled
+Counterpart remainder misc.datetime misc.field to {@link DividedDateTimeField}. The
+ * misc.field's unit misc.duration is unchanged, but the range misc.duration is scaled
  * accordingly.
  * <p>
  * RemainderDateTimeField is thread-safe and immutable.
  *
  * @see DividedDateTimeField
 
- public RemainderDateTimeField(DateTimeField field, DateTimeFieldType type, int divisor):
+ public RemainderDateTimeField(DateTimeField misc.field, DateTimeFieldType type, int divisor):
  Constructor.
       *
-      * @param field  the field to wrap, like "year()".
-      * @param type  the field type this field actually uses
+      * @param misc.field  the misc.field to wrap, like "year()".
+      * @param type  the misc.field type this misc.field actually uses
       * @param divisor  divisor, such as 100 years in a century
       * @throws IllegalArgumentException if divisor is less than two

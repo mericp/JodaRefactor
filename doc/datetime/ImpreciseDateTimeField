@@ -1,8 +1,8 @@
-Abstract datetime field class that defines its own DurationField, which
+Abstract misc.datetime misc.field class that defines its own DurationField, which
  * delegates back into this ImpreciseDateTimeField.
  * <p>
  * This DateTimeField is useful for defining DateTimeFields that are composed
- * of imprecise durations. If both duration fields are precise, then a
+ * of imprecise durations. If both misc.duration fields are precise, then a
  * {@link PreciseDateTimeField} should be used instead.
  * <p>
  * When defining imprecise DateTimeFields where a matching DurationField is
@@ -14,13 +14,13 @@ Abstract datetime field class that defines its own DurationField, which
 
  public int getDifference(long minuendInstant, long subtrahendInstant):
  Computes the difference between two instants, as measured in the units
-      * of this field. Any fractional units are dropped from the result. Calling
+      * of this misc.field. Any fractional units are dropped from the result. Calling
       * getDifference reverses the effect of calling add. In the following code:
       *
       * <pre>
-      * long instant = ...
+      * long misc.instant = ...
       * int v = ...
-      * int age = getDifference(add(instant, v), instant);
+      * int age = getDifference(add(misc.instant, v), misc.instant);
       * </pre>
       *
       * The value 'age' is the same as the value 'v'.
@@ -32,17 +32,17 @@ Abstract datetime field class that defines its own DurationField, which
       * subtract from
       * @param subtrahendInstant the milliseconds from 1970-01-01T00:00:00Z to
       * subtract off the minuend
-      * @return the difference in the units of this field
+      * @return the difference in the units of this misc.field
 
 public long getDifferenceAsLong(long minuendInstant, long subtrahendInstant):
 Computes the difference between two instants, as measured in the units
-     * of this field. Any fractional units are dropped from the result. Calling
+     * of this misc.field. Any fractional units are dropped from the result. Calling
      * getDifference reverses the effect of calling add. In the following code:
      *
      * <pre>
-     * long instant = ...
+     * long misc.instant = ...
      * long v = ...
-     * long age = getDifferenceAsLong(add(instant, v), instant);
+     * long age = getDifferenceAsLong(add(misc.instant, v), misc.instant);
      * </pre>
      *
      * The value 'age' is the same as the value 'v'.
@@ -55,4 +55,4 @@ Computes the difference between two instants, as measured in the units
      * subtract from
      * @param subtrahendInstant the milliseconds from 1970-01-01T00:00:00Z to
      * subtract off the minuend
-     * @return the difference in the units of this field
+     * @return the difference in the units of this misc.field

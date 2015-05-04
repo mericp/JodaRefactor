@@ -1,9 +1,9 @@
-A placeholder implementation to use when a datetime field is not supported.
+A placeholder implementation to use when a misc.datetime misc.field is not supported.
  * <p>
  * UnsupportedDateTimeField is thread-safe and immutable.
 
  public static synchronized UnsupportedDateTimeField getInstance:
- Gets an instance of UnsupportedDateTimeField for a specific named field.
+ Gets an instance of UnsupportedDateTimeField for a specific named misc.field.
       * Names should be of standard format, such as 'monthOfYear' or 'hourOfDay'.
       * The returned instance is cached.
       *

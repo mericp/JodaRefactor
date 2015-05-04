@@ -4,13 +4,13 @@ DateTimeParserBucket is an advanced class, intended mainly for parser
  * <p>
  * This class allows fields to be saved in any order, but be physically set in
  * a consistent order. This is useful for parsing against formats that allow
- * field values to contradict each other.
+ * misc.field values to contradict each other.
  * <p>
  * Field values are applied in an order where the "larger" fields are set
- * first, making their value less likely to stick.  A field is larger than
- * another when it's range duration is longer. If both ranges are the same,
- * then the larger field has the longer duration. If it cannot be determined
- * which field is larger, then the fields are set in the order they were saved.
+ * first, making their value less likely to stick.  A misc.field is larger than
+ * another when it's range misc.duration is longer. If both ranges are the same,
+ * then the larger misc.field has the longer misc.duration. If it cannot be determined
+ * which misc.field is larger, then the fields are set in the order they were saved.
  * <p>
  * For example, these fields were saved in this order: dayOfWeek, monthOfYear,
  * dayOfMonth, dayOfYear. When computeMillis is called, the fields are set in
@@ -21,8 +21,8 @@ DateTimeParserBucket is an advanced class, intended mainly for parser
  public DateTimeParserBucket(long instantLocal, Chronology chrono, Locale locale):
  Constructs a bucket.
       *
-      * @param instantLocal  the initial millis from 1970-01-01T00:00:00, local time
-      * @param chrono  the chronology to use
+      * @param instantLocal  the initial millis from 1970-01-01T00:00:00, misc.local time
+      * @param chrono  the misc.chronology to use
       * @param locale  the locale to use
       * @deprecated Use longer constructor
 
@@ -30,8 +30,8 @@ public DateTimeParserBucket(long instantLocal, Chronology chrono, Locale locale,
 Constructs a bucket, with the option of specifying the pivot year for
      * two-digit year parsing.
      *
-     * @param instantLocal  the initial millis from 1970-01-01T00:00:00, local time
-     * @param chrono  the chronology to use
+     * @param instantLocal  the initial millis from 1970-01-01T00:00:00, misc.local time
+     * @param chrono  the misc.chronology to use
      * @param locale  the locale to use
      * @param pivotYear  the pivot year to use when parsing two-digit years
      * @since 1.1
@@ -41,14 +41,14 @@ Constructs a bucket, with the option of specifying the pivot year for
  Constructs a bucket, with the option of specifying the pivot year for
       * two-digit year parsing.
       *
-      * @param instantLocal  the initial millis from 1970-01-01T00:00:00, local time
-      * @param chrono  the chronology to use
+      * @param instantLocal  the initial millis from 1970-01-01T00:00:00, misc.local time
+      * @param chrono  the misc.chronology to use
       * @param locale  the locale to use
       * @param pivotYear  the pivot year to use when parsing two-digit years
       * @param defaultYear  the default year to use when parsing month-day
 
 public long parseMillis(DateTimeParser parser, CharSequence text):
-Parses a datetime from the given text, returning the number of
+Parses a misc.datetime from the given text, returning the number of
      * milliseconds since the epoch, 1970-01-01T00:00:00Z.
      * <p>
      * This parses the text using the parser into this bucket.

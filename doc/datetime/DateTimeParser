@@ -29,9 +29,9 @@ Parse an element from the given text, saving any fields into the given
      * where the parse failed, apply the one's complement operator (~) on the
      * return value.
      *
-     * @param bucket  field are saved into this, not null
+     * @param bucket  misc.field are saved into this, not null
      * @param text  the text to parse, not null
      * @param position  position to start parsing from
      * @return new position, negative value means parse failed -
      *  apply complement operator (~) to get position of failure
-     * @throws IllegalArgumentException if any field is out of range
+     * @throws IllegalArgumentException if any misc.field is out of range

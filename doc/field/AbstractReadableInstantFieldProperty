@@ -1,7 +1,7 @@
 AbstractReadableInstantFieldProperty is a base class for binding a
  * ReadableInstant to a DateTimeField.
  * <p>
- * It allows the date and time manipulation code to be field based yet
+ * It allows the date and time manipulation code to be misc.field based yet
  * still easy to use.
  * <p>
  * AbstractReadableInstantFieldProperty itself is thread-safe and immutable,
@@ -9,19 +9,19 @@ AbstractReadableInstantFieldProperty is a base class for binding a
  * thread-safe.
 
 public int get():
-Gets the value of this property from the instant.
+Gets the value of this property from the misc.instant.
      * <p>
      * For example, the following two lines of code are equivalent:
      * <pre>
-     * datetime.getDayOfMonth();
-     * datetime.dayOfMonth().get();
+     * misc.datetime.getDayOfMonth();
+     * misc.datetime.dayOfMonth().get();
      * </pre>
      *
      * @return the current value
      * @see DateTimeField#get
 
 public String getAsString():
-Gets the value of this property from the instant as a string.
+Gets the value of this property from the misc.instant as a string.
      * <p>
      * This method returns the value converted to a <code>String</code>
      * using <code>Integer.toString</code>. This method does NOT return
@@ -32,7 +32,7 @@ Gets the value of this property from the instant as a string.
      * @see DateTimeField#get
 
 public String getAsText():
-Gets the textual value of this property from the instant as a
+Gets the textual value of this property from the misc.instant as a
      * string in the default locale.
      * <p>
      * This method returns the value converted to a <code>String</code>

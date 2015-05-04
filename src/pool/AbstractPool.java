@@ -1,6 +1,6 @@
 package pool;
 
-import period.Base.BaseSingleFieldPeriod;
+import timeunits.BaseSingleFieldPeriod;
 
 import java.util.HashMap;
 

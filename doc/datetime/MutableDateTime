@@ -1,28 +1,28 @@
-MutableDateTime is the standard implementation of a modifiable datetime class.
- * It holds the datetime as milliseconds from the Java epoch of 1970-01-01T00:00:00Z.
+MutableDateTime is the standard implementation of a modifiable misc.datetime class.
+ * It holds the misc.datetime as milliseconds from the Java epoch of 1970-01-01T00:00:00Z.
  * <p>
  * This class uses a Chronology internally. The Chronology determines how the
- * millisecond instant value is converted into the date time fields.
+ * millisecond misc.instant value is converted into the date time fields.
  * The default Chronology is <code>ISOChronology</code> which is the agreed
  * international standard and compatible with the modern Gregorian calendar.
  * <p>
- * Each individual field can be accessed in two ways:
+ * Each individual misc.field can be accessed in two ways:
  * <ul>
  * <li><code>getHourOfDay()</code>
  * <li><code>hourOfDay().get()</code>
  * </ul>
  * The second technique also provides access to other useful methods on the
- * field:
+ * misc.field:
  * <ul>
  * <li>get numeric value
  * <li>set numeric value
  * <li>add to numeric value
- * <li>add to numeric value wrapping with the field
+ * <li>add to numeric value wrapping with the misc.field
  * <li>get text value
  * <li>get short text value
  * <li>set text value
- * <li>field maximum value
- * <li>field minimum value
+ * <li>misc.field maximum value
+ * <li>misc.field minimum value
  * </ul>
  *
  * <p>
@@ -61,36 +61,36 @@ Constructs an instance set to the current system millisecond time
      *
      * @see #now()
 
-public MutableDateTime(Object instant):
-Constructs an instance from an Object that represents a datetime.
+public MutableDateTime(Object misc.instant):
+Constructs an instance from an Object that represents a misc.datetime.
      * <p>
-     * If the object implies a chronology (such as GregorianCalendar does),
-     * then that chronology will be used. Otherwise, ISO default is used.
-     * Thus if a GregorianCalendar is passed in, the chronology used will
-     * be GJ, but if a Date is passed in the chronology will be ISO.
+     * If the object implies a misc.chronology (such as GregorianCalendar does),
+     * then that misc.chronology will be used. Otherwise, ISO default is used.
+     * Thus if a GregorianCalendar is passed in, the misc.chronology used will
+     * be GJ, but if a Date is passed in the misc.chronology will be ISO.
      * <p>
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadableInstant, String, Calendar and Date.
      *
-     * @param instant  the datetime object, null means now
-     * @throws IllegalArgumentException if the instant is invalid
+     * @param misc.instant  the misc.datetime object, null means now
+     * @throws IllegalArgumentException if the misc.instant is invalid
 
-public MutableDateTime(Object instant, DateTimeZone zone):
-Constructs an instance from an Object that represents a datetime,
+public MutableDateTime(Object misc.instant, DateTimeZone zone):
+Constructs an instance from an Object that represents a misc.datetime,
      * forcing the time zone to that specified.
      * <p>
-     * If the object implies a chronology (such as GregorianCalendar does),
-     * then that chronology will be used, but with the time zone adjusted.
+     * If the object implies a misc.chronology (such as GregorianCalendar does),
+     * then that misc.chronology will be used, but with the time zone adjusted.
      * Otherwise, ISO is used in the specified time zone.
      * If the specified time zone is null, the default zone is used.
-     * Thus if a GregorianCalendar is passed in, the chronology used will
-     * be GJ, but if a Date is passed in the chronology will be ISO.
+     * Thus if a GregorianCalendar is passed in, the misc.chronology used will
+     * be GJ, but if a Date is passed in the misc.chronology will be ISO.
      * <p>
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadableInstant, String, Calendar and Date.
      *
-     * @param instant  the datetime object, null means now
+     * @param misc.instant  the misc.datetime object, null means now
      * @param zone  the time zone, null means default time zone
-     * @throws IllegalArgumentException if the instant is invalid
+     * @throws IllegalArgumentException if the misc.instant is invalid

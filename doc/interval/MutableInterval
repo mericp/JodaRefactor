@@ -1,20 +1,20 @@
-MutableInterval is the standard implementation of a mutable time interval.
+MutableInterval is the standard implementation of a mutable time misc.interval.
  * <p>
- * A time interval represents a period of time between two instants.
- * Intervals are inclusive of the start instant and exclusive of the end.
- * The end instant is always greater than or equal to the start instant.
+ * A time misc.interval represents a misc.period of time between two instants.
+ * Intervals are inclusive of the start misc.instant and exclusive of the end.
+ * The end misc.instant is always greater than or equal to the start misc.instant.
  * <p>
- * Intervals have a fixed millisecond duration.
+ * Intervals have a fixed millisecond misc.duration.
  * This is the difference between the start and end instants.
- * The duration is represented separately by {@link ReadableDuration}.
+ * The misc.duration is represented separately by {@link ReadableDuration}.
  * As a result, intervals are not comparable.
  * To compare the length of two intervals, you should compare their durations.
  * <p>
- * An interval can also be converted to a {@link ReadablePeriod}.
+ * An misc.interval can also be converted to a {@link ReadablePeriod}.
  * This represents the difference between the start and end points in terms of fields
  * such as years and days.
  * <p>
- * If performing significant calculations on an interval, it may be faster to
+ * If performing significant calculations on an misc.interval, it may be faster to
  * convert an Interval object to a MutableInterval one.
  * <p>
  * MutableInterval is mutable and not thread-safe, unless concurrent threads
@@ -24,15 +24,15 @@ public static MutableInterval parse(String str):
 Parses a {@code MutableInterval} from the specified string.
      * <p>
      * The String formats are described by {@link ISODateTimeFormat#dateTimeParser()}
-     * and {@link ISOPeriodFormat#standard()}, and may be 'datetime/datetime',
-     * 'datetime/period' or 'period/datetime'.
+     * and {@link ISOPeriodFormat#standard()}, and may be 'misc.datetime/misc.datetime',
+     * 'misc.datetime/misc.period' or 'misc.period/misc.datetime'.
 
 public MutableInterval():
-Constructs a zero length time interval from 1970-01-01 to 1970-01-01.
+Constructs a zero length time misc.interval from 1970-01-01 to 1970-01-01.
 
 public MutableInterval(long startInstant, long endInstant):
-Constructs an interval from a start and end instant with the ISO default chronology.
+Constructs an misc.interval from a start and end misc.instant with the ISO default misc.chronology.
      *
-     * @param startInstant  start of this interval, as milliseconds from 1970-01-01T00:00:00Z.
-     * @param endInstant  end of this interval, as milliseconds from 1970-01-01T00:00:00Z.
+     * @param startInstant  start of this misc.interval, as milliseconds from 1970-01-01T00:00:00Z.
+     * @param endInstant  end of this misc.interval, as milliseconds from 1970-01-01T00:00:00Z.
      * @throws IllegalArgumentException if the end is before the start

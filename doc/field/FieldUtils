@@ -51,7 +51,7 @@ Multiply two values throwing an exception if overflow occurs.
 
   public static int getWrappedValue(int currentValue, int wrapValue, int minValue, int maxValue):
   Utility method used by addWrapField implementations to ensure the new
-       * value lies within the field's legal value range.
+       * value lies within the misc.field's legal value range.
        *
        * @param currentValue the current value of the data, which may lie outside
        * the wrapped value range

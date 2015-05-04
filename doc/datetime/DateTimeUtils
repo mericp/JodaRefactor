@@ -53,64 +53,64 @@ Checks whether the provider may be changed using permission 'CurrentTime.setProv
 
  @throws SecurityException if the provider may not be changed
 
-public static final long getInstantMillis(ReadableInstant instant):
-Gets the millisecond instant from the specified instant object handling null.
+public static final long getInstantMillis(ReadableInstant misc.instant):
+Gets the millisecond misc.instant from the specified misc.instant object handling null.
  <p>
- If the instant object is <code>null</code>, the {@link #currentTimeMillis()}
+ If the misc.instant object is <code>null</code>, the {@link #currentTimeMillis()}
  will be returned. Otherwise, the millis from the object are returned.
 
- @param instant  the instant to examine, null means now
+ @param misc.instant  the misc.instant to examine, null means now
  @return the time in milliseconds from 1970-01-01T00:00:00Z
 
- public static final Chronology getInstantChronology(ReadableInstant instant):
- Gets the chronology from the specified instant object handling null.
+ public static final Chronology getInstantChronology(ReadableInstant misc.instant):
+ Gets the misc.chronology from the specified misc.instant object handling null.
   <p>
-  If the instant object is <code>null</code>, or the instant's chronology is
+  If the misc.instant object is <code>null</code>, or the misc.instant's misc.chronology is
   <code>null</code>, {@link ISOChronology#getInstance()} will be returned.
-  Otherwise, the chronology from the object is returned.
+  Otherwise, the misc.chronology from the object is returned.
  
-  @param instant  the instant to examine, null means ISO in the default zone
-  @return the chronology, never null
+  @param misc.instant  the misc.instant to examine, null means ISO in the default zone
+  @return the misc.chronology, never null
 
 public static final Chronology getIntervalChronology(ReadableInstant start, ReadableInstant end):
-Gets the chronology from the specified instant based interval handling null.
+Gets the misc.chronology from the specified misc.instant based misc.interval handling null.
  <p>
- The chronology is obtained from the start if that is not null, or from the
+ The misc.chronology is obtained from the start if that is not null, or from the
  end if the start is null. The result is additionally checked, and if still
  null then {@link ISOChronology#getInstance()} will be returned.
 
- @param start  the instant to examine and use as the primary source of the chronology
- @param end  the instant to examine and use as the secondary source of the chronology
- @return the chronology, never null
+ @param start  the misc.instant to examine and use as the primary source of the misc.chronology
+ @param end  the misc.instant to examine and use as the secondary source of the misc.chronology
+ @return the misc.chronology, never null
 
-public static final Chronology getIntervalChronology(ReadableInterval interval):
-Gets the chronology from the specified interval object handling null.
+public static final Chronology getIntervalChronology(ReadableInterval misc.interval):
+Gets the misc.chronology from the specified misc.interval object handling null.
  <p>
- If the interval object is <code>null</code>, or the interval's chronology is
+ If the misc.interval object is <code>null</code>, or the misc.interval's misc.chronology is
  <code>null</code>, {@link ISOChronology#getInstance()} will be returned.
- Otherwise, the chronology from the object is returned.
+ Otherwise, the misc.chronology from the object is returned.
 
- @param interval  the interval to examine, null means ISO in the default zone
- @return the chronology, never null
+ @param misc.interval  the misc.interval to examine, null means ISO in the default zone
+ @return the misc.chronology, never null
 
-public static final ReadableInterval getReadableInterval(ReadableInterval interval):
-Gets the interval handling null.
+public static final ReadableInterval getReadableInterval(ReadableInterval misc.interval):
+Gets the misc.interval handling null.
  <p>
- If the interval is <code>null</code>, an interval representing now
+ If the misc.interval is <code>null</code>, an misc.interval representing now
  to now in the {@link ISOChronology#getInstance() ISOChronology}
- will be returned. Otherwise, the interval specified is returned.
+ will be returned. Otherwise, the misc.interval specified is returned.
 
- @param interval  the interval to use, null means now to now
- @return the interval, never null
+ @param misc.interval  the misc.interval to use, null means now to now
+ @return the misc.interval, never null
 
 public static final Chronology getChronology(Chronology chrono):
-Gets the chronology handling null.
+Gets the misc.chronology handling null.
  <p>
- If the chronology is <code>null</code>, {@link ISOChronology#getInstance()}
- will be returned. Otherwise, the chronology is returned.
+ If the misc.chronology is <code>null</code>, {@link ISOChronology#getInstance()}
+ will be returned. Otherwise, the misc.chronology is returned.
 
- @param chrono  the chronology to use, null means ISO in the default zone
- @return the chronology, never null
+ @param chrono  the misc.chronology to use, null means ISO in the default zone
+ @return the misc.chronology, never null
 
 public static final DateTimeZone getZone(DateTimeZone zone):
 Gets the zone handling null.
@@ -122,7 +122,7 @@ Gets the zone handling null.
  @return the time zone, never null
 
 public static final PeriodType getPeriodType(PeriodType type):
-Gets the period type handling null.
+Gets the misc.period type handling null.
  <p>
  If the zone is <code>null</code>, {@link PeriodType#standard()}
  will be returned. Otherwise, the type specified is returned.
@@ -130,36 +130,36 @@ Gets the period type handling null.
  @param type  the time zone to use, null means the standard type
  @return the type to use, never null
 
-public static final long getDurationMillis(ReadableDuration duration):
-Gets the millisecond duration from the specified duration object handling null.
+public static final long getDurationMillis(ReadableDuration misc.duration):
+Gets the millisecond misc.duration from the specified misc.duration object handling null.
  <p>
- If the duration object is <code>null</code>, zero will be returned.
+ If the misc.duration object is <code>null</code>, zero will be returned.
  Otherwise, the millis from the object are returned.
 
- @param duration  the duration to examine, null means zero
- @return the duration in milliseconds
+ @param misc.duration  the misc.duration to examine, null means zero
+ @return the misc.duration in milliseconds
 
-public static final boolean isContiguous(ReadablePartial partial):
- Checks whether the partial is contiguous.
+public static final boolean isContiguous(ReadablePartial misc.partial):
+ Checks whether the misc.partial is contiguous.
  <p>
- A partial is contiguous if one field starts where another ends.
+ A misc.partial is contiguous if one misc.field starts where another ends.
  <p>
  For example <code>LocalDate</code> is contiguous because DayOfMonth has
- the same range (Month) as the unit of the next field (MonthOfYear), and
- MonthOfYear has the same range (Year) as the unit of the next field (Year).
+ the same range (Month) as the unit of the next misc.field (MonthOfYear), and
+ MonthOfYear has the same range (Year) as the unit of the next misc.field (Year).
  <p>
  Similarly, <code>LocalTime</code> is contiguous, as it consists of
  MillisOfSecond, SecondOfMinute, MinuteOfHour and HourOfDay (note how
- the names of each field 'join up').
+ the names of each misc.field 'join up').
  <p>
- However, a Year/HourOfDay partial is not contiguous because the range
- field Day is not equal to the next field Year.
- Similarly, a DayOfWeek/DayOfMonth partial is not contiguous because
- the range Month is not equal to the next field Day.
+ However, a Year/HourOfDay misc.partial is not contiguous because the range
+ misc.field Day is not equal to the next misc.field Year.
+ Similarly, a DayOfWeek/DayOfMonth misc.partial is not contiguous because
+ the range Month is not equal to the next misc.field Day.
 
- @param partial  the partial to check
- @return true if the partial is contiguous
- @throws IllegalArgumentException if the partial is null
+ @param misc.partial  the misc.partial to check
+ @return true if the misc.partial is contiguous
+ @throws IllegalArgumentException if the misc.partial is null
 
 public static final DateFormatSymbols getDateFormatSymbols(Locale locale):
 Gets the {@link DateFormatSymbols} based on the given locale.
@@ -202,11 +202,11 @@ Sets the default map of time zone names.
  @param names  the map of abbreviations to zones, not null
 
 public static final double toJulianDay(long epochMillis):
-Calculates the astronomical Julian Day for an instant.
+Calculates the astronomical Julian Day for an misc.instant.
  <p>
  The <a href="http://en.wikipedia.org/wiki/Julian_day">Julian day</a> is a well-known
  system of time measurement for scientific use by the astronomy community.
- It expresses the interval of time in days and fractions of a day since
+ It expresses the misc.interval of time in days and fractions of a day since
  January 1, 4713 BC (Julian) Greenwich noon.
  <p>
  Each day starts at midday (not midnight) and time is expressed as a fraction.
@@ -215,7 +215,7 @@ Calculates the astronomical Julian Day for an instant.
  Note that this method has nothing to do with the day-of-year.
 
  @param epochMillis  the epoch millis from 1970-01-01Z
- @return the astronomical Julian Day represented by the specified instant
+ @return the astronomical Julian Day represented by the specified misc.instant
 useful links
         // http://en.wikipedia.org/wiki/Julian_day#cite_note-13 - Wikipedia
         // http://aa.usno.navy.mil/data/docs/JulianDate.php" - USNO
@@ -223,7 +223,7 @@ useful links
         // http://ssd.jpl.nasa.gov/tc.cgi#top - CalTech
 
 public static final long toJulianDayNumber(long epochMillis):
-Calculates the astronomical Julian Day Number for an instant.
+Calculates the astronomical Julian Day Number for an misc.instant.
  <p>
  The {@link #toJulianDay(long)} method calculates the astronomical Julian Day
  with a fraction based on days starting at midday.
@@ -234,7 +234,7 @@ Calculates the astronomical Julian Day Number for an instant.
  Note that this method has nothing to do with the day-of-year.
 
  @param epochMillis  the epoch millis from 1970-01-01Z
- @return the astronomical Julian Day represented by the specified instant
+ @return the astronomical Julian Day represented by the specified misc.instant
 
  public static final long fromJulianDay(double julianDay):
  Creates a date-time from a Julian Day.

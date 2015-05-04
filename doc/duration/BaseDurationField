@@ -8,42 +8,42 @@ BaseDurationField provides the common behaviour for DurationField
  * BaseDurationField is thread-safe and immutable, and its subclasses must
  * be as well.
 
- public int getValue(long duration):
- Get the value of this field from the milliseconds, which is approximate
-      * if this field is imprecise.
+ public int getValue(long misc.duration):
+ Get the value of this misc.field from the milliseconds, which is approximate
+      * if this misc.field is imprecise.
       *
-      * @param duration  the milliseconds to query, which may be negative
-      * @return the value of the field, in the units of the field, which may be
+      * @param misc.duration  the milliseconds to query, which may be negative
+      * @return the value of the misc.field, in the units of the misc.field, which may be
       * negative
 
-public long getValueAsLong(long duration):
-Get the value of this field from the milliseconds, which is approximate
-     * if this field is imprecise.
+public long getValueAsLong(long misc.duration):
+Get the value of this misc.field from the milliseconds, which is approximate
+     * if this misc.field is imprecise.
      *
-     * @param duration  the milliseconds to query, which may be negative
-     * @return the value of the field, in the units of the field, which may be
+     * @param misc.duration  the milliseconds to query, which may be negative
+     * @return the value of the misc.field, in the units of the misc.field, which may be
      * negative
 
-public int getValue(long duration, long instant):
-Get the value of this field from the milliseconds relative to an
-     * instant.
+public int getValue(long misc.duration, long misc.instant):
+Get the value of this misc.field from the milliseconds relative to an
+     * misc.instant.
      *
-     * <p>If the milliseconds is positive, then the instant is treated as a
-     * "start instant". If negative, the instant is treated as an "end
-     * instant".
+     * <p>If the milliseconds is positive, then the misc.instant is treated as a
+     * "start misc.instant". If negative, the misc.instant is treated as an "end
+     * misc.instant".
      *
      * <p>The default implementation returns
-     * <code>Utils.safeToInt(getAsLong(millisDuration, instant))</code>.
+     * <code>Utils.safeToInt(getAsLong(millisDuration, misc.instant))</code>.
      *
-     * @param duration  the milliseconds to query, which may be negative
-     * @param instant  the start instant to calculate relative to
-     * @return the value of the field, in the units of the field, which may be
+     * @param misc.duration  the milliseconds to query, which may be negative
+     * @param misc.instant  the start misc.instant to calculate relative to
+     * @return the value of the misc.field, in the units of the misc.field, which may be
      * negative
 
 public long getMillis(int value):
-Get the millisecond duration of this field from its value, which is
-     * approximate if this field is imprecise.
+Get the millisecond misc.duration of this misc.field from its value, which is
+     * approximate if this misc.field is imprecise.
      *
-     * @param value  the value of the field, which may be negative
-     * @return the milliseconds that the field represents, which may be
+     * @param value  the value of the misc.field, which may be negative
+     * @return the milliseconds that the misc.field represents, which may be
      * negative

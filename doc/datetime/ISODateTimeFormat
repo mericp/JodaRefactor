@@ -22,10 +22,10 @@ Factory that creates instances of DateTimeFormatter based on the ISO8601 standar
  * <p>
  * It is important to understand that these formatters are not linked to
  * the <code>ISOChronology</code>. These formatters may be used with any
- * chronology, however there may be certain side effects with more unusual
+ * misc.chronology, however there may be certain side effects with more unusual
  * chronologies. For example, the ISO formatters rely on dayOfWeek being
  * single digit, dayOfMonth being two digit and dayOfYear being three digit.
- * A chronology with a ten day week would thus cause issues. However, in
+ * A misc.chronology with a ten day week would thus cause issues. However, in
  * general, it is safe to use these formatters with other chronologies.
  * <p>
  * ISODateTimeFormat is thread-safe and immutable, and the formatters it
@@ -84,13 +84,13 @@ Returns a formatter that outputs only those fields specified.
      * 10-30         10-30       hour/second *
      * 10--.040      10--.040    hour/milli *
      * -20-.040      -20-.040    minute/milli *
-     *   plus datetime formats like {date}T{time}
+     *   plus misc.datetime formats like {date}T{time}
      * </pre>
      * * indiates that this is not an official ISO format and can be excluded
      * by passing in <code>strictISO</code> as <code>true</code>.
      * <p>
      * This method can side effect the input collection of fields.
-     * If the input collection is modifiable, then each field that was added to
+     * If the input collection is modifiable, then each misc.field that was added to
      * the formatter will be removed from the collection, including any duplicates.
      * If the input collection is unmodifiable then no side effect occurs.
      * <p>
@@ -132,11 +132,11 @@ Returns a generic ISO date parser for parsing dates with a possible zone.
      * </pre>
 
 public static DateTimeFormatter localDateParser():
-Returns a generic ISO date parser for parsing local dates.
+Returns a generic ISO date parser for parsing misc.local dates.
      * <p>
      * The returned formatter can only be used for parsing, printing is unsupported.
      * <p>
-     * This parser is initialised with the local (UTC) time zone.
+     * This parser is initialised with the misc.local (UTC) time zone.
      * <p>
      * It accepts formats described by the following syntax:
      * <pre>
@@ -177,11 +177,11 @@ Returns a generic ISO time parser for parsing times with a possible zone.
      * </pre>
 
 public static DateTimeFormatter localTimeParser():
-Returns a generic ISO time parser for parsing local times.
+Returns a generic ISO time parser for parsing misc.local times.
      * <p>
      * The returned formatter can only be used for parsing, printing is unsupported.
      * <p>
-     * This parser is initialised with the local (UTC) time zone.
+     * This parser is initialised with the misc.local (UTC) time zone.
      * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
      * <p>
      * It accepts formats described by the following syntax:

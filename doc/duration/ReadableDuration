@@ -1,46 +1,46 @@
-Defines an exact duration of time in milliseconds.
+Defines an exact misc.duration of time in milliseconds.
  * <p>
  * The implementation of this interface may be mutable or immutable. This
  * interface only gives access to retrieve data, never to change it.
  * <p>
- * Methods that are passed a duration as a parameter will treat <code>null</code>
- * as a zero length duration.
+ * Methods that are passed a misc.duration as a parameter will treat <code>null</code>
+ * as a zero length misc.duration.
  * <p>
  * The {@code compareTo} method is no longer defined in this class in version 2.0.
  * Instead, the definition is simply inherited from the {@code Comparable} interface.
  * This approach is necessary to preserve binary compatibility.
- * The definition of the comparison is ascending order by millisecond duration.
+ * The definition of the comparison is ascending order by millisecond misc.duration.
  * Implementors are recommended to extend {@code AbstractInstant} instead of this interface.
 
  long getMillis():
- Gets the total length of this duration in milliseconds.
+ Gets the total length of this misc.duration in milliseconds.
       *
-      * @return the total length of the time duration in milliseconds.
+      * @return the total length of the time misc.duration in milliseconds.
 
 Duration toDuration():
-Get this duration as an immutable <code>Duration</code> object.
+Get this misc.duration as an immutable <code>Duration</code> object.
      * <p>
      * This will either typecast this instance, or create a new <code>Duration</code>.
      *
-     * @return a Duration created using the millisecond duration from this instance
+     * @return a Duration created using the millisecond misc.duration from this instance
 
 Period toPeriod():
-Converts this duration to a Period instance using the standard period type
-     * and the ISO chronology.
+Converts this misc.duration to a Period instance using the standard misc.period type
+     * and the ISO misc.chronology.
      * <p>
-     * Only precise fields in the period type will be used. Thus, only the hour,
-     * minute, second and millisecond fields on the period will be used.
+     * Only precise fields in the misc.period type will be used. Thus, only the hour,
+     * minute, second and millisecond fields on the misc.period will be used.
      * The year, month, week and day fields will not be populated.
      * <p>
-     * If the duration is small, less than one day, then this method will perform
+     * If the misc.duration is small, less than one day, then this method will perform
      * as you might expect and split the fields evenly.
-     * If the duration is larger than one day then all the remaining duration will
-     * be stored in the largest available field, hours in this case.
+     * If the misc.duration is larger than one day then all the remaining misc.duration will
+     * be stored in the largest available misc.field, hours in this case.
      * <p>
-     * For example, a duration effectively equal to (365 + 60 + 5) days will be
+     * For example, a misc.duration effectively equal to (365 + 60 + 5) days will be
      * converted to ((365 + 60 + 5) * 24) hours by this constructor.
      * <p>
-     * For more control over the conversion process, you must pair the duration with
-     * an instant, see {@link Period#Period(ReadableInstant,ReadableDuration)}.
+     * For more control over the conversion process, you must pair the misc.duration with
+     * an misc.instant, see {@link Period#Period(ReadableInstant,ReadableDuration)}.
      *
-     * @return a Period created using the millisecond duration from this instance
+     * @return a Period created using the millisecond misc.duration from this instance

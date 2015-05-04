@@ -1,21 +1,21 @@
-Writable interface for an interval.
+Writable interface for an misc.interval.
 
 void setInterval(long startInstant, long endInstant):
-Sets this interval from two millisecond instants.
+Sets this misc.interval from two millisecond instants.
      *
-     * @param startInstant  the start of the time interval
-     * @param endInstant  the start of the time interval
+     * @param startInstant  the start of the time misc.interval
+     * @param endInstant  the start of the time misc.interval
      * @throws IllegalArgumentException if the end is before the start
 
-void setInterval(ReadableInterval interval):
-Sets this interval to be the same as another.
+void setInterval(ReadableInterval misc.interval):
+Sets this misc.interval to be the same as another.
      *
-     * @param interval  the interval to copy
+     * @param misc.interval  the misc.interval to copy
      * @throws IllegalArgumentException if the end is before the start
 
 void setInterval(ReadableInstant startInstant, ReadableInstant endInstant):
-Sets this interval from two instants.
+Sets this misc.interval from two instants.
      *
-     * @param startInstant  the start of the time interval
-     * @param endInstant  the start of the time interval
+     * @param startInstant  the start of the time misc.interval
+     * @param endInstant  the start of the time misc.interval
      * @throws IllegalArgumentException if the end is before the start

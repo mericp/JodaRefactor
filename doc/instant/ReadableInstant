@@ -1,17 +1,17 @@
-Defines an instant in the datetime continuum.
- * This interface expresses the datetime as milliseconds from 1970-01-01T00:00:00Z.
+Defines an misc.instant in the misc.datetime continuum.
+ * This interface expresses the misc.datetime as milliseconds from 1970-01-01T00:00:00Z.
  * <p>
  * The implementation of this interface may be mutable or immutable.
  * This interface only gives access to retrieve data, never to change it.
  * <p>
  * Methods in your application should be defined using <code>ReadableInstant</code>
- * as a parameter if the method only wants to read the instant without needing to know
- * the specific datetime fields.
+ * as a parameter if the method only wants to read the misc.instant without needing to know
+ * the specific misc.datetime fields.
  * <p>
  * The {@code compareTo} method is no longer defined in this class in version 2.0.
  * Instead, the definition is simply inherited from the {@code Comparable} interface.
  * This approach is necessary to preserve binary compatibility.
- * The definition of the comparison is ascending order by millisecond instant.
+ * The definition of the comparison is ascending order by millisecond misc.instant.
  * Implementors are recommended to extend {@code AbstractInstant} instead of this interface.
 
 long getMillis():
@@ -21,32 +21,32 @@ Get the value as the number of milliseconds since
      * @return the value as milliseconds
 
 Chronology getChronology():
-Gets the chronology of the instant.
+Gets the misc.chronology of the misc.instant.
      * <p>
-     * The {@link chronology} provides conversion from the millisecond
+     * The {@link misc.chronology} provides conversion from the millisecond
      * value to meaningful fields in a particular calendar system.
      *
      * @return the Chronology, never null
 
 DateTimeZone getTimeZone():
-Gets the time zone of the instant from the chronology.
+Gets the time zone of the misc.instant from the misc.chronology.
      *
-     * @return the DateTimeZone that the instant is using, never null
+     * @return the DateTimeZone that the misc.instant is using, never null
 
 int get(DateTimeFieldType type):
- Get the value of one of the fields of a datetime.
+ Get the value of one of the fields of a misc.datetime.
      * <p>
-     * This method uses the chronology of the instant to obtain the value.
+     * This method uses the misc.chronology of the misc.instant to obtain the value.
      *
-     * @param type  a field type, usually obtained from DateTimeFieldType, not null
-     * @return the value of that field
-     * @throws IllegalArgumentException if the field type is null
+     * @param type  a misc.field type, usually obtained from DateTimeFieldType, not null
+     * @return the value of that misc.field
+     * @throws IllegalArgumentException if the misc.field type is null
 
-boolean isSupported(DateTimeFieldType field):
-Checks whether the field type specified is supported by this implementation.
+boolean isSupported(DateTimeFieldType misc.field):
+Checks whether the misc.field type specified is supported by this implementation.
      *
-     * @param field  the field type to check, may be null which returns false
-     * @return true if the field is supported
+     * @param misc.field  the misc.field type to check, may be null which returns false
+     * @return true if the misc.field is supported
 
 Instant toInstant():
 Get the value as a simple immutable <code>Instant</code> object.
@@ -57,36 +57,36 @@ Get the value as a simple immutable <code>Instant</code> object.
      *
      * @return the value as an <code>Instant</code> object
 
-boolean isEqual(ReadableInstant instant):
-Is this instant equal to the instant passed in
+boolean isEqual(ReadableInstant misc.instant):
+Is this misc.instant equal to the misc.instant passed in
      * comparing solely by millisecond.
      *
-     * @param instant  an instant to check against, null means now
-     * @return true if the instant is equal to the instant passed in
+     * @param misc.instant  an misc.instant to check against, null means now
+     * @return true if the misc.instant is equal to the misc.instant passed in
 
-boolean isAfter(ReadableInstant instant):
-Is this instant after the instant passed in
+boolean isAfter(ReadableInstant misc.instant):
+Is this misc.instant after the misc.instant passed in
      * comparing solely by millisecond.
      *
-     * @param instant  an instant to check against, null means now
-     * @return true if the instant is after the instant passed in
+     * @param misc.instant  an misc.instant to check against, null means now
+     * @return true if the misc.instant is after the misc.instant passed in
 
-boolean isBefore(ReadableInstant instant):
-Is this instant before the instant passed in
+boolean isBefore(ReadableInstant misc.instant):
+Is this misc.instant before the misc.instant passed in
      * comparing solely by millisecond.
      *
-     * @param instant  an instant to check against, null means now
-     * @return true if the instant is before the instant passed in
+     * @param misc.instant  an misc.instant to check against, null means now
+     * @return true if the misc.instant is before the misc.instant passed in
 
 boolean equals(Object readableInstant):
 Compares this object with the specified object for equality based
-     * on the millisecond instant and the Chronology. All ReadableInstant
+     * on the millisecond misc.instant and the Chronology. All ReadableInstant
      * instances are accepted.
      * <p>
      * To compare two instants for absolute time (ie. UTC milliseconds
-     * ignoring the chronology), use {@link #isEqual(ReadableInstant)} or
+     * ignoring the misc.chronology), use {@link #isEqual(ReadableInstant)} or
      * {@link #compareTo(Object)}.
      *
-     * @param readableInstant  a readable instant to check against
-     * @return true if millisecond and chronology are equal, false if
-     *  not or the instant is null or of an incorrect type
+     * @param readableInstant  a readable misc.instant to check against
+     * @return true if millisecond and misc.chronology are equal, false if
+     *  not or the misc.instant is null or of an incorrect type
