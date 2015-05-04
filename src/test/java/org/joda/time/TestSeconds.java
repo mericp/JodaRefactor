@@ -32,12 +32,12 @@ public class TestSeconds extends TestCase {
     }
 
     public void testConstants() {
-        assertEquals(0, Seconds.ZERO.getSeconds());
-        assertEquals(1, Seconds.ONE.getSeconds());
-        assertEquals(2, Seconds.TWO.getSeconds());
-        assertEquals(3, Seconds.THREE.getSeconds());
-        assertEquals(Integer.MAX_VALUE, Seconds.MAX_VALUE.getSeconds());
-        assertEquals(Integer.MIN_VALUE, Seconds.MIN_VALUE.getSeconds());
+        assertEquals(0, Seconds.ZERO.getValue());
+        assertEquals(1, Seconds.ONE.getValue());
+        assertEquals(2, Seconds.TWO.getValue());
+        assertEquals(3, Seconds.THREE.getValue());
+        assertEquals(Integer.MAX_VALUE, Seconds.MAX_VALUE.getValue());
+        assertEquals(Integer.MIN_VALUE, Seconds.MIN_VALUE.getValue());
     }
 
     public void testFactory_seconds_int() {
@@ -47,8 +47,8 @@ public class TestSeconds extends TestCase {
         assertSame(Seconds.THREE, Seconds.seconds(3));
         assertSame(Seconds.MAX_VALUE, Seconds.seconds(Integer.MAX_VALUE));
         assertSame(Seconds.MIN_VALUE, Seconds.seconds(Integer.MIN_VALUE));
-        assertEquals(-1, Seconds.seconds(-1).getSeconds());
-        assertEquals(4, Seconds.seconds(4).getSeconds());
+        assertEquals(-1, Seconds.seconds(-1).getValue());
+        assertEquals(4, Seconds.seconds(4).getValue());
     }
 
     public void testFactory_secondsBetween_RPartial() {
@@ -57,19 +57,19 @@ public class TestSeconds extends TestCase {
         @SuppressWarnings("deprecation")
         TimeOfDay end2 = new TimeOfDay(12, 0, 9);
         
-        assertEquals(3, Seconds.secondsBetween(start, end1).getSeconds());
-        assertEquals(0, Seconds.secondsBetween(start, start).getSeconds());
-        assertEquals(0, Seconds.secondsBetween(end1, end1).getSeconds());
-        assertEquals(-3, Seconds.secondsBetween(end1, start).getSeconds());
-        assertEquals(6, Seconds.secondsBetween(start, end2).getSeconds());
+        assertEquals(3, Seconds.secondsBetween(start, end1).getValue());
+        assertEquals(0, Seconds.secondsBetween(start, start).getValue());
+        assertEquals(0, Seconds.secondsBetween(end1, end1).getValue());
+        assertEquals(-3, Seconds.secondsBetween(end1, start).getValue());
+        assertEquals(6, Seconds.secondsBetween(start, end2).getValue());
     }
     public void testFactory_standardSecondsIn_RPeriod() {
-        assertEquals(0, Seconds.standardSecondsIn(null).getSeconds());
-        assertEquals(0, Seconds.standardSecondsIn(Period.ZERO).getSeconds());
-        assertEquals(1, Seconds.standardSecondsIn(new Period(0, 0, 0, 0, 0, 0, 1, 0)).getSeconds());
-        assertEquals(123, Seconds.standardSecondsIn(Period.seconds(123)).getSeconds());
-        assertEquals(-987, Seconds.standardSecondsIn(Period.seconds(-987)).getSeconds());
-        assertEquals(2 * 24 * 60 * 60, Seconds.standardSecondsIn(Period.days(2)).getSeconds());
+        assertEquals(0, Seconds.standardSecondsIn(null).getValue());
+        assertEquals(0, Seconds.standardSecondsIn(Period.ZERO).getValue());
+        assertEquals(1, Seconds.standardSecondsIn(new Period(0, 0, 0, 0, 0, 0, 1, 0)).getValue());
+        assertEquals(123, Seconds.standardSecondsIn(Period.seconds(123)).getValue());
+        assertEquals(-987, Seconds.standardSecondsIn(Period.seconds(-987)).getValue());
+        assertEquals(2 * 24 * 60 * 60, Seconds.standardSecondsIn(Period.days(2)).getValue());
         try {
             Seconds.standardSecondsIn(Period.months(1));
             fail();
@@ -78,12 +78,12 @@ public class TestSeconds extends TestCase {
         }
     }
     public void testFactory_parseSeconds_String() {
-        assertEquals(0, Seconds.parseSeconds(null).getSeconds());
-        assertEquals(0, Seconds.parseSeconds("PT0S").getSeconds());
-        assertEquals(1, Seconds.parseSeconds("PT1S").getSeconds());
-        assertEquals(-3, Seconds.parseSeconds("PT-3S").getSeconds());
-        assertEquals(2, Seconds.parseSeconds("P0Y0M0DT2S").getSeconds());
-        assertEquals(2, Seconds.parseSeconds("PT0H2S").getSeconds());
+        assertEquals(0, Seconds.parseSeconds(null).getValue());
+        assertEquals(0, Seconds.parseSeconds("PT0S").getValue());
+        assertEquals(1, Seconds.parseSeconds("PT1S").getValue());
+        assertEquals(-3, Seconds.parseSeconds("PT-3S").getValue());
+        assertEquals(2, Seconds.parseSeconds("P0Y0M0DT2S").getValue());
+        assertEquals(2, Seconds.parseSeconds("PT0H2S").getValue());
         try {
             Seconds.parseSeconds("P1Y1D");
             fail();
@@ -100,7 +100,7 @@ public class TestSeconds extends TestCase {
 
     public void testGetMethods() {
         Seconds test = Seconds.seconds(20);
-        assertEquals(20, test.getSeconds());
+        assertEquals(20, test.getValue());
     }
     public void testGetFieldType() {
         Seconds test = Seconds.seconds(20);
@@ -183,10 +183,10 @@ public class TestSeconds extends TestCase {
     public void testPlus_int() {
         Seconds test2 = Seconds.seconds(2);
         Seconds result = test2.plus(3);
-        assertEquals(2, test2.getSeconds());
-        assertEquals(5, result.getSeconds());
+        assertEquals(2, test2.getValue());
+        assertEquals(5, result.getValue());
         
-        assertEquals(1, Seconds.ONE.plus(0).getSeconds());
+        assertEquals(1, Seconds.ONE.plus(0).getValue());
         
         try {
             Seconds.MAX_VALUE.plus(1);
@@ -198,13 +198,13 @@ public class TestSeconds extends TestCase {
     public void testPlus_Seconds() {
         Seconds test2 = Seconds.seconds(2);
         Seconds test3 = Seconds.seconds(3);
-        Seconds result = test2.plus(test3);
-        assertEquals(2, test2.getSeconds());
-        assertEquals(3, test3.getSeconds());
-        assertEquals(5, result.getSeconds());
+        Seconds result = (Seconds)test2.plus(test3);
+        assertEquals(2, test2.getValue());
+        assertEquals(3, test3.getValue());
+        assertEquals(5, result.getValue());
         
-        assertEquals(1, Seconds.ONE.plus(Seconds.ZERO).getSeconds());
-        assertEquals(1, Seconds.ONE.plus(null).getSeconds());
+        assertEquals(1, Seconds.ONE.plus(Seconds.ZERO).getValue());
+        assertEquals(1, Seconds.ONE.plus(null).getValue());
         
         try {
             Seconds.MAX_VALUE.plus(Seconds.ONE);
@@ -215,11 +215,11 @@ public class TestSeconds extends TestCase {
     }
     public void testMinus_int() {
         Seconds test2 = Seconds.seconds(2);
-        Seconds result = test2.minus(3);
-        assertEquals(2, test2.getSeconds());
-        assertEquals(-1, result.getSeconds());
+        Seconds result = (Seconds)test2.minus(3);
+        assertEquals(2, test2.getValue());
+        assertEquals(-1, result.getValue());
         
-        assertEquals(1, Seconds.ONE.minus(0).getSeconds());
+        assertEquals(1, Seconds.ONE.minus(0).getValue());
         
         try {
             Seconds.MIN_VALUE.minus(1);
@@ -231,13 +231,13 @@ public class TestSeconds extends TestCase {
     public void testMinus_Seconds() {
         Seconds test2 = Seconds.seconds(2);
         Seconds test3 = Seconds.seconds(3);
-        Seconds result = test2.minus(test3);
-        assertEquals(2, test2.getSeconds());
-        assertEquals(3, test3.getSeconds());
-        assertEquals(-1, result.getSeconds());
+        Seconds result = (Seconds)test2.minus(test3);
+        assertEquals(2, test2.getValue());
+        assertEquals(3, test3.getValue());
+        assertEquals(-1, result.getValue());
         
-        assertEquals(1, Seconds.ONE.minus(Seconds.ZERO).getSeconds());
-        assertEquals(1, Seconds.ONE.minus(null).getSeconds());
+        assertEquals(1, Seconds.ONE.minus(Seconds.ZERO).getValue());
+        assertEquals(1, Seconds.ONE.minus(null).getValue());
         
         try {
             Seconds.MIN_VALUE.minus(Seconds.ONE);
@@ -248,9 +248,9 @@ public class TestSeconds extends TestCase {
     }
     public void testMultipliedBy_int() {
         Seconds test = Seconds.seconds(2);
-        assertEquals(6, test.multipliedBy(3).getSeconds());
-        assertEquals(2, test.getSeconds());
-        assertEquals(-6, test.multipliedBy(-3).getSeconds());
+        assertEquals(6, test.multipliedBy(3).getValue());
+        assertEquals(2, test.getValue());
+        assertEquals(-6, test.multipliedBy(-3).getValue());
         assertSame(test, test.multipliedBy(1));
         
         Seconds halfMax = Seconds.seconds(Integer.MAX_VALUE / 2 + 1);
@@ -263,12 +263,12 @@ public class TestSeconds extends TestCase {
     }
     public void testDividedBy_int() {
         Seconds test = Seconds.seconds(12);
-        assertEquals(6, test.dividedBy(2).getSeconds());
-        assertEquals(12, test.getSeconds());
-        assertEquals(4, test.dividedBy(3).getSeconds());
-        assertEquals(3, test.dividedBy(4).getSeconds());
-        assertEquals(2, test.dividedBy(5).getSeconds());
-        assertEquals(2, test.dividedBy(6).getSeconds());
+        assertEquals(6, test.dividedBy(2).getValue());
+        assertEquals(12, test.getValue());
+        assertEquals(4, test.dividedBy(3).getValue());
+        assertEquals(3, test.dividedBy(4).getValue());
+        assertEquals(2, test.dividedBy(5).getValue());
+        assertEquals(2, test.dividedBy(6).getValue());
         assertSame(test, test.dividedBy(1));
         
         try {
@@ -280,8 +280,8 @@ public class TestSeconds extends TestCase {
     }
     public void testNegated() {
         Seconds test = Seconds.seconds(12);
-        assertEquals(-12, test.negated().getSeconds());
-        assertEquals(12, test.getSeconds());
+        assertEquals(-12, test.negated().getValue());
+        assertEquals(12, test.getValue());
         
         try {
             Seconds.MIN_VALUE.negated();

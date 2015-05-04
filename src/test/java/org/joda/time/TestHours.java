@@ -32,17 +32,17 @@ public class TestHours extends TestCase {
     }
 
     public void testConstants() {
-        assertEquals(0, Hours.ZERO.getHours());
-        assertEquals(1, Hours.ONE.getHours());
-        assertEquals(2, Hours.TWO.getHours());
-        assertEquals(3, Hours.THREE.getHours());
-        assertEquals(4, Hours.FOUR.getHours());
-        assertEquals(5, Hours.FIVE.getHours());
-        assertEquals(6, Hours.SIX.getHours());
-        assertEquals(7, Hours.SEVEN.getHours());
-        assertEquals(8, Hours.EIGHT.getHours());
-        assertEquals(Integer.MAX_VALUE, Hours.MAX_VALUE.getHours());
-        assertEquals(Integer.MIN_VALUE, Hours.MIN_VALUE.getHours());
+        assertEquals(0, Hours.ZERO.getValue());
+        assertEquals(1, Hours.ONE.getValue());
+        assertEquals(2, Hours.TWO.getValue());
+        assertEquals(3, Hours.THREE.getValue());
+        assertEquals(4, Hours.FOUR.getValue());
+        assertEquals(5, Hours.FIVE.getValue());
+        assertEquals(6, Hours.SIX.getValue());
+        assertEquals(7, Hours.SEVEN.getValue());
+        assertEquals(8, Hours.EIGHT.getValue());
+        assertEquals(Integer.MAX_VALUE, Hours.MAX_VALUE.getValue());
+        assertEquals(Integer.MIN_VALUE, Hours.MIN_VALUE.getValue());
     }
 
     public void testFactory_hours_int() {
@@ -57,8 +57,8 @@ public class TestHours extends TestCase {
         assertSame(Hours.EIGHT, Hours.hours(8));
         assertSame(Hours.MAX_VALUE, Hours.hours(Integer.MAX_VALUE));
         assertSame(Hours.MIN_VALUE, Hours.hours(Integer.MIN_VALUE));
-        assertEquals(-1, Hours.hours(-1).getHours());
-        assertEquals(9, Hours.hours(9).getHours());
+        assertEquals(-1, Hours.hours(-1).getValue());
+        assertEquals(9, Hours.hours(9).getValue());
     }
 
     public void testFactory_hoursBetween_RPartial() {
@@ -66,22 +66,22 @@ public class TestHours extends TestCase {
         LocalTime end1 = new LocalTime(15, 0);
         TimeOfDay end2 = new TimeOfDay(18, 0);
         
-        assertEquals(3, Hours.hoursBetween(start, end1).getHours());
-        assertEquals(0, Hours.hoursBetween(start, start).getHours());
-        assertEquals(0, Hours.hoursBetween(end1, end1).getHours());
-        assertEquals(-3, Hours.hoursBetween(end1, start).getHours());
-        assertEquals(6, Hours.hoursBetween(start, end2).getHours());
+        assertEquals(3, Hours.hoursBetween(start, end1).getValue());
+        assertEquals(0, Hours.hoursBetween(start, start).getValue());
+        assertEquals(0, Hours.hoursBetween(end1, end1).getValue());
+        assertEquals(-3, Hours.hoursBetween(end1, start).getValue());
+        assertEquals(6, Hours.hoursBetween(start, end2).getValue());
     }
     public void testFactory_standardHoursIn_RPeriod() {
-        assertEquals(0, Hours.standardHoursIn(null).getHours());
-        assertEquals(0, Hours.standardHoursIn(Period.ZERO).getHours());
-        assertEquals(1, Hours.standardHoursIn(new Period(0, 0, 0, 0, 1, 0, 0, 0)).getHours());
-        assertEquals(123, Hours.standardHoursIn(Period.hours(123)).getHours());
-        assertEquals(-987, Hours.standardHoursIn(Period.hours(-987)).getHours());
-        assertEquals(1, Hours.standardHoursIn(Period.minutes(119)).getHours());
-        assertEquals(2, Hours.standardHoursIn(Period.minutes(120)).getHours());
-        assertEquals(2, Hours.standardHoursIn(Period.minutes(121)).getHours());
-        assertEquals(48, Hours.standardHoursIn(Period.days(2)).getHours());
+        assertEquals(0, Hours.standardHoursIn(null).getValue());
+        assertEquals(0, Hours.standardHoursIn(Period.ZERO).getValue());
+        assertEquals(1, Hours.standardHoursIn(new Period(0, 0, 0, 0, 1, 0, 0, 0)).getValue());
+        assertEquals(123, Hours.standardHoursIn(Period.hours(123)).getValue());
+        assertEquals(-987, Hours.standardHoursIn(Period.hours(-987)).getValue());
+        assertEquals(1, Hours.standardHoursIn(Period.minutes(119)).getValue());
+        assertEquals(2, Hours.standardHoursIn(Period.minutes(120)).getValue());
+        assertEquals(2, Hours.standardHoursIn(Period.minutes(121)).getValue());
+        assertEquals(48, Hours.standardHoursIn(Period.days(2)).getValue());
         try {
             Hours.standardHoursIn(Period.months(1));
             fail();
@@ -90,12 +90,12 @@ public class TestHours extends TestCase {
         }
     }
     public void testFactory_parseHours_String() {
-        assertEquals(0, Hours.parseHours(null).getHours());
-        assertEquals(0, Hours.parseHours("PT0H").getHours());
-        assertEquals(1, Hours.parseHours("PT1H").getHours());
-        assertEquals(-3, Hours.parseHours("PT-3H").getHours());
-        assertEquals(2, Hours.parseHours("P0Y0M0DT2H").getHours());
-        assertEquals(2, Hours.parseHours("PT2H0M").getHours());
+        assertEquals(0, Hours.parseHours(null).getValue());
+        assertEquals(0, Hours.parseHours("PT0H").getValue());
+        assertEquals(1, Hours.parseHours("PT1H").getValue());
+        assertEquals(-3, Hours.parseHours("PT-3H").getValue());
+        assertEquals(2, Hours.parseHours("P0Y0M0DT2H").getValue());
+        assertEquals(2, Hours.parseHours("PT2H0M").getValue());
         try {
             Hours.parseHours("P1Y1D");
             fail();
@@ -112,7 +112,7 @@ public class TestHours extends TestCase {
 
     public void testGetMethods() {
         Hours test = Hours.hours(20);
-        assertEquals(20, test.getHours());
+        assertEquals(20, test.getValue());
     }
     public void testGetFieldType() {
         Hours test = Hours.hours(20);
@@ -209,10 +209,10 @@ public class TestHours extends TestCase {
     public void testPlus_int() {
         Hours test2 = Hours.hours(2);
         Hours result = test2.plus(3);
-        assertEquals(2, test2.getHours());
-        assertEquals(5, result.getHours());
+        assertEquals(2, test2.getValue());
+        assertEquals(5, result.getValue());
         
-        assertEquals(1, Hours.ONE.plus(0).getHours());
+        assertEquals(1, Hours.ONE.plus(0).getValue());
         
         try {
             Hours.MAX_VALUE.plus(1);
@@ -224,13 +224,13 @@ public class TestHours extends TestCase {
     public void testPlus_Hours() {
         Hours test2 = Hours.hours(2);
         Hours test3 = Hours.hours(3);
-        Hours result = test2.plus(test3);
-        assertEquals(2, test2.getHours());
-        assertEquals(3, test3.getHours());
-        assertEquals(5, result.getHours());
+        Hours result = (Hours)test2.plus(test3);
+        assertEquals(2, test2.getValue());
+        assertEquals(3, test3.getValue());
+        assertEquals(5, result.getValue());
         
-        assertEquals(1, Hours.ONE.plus(Hours.ZERO).getHours());
-        assertEquals(1, Hours.ONE.plus(null).getHours());
+        assertEquals(1, Hours.ONE.plus(Hours.ZERO).getValue());
+        assertEquals(1, Hours.ONE.plus(null).getValue());
         
         try {
             Hours.MAX_VALUE.plus(Hours.ONE);
@@ -241,11 +241,11 @@ public class TestHours extends TestCase {
     }
     public void testMinus_int() {
         Hours test2 = Hours.hours(2);
-        Hours result = test2.minus(3);
-        assertEquals(2, test2.getHours());
-        assertEquals(-1, result.getHours());
+        Hours result = (Hours)test2.minus(3);
+        assertEquals(2, test2.getValue());
+        assertEquals(-1, result.getValue());
         
-        assertEquals(1, Hours.ONE.minus(0).getHours());
+        assertEquals(1, Hours.ONE.minus(0).getValue());
         
         try {
             Hours.MIN_VALUE.minus(1);
@@ -257,13 +257,13 @@ public class TestHours extends TestCase {
     public void testMinus_Hours() {
         Hours test2 = Hours.hours(2);
         Hours test3 = Hours.hours(3);
-        Hours result = test2.minus(test3);
-        assertEquals(2, test2.getHours());
-        assertEquals(3, test3.getHours());
-        assertEquals(-1, result.getHours());
+        Hours result = (Hours)test2.minus(test3);
+        assertEquals(2, test2.getValue());
+        assertEquals(3, test3.getValue());
+        assertEquals(-1, result.getValue());
         
-        assertEquals(1, Hours.ONE.minus(Hours.ZERO).getHours());
-        assertEquals(1, Hours.ONE.minus(null).getHours());
+        assertEquals(1, Hours.ONE.minus(Hours.ZERO).getValue());
+        assertEquals(1, Hours.ONE.minus(null).getValue());
         
         try {
             Hours.MIN_VALUE.minus(Hours.ONE);
@@ -274,9 +274,9 @@ public class TestHours extends TestCase {
     }
     public void testMultipliedBy_int() {
         Hours test = Hours.hours(2);
-        assertEquals(6, test.multipliedBy(3).getHours());
-        assertEquals(2, test.getHours());
-        assertEquals(-6, test.multipliedBy(-3).getHours());
+        assertEquals(6, test.multipliedBy(3).getValue());
+        assertEquals(2, test.getValue());
+        assertEquals(-6, test.multipliedBy(-3).getValue());
         assertSame(test, test.multipliedBy(1));
         
         Hours halfMax = Hours.hours(Integer.MAX_VALUE / 2 + 1);
@@ -289,12 +289,12 @@ public class TestHours extends TestCase {
     }
     public void testDividedBy_int() {
         Hours test = Hours.hours(12);
-        assertEquals(6, test.dividedBy(2).getHours());
-        assertEquals(12, test.getHours());
-        assertEquals(4, test.dividedBy(3).getHours());
-        assertEquals(3, test.dividedBy(4).getHours());
-        assertEquals(2, test.dividedBy(5).getHours());
-        assertEquals(2, test.dividedBy(6).getHours());
+        assertEquals(6, test.dividedBy(2).getValue());
+        assertEquals(12, test.getValue());
+        assertEquals(4, test.dividedBy(3).getValue());
+        assertEquals(3, test.dividedBy(4).getValue());
+        assertEquals(2, test.dividedBy(5).getValue());
+        assertEquals(2, test.dividedBy(6).getValue());
         assertSame(test, test.dividedBy(1));
         
         try {
@@ -306,8 +306,8 @@ public class TestHours extends TestCase {
     }
     public void testNegated() {
         Hours test = Hours.hours(12);
-        assertEquals(-12, test.negated().getHours());
-        assertEquals(12, test.getHours());
+        assertEquals(-12, test.negated().getValue());
+        assertEquals(12, test.getValue());
         
         try {
             Hours.MIN_VALUE.negated();

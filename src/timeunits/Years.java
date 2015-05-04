@@ -1,10 +1,11 @@
 package timeunits;
 
-import field.FieldUtils;
-import org.joda.convert.FromString;
+import chronology.Chronology;
 import datetime.DateTimeUtils;
 import datetime.LocalDate;
 import duration.DurationFieldType;
+import field.FieldUtils;
+import org.joda.convert.FromString;
 import org.joda.convert.ToString;
 import partial.ReadablePartial;
 import period.Base.BaseSingleFieldPeriod;
@@ -12,7 +13,6 @@ import period.Format.ISOPeriodFormat;
 import period.Format.PeriodFormatter;
 import period.Period;
 import period.PeriodType;
-import chronology.Chronology;
 import pool.YearPool;
 
 public final class Years extends BaseSingleFieldPeriod {
@@ -42,11 +42,11 @@ public final class Years extends BaseSingleFieldPeriod {
         {
             Chronology chrono = DateTimeUtils.getChronology(start.getChronology());
             int years = chrono.years().getDifference(((LocalDate)end).getLocalMillis(), ((LocalDate) start).getLocalMillis());
-            result = Years.years(years);
+            result = years(years);
         }
         else
         {
-            result = Years.years(BaseSingleFieldPeriod.between(start, end, ZERO));
+            result = years(BaseSingleFieldPeriod.between(start, end, ZERO));
         }
 
         return result;
@@ -62,19 +62,16 @@ public final class Years extends BaseSingleFieldPeriod {
         else
         {
             Period p = PARSER.parsePeriod(periodStr);
-            result = Years.years(p.getYears());
+            result = years(p.getYears());
         }
 
         return result;
     }
 
     @Override protected Object readResolve() {
-        return Years.years(getValue());
+        return years(getValue());
     }
 
-    public int getYears() {
-        return getValue();
-    }
     @Override public DurationFieldType getFieldType() {
         return DurationFieldType.years();
     }
@@ -82,35 +79,7 @@ public final class Years extends BaseSingleFieldPeriod {
         return PeriodType.years();
     }
 
-    public boolean isGreaterThan(Years other) {
-        boolean greater;
-
-        if (other == null)
-        {
-            greater = getValue() > 0;
-        }
-        else
-        {
-            greater = getValue() > other.getValue();
-        }
-
-        return greater;
-    }
-    public boolean isLessThan(Years other) {
-        boolean lower;
-
-        if (other == null)
-        {
-            lower = getValue() < 0;
-        }
-        else
-        {
-            lower = getValue() < other.getValue();
-        }
-        return lower;
-    }
-
-    public Years plus(int years) {
+    @Override public Years plus(int years) {
         Years result;
 
         if (years == 0)
@@ -119,48 +88,16 @@ public final class Years extends BaseSingleFieldPeriod {
         }
         else
         {
-            result = Years.years(FieldUtils.safeAdd(getValue(), years));
-        }
-
-        return result;
-    }
-    public Years plus(Years years) {
-        Years result;
-
-        if (years == null)
-        {
-            result = this;
-        }
-        else
-        {
-            result = plus(years.getValue());
+            result = years(FieldUtils.safeAdd(getValue(), years));
         }
 
         return result;
     }
 
-    public Years minus(int years) {
-        return plus(FieldUtils.safeNegate(years));
+    @Override public Years multipliedBy(int scalar) {
+        return years(FieldUtils.safeMultiply(getValue(), scalar));
     }
-    public Years minus(Years years) {
-        Years result;
-
-        if (years == null)
-        {
-            result = this;
-        }
-        else
-        {
-            result = minus(years.getValue());
-        }
-
-        return result;
-    }
-
-    public Years multipliedBy(int scalar) {
-        return Years.years(FieldUtils.safeMultiply(getValue(), scalar));
-    }
-    public Years dividedBy(int divisor) {
+    @Override public Years dividedBy(int divisor) {
         Years result;
 
         if (divisor == 1)
@@ -169,14 +106,14 @@ public final class Years extends BaseSingleFieldPeriod {
         }
         else
         {
-            result = Years.years(getValue() / divisor);
+            result = years(getValue() / divisor);
         }
 
         return result;
     }
 
-    public Years negated() {
-        return Years.years(FieldUtils.safeNegate(getValue()));
+    @Override public Years negated() {
+        return years(FieldUtils.safeNegate(getValue()));
     }
 
     @Override @ToString public String toString() {

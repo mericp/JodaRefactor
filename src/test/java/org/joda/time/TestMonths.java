@@ -30,21 +30,21 @@ public class TestMonths extends TestCase {
     }
 
     public void testConstants() {
-        assertEquals(0, Months.ZERO.getMonths());
-        assertEquals(1, Months.ONE.getMonths());
-        assertEquals(2, Months.TWO.getMonths());
-        assertEquals(3, Months.THREE.getMonths());
-        assertEquals(4, Months.FOUR.getMonths());
-        assertEquals(5, Months.FIVE.getMonths());
-        assertEquals(6, Months.SIX.getMonths());
-        assertEquals(7, Months.SEVEN.getMonths());
-        assertEquals(8, Months.EIGHT.getMonths());
-        assertEquals(9, Months.NINE.getMonths());
-        assertEquals(10, Months.TEN.getMonths());
-        assertEquals(11, Months.ELEVEN.getMonths());
-        assertEquals(12, Months.TWELVE.getMonths());
-        assertEquals(Integer.MAX_VALUE, Months.MAX_VALUE.getMonths());
-        assertEquals(Integer.MIN_VALUE, Months.MIN_VALUE.getMonths());
+        assertEquals(0, Months.ZERO.getValue());
+        assertEquals(1, Months.ONE.getValue());
+        assertEquals(2, Months.TWO.getValue());
+        assertEquals(3, Months.THREE.getValue());
+        assertEquals(4, Months.FOUR.getValue());
+        assertEquals(5, Months.FIVE.getValue());
+        assertEquals(6, Months.SIX.getValue());
+        assertEquals(7, Months.SEVEN.getValue());
+        assertEquals(8, Months.EIGHT.getValue());
+        assertEquals(9, Months.NINE.getValue());
+        assertEquals(10, Months.TEN.getValue());
+        assertEquals(11, Months.ELEVEN.getValue());
+        assertEquals(12, Months.TWELVE.getValue());
+        assertEquals(Integer.MAX_VALUE, Months.MAX_VALUE.getValue());
+        assertEquals(Integer.MIN_VALUE, Months.MIN_VALUE.getValue());
     }
 
     public void testFactory_months_int() {
@@ -63,8 +63,8 @@ public class TestMonths extends TestCase {
         assertSame(Months.TWELVE, Months.months(12));
         assertSame(Months.MAX_VALUE, Months.months(Integer.MAX_VALUE));
         assertSame(Months.MIN_VALUE, Months.months(Integer.MIN_VALUE));
-        assertEquals(-1, Months.months(-1).getMonths());
-        assertEquals(13, Months.months(13).getMonths());
+        assertEquals(-1, Months.months(-1).getValue());
+        assertEquals(13, Months.months(13).getValue());
     }
 
     public void testFactory_monthsBetween_RPartial_LocalDate() {
@@ -72,19 +72,19 @@ public class TestMonths extends TestCase {
         LocalDate end1 = new LocalDate(2006, 9, 9);
         YearMonthDay end2 = new YearMonthDay(2006, 12, 9);
         
-        assertEquals(3, Months.monthsBetween(start, end1).getMonths());
-        assertEquals(0, Months.monthsBetween(start, start).getMonths());
-        assertEquals(0, Months.monthsBetween(end1, end1).getMonths());
-        assertEquals(-3, Months.monthsBetween(end1, start).getMonths());
-        assertEquals(6, Months.monthsBetween(start, end2).getMonths());
+        assertEquals(3, Months.monthsBetween(start, end1).getValue());
+        assertEquals(0, Months.monthsBetween(start, start).getValue());
+        assertEquals(0, Months.monthsBetween(end1, end1).getValue());
+        assertEquals(-3, Months.monthsBetween(end1, start).getValue());
+        assertEquals(6, Months.monthsBetween(start, end2).getValue());
     }
     public void testFactory_monthsBetween_RPartial_YearMonth() {
         YearMonth start1 = new YearMonth(2011, 1);
         for (int i = 0; i < 6; i++) {
             YearMonth start2 = new YearMonth(2011 + i, 1);
             YearMonth end = new YearMonth(2011 + i, 3);
-            assertEquals(i * 12 + 2, Months.monthsBetween(start1, end).getMonths());
-            assertEquals(2, Months.monthsBetween(start2, end).getMonths());
+            assertEquals(i * 12 + 2, Months.monthsBetween(start1, end).getValue());
+            assertEquals(2, Months.monthsBetween(start2, end).getValue());
         }
     }
     public void testFactory_monthsBetween_RPartial_MonthDay() {
@@ -93,22 +93,22 @@ public class TestMonths extends TestCase {
         MonthDay end2 = new MonthDay(2, 29);
         MonthDay end3 = new MonthDay(3, 1);
         
-        assertEquals(0, Months.monthsBetween(start, end1).getMonths());
-        assertEquals(0, Months.monthsBetween(start, end2).getMonths());
-        assertEquals(1, Months.monthsBetween(start, end3).getMonths());
+        assertEquals(0, Months.monthsBetween(start, end1).getValue());
+        assertEquals(0, Months.monthsBetween(start, end2).getValue());
+        assertEquals(1, Months.monthsBetween(start, end3).getValue());
         
-        assertEquals(0, Months.monthsBetween(end1, start).getMonths());
-        assertEquals(0, Months.monthsBetween(end2, start).getMonths());
-        assertEquals(-1, Months.monthsBetween(end3, start).getMonths());
+        assertEquals(0, Months.monthsBetween(end1, start).getValue());
+        assertEquals(0, Months.monthsBetween(end2, start).getValue());
+        assertEquals(-1, Months.monthsBetween(end3, start).getValue());
     }
 
     public void testFactory_parseMonths_String() {
-        assertEquals(0, Months.parseMonths(null).getMonths());
-        assertEquals(0, Months.parseMonths("P0M").getMonths());
-        assertEquals(1, Months.parseMonths("P1M").getMonths());
-        assertEquals(-3, Months.parseMonths("P-3M").getMonths());
-        assertEquals(2, Months.parseMonths("P0Y2M").getMonths());
-        assertEquals(2, Months.parseMonths("P2MT0H0M").getMonths());
+        assertEquals(0, Months.parseMonths(null).getValue());
+        assertEquals(0, Months.parseMonths("P0M").getValue());
+        assertEquals(1, Months.parseMonths("P1M").getValue());
+        assertEquals(-3, Months.parseMonths("P-3M").getValue());
+        assertEquals(2, Months.parseMonths("P0Y2M").getValue());
+        assertEquals(2, Months.parseMonths("P2MT0H0M").getValue());
         try {
             Months.parseMonths("P1Y1D");
             fail();
@@ -125,7 +125,7 @@ public class TestMonths extends TestCase {
 
     public void testGetMethods() {
         Months test = Months.months(20);
-        assertEquals(20, test.getMonths());
+        assertEquals(20, test.getValue());
     }
     public void testGetFieldType() {
         Months test = Months.months(20);
@@ -179,10 +179,10 @@ public class TestMonths extends TestCase {
     public void testPlus_int() {
         Months test2 = Months.months(2);
         Months result = test2.plus(3);
-        assertEquals(2, test2.getMonths());
-        assertEquals(5, result.getMonths());
+        assertEquals(2, test2.getValue());
+        assertEquals(5, result.getValue());
         
-        assertEquals(1, Months.ONE.plus(0).getMonths());
+        assertEquals(1, Months.ONE.plus(0).getValue());
         
         try {
             Months.MAX_VALUE.plus(1);
@@ -194,13 +194,13 @@ public class TestMonths extends TestCase {
     public void testPlus_Months() {
         Months test2 = Months.months(2);
         Months test3 = Months.months(3);
-        Months result = test2.plus(test3);
-        assertEquals(2, test2.getMonths());
-        assertEquals(3, test3.getMonths());
-        assertEquals(5, result.getMonths());
+        Months result = (Months)test2.plus(test3);
+        assertEquals(2, test2.getValue());
+        assertEquals(3, test3.getValue());
+        assertEquals(5, result.getValue());
         
-        assertEquals(1, Months.ONE.plus(Months.ZERO).getMonths());
-        assertEquals(1, Months.ONE.plus(null).getMonths());
+        assertEquals(1, Months.ONE.plus(Months.ZERO).getValue());
+        assertEquals(1, Months.ONE.plus(null).getValue());
         
         try {
             Months.MAX_VALUE.plus(Months.ONE);
@@ -211,11 +211,11 @@ public class TestMonths extends TestCase {
     }
     public void testMinus_int() {
         Months test2 = Months.months(2);
-        Months result = test2.minus(3);
-        assertEquals(2, test2.getMonths());
-        assertEquals(-1, result.getMonths());
+        Months result = (Months)test2.minus(3);
+        assertEquals(2, test2.getValue());
+        assertEquals(-1, result.getValue());
         
-        assertEquals(1, Months.ONE.minus(0).getMonths());
+        assertEquals(1, Months.ONE.minus(0).getValue());
         
         try {
             Months.MIN_VALUE.minus(1);
@@ -227,13 +227,13 @@ public class TestMonths extends TestCase {
     public void testMinus_Months() {
         Months test2 = Months.months(2);
         Months test3 = Months.months(3);
-        Months result = test2.minus(test3);
-        assertEquals(2, test2.getMonths());
-        assertEquals(3, test3.getMonths());
-        assertEquals(-1, result.getMonths());
+        Months result = (Months)test2.minus(test3);
+        assertEquals(2, test2.getValue());
+        assertEquals(3, test3.getValue());
+        assertEquals(-1, result.getValue());
         
-        assertEquals(1, Months.ONE.minus(Months.ZERO).getMonths());
-        assertEquals(1, Months.ONE.minus(null).getMonths());
+        assertEquals(1, Months.ONE.minus(Months.ZERO).getValue());
+        assertEquals(1, Months.ONE.minus(null).getValue());
         
         try {
             Months.MIN_VALUE.minus(Months.ONE);
@@ -244,9 +244,9 @@ public class TestMonths extends TestCase {
     }
     public void testMultipliedBy_int() {
         Months test = Months.months(2);
-        assertEquals(6, test.multipliedBy(3).getMonths());
-        assertEquals(2, test.getMonths());
-        assertEquals(-6, test.multipliedBy(-3).getMonths());
+        assertEquals(6, test.multipliedBy(3).getValue());
+        assertEquals(2, test.getValue());
+        assertEquals(-6, test.multipliedBy(-3).getValue());
         assertSame(test, test.multipliedBy(1));
         
         Months halfMax = Months.months(Integer.MAX_VALUE / 2 + 1);
@@ -259,12 +259,12 @@ public class TestMonths extends TestCase {
     }
     public void testDividedBy_int() {
         Months test = Months.months(12);
-        assertEquals(6, test.dividedBy(2).getMonths());
-        assertEquals(12, test.getMonths());
-        assertEquals(4, test.dividedBy(3).getMonths());
-        assertEquals(3, test.dividedBy(4).getMonths());
-        assertEquals(2, test.dividedBy(5).getMonths());
-        assertEquals(2, test.dividedBy(6).getMonths());
+        assertEquals(6, test.dividedBy(2).getValue());
+        assertEquals(12, test.getValue());
+        assertEquals(4, test.dividedBy(3).getValue());
+        assertEquals(3, test.dividedBy(4).getValue());
+        assertEquals(2, test.dividedBy(5).getValue());
+        assertEquals(2, test.dividedBy(6).getValue());
         assertSame(test, test.dividedBy(1));
         
         try {
@@ -276,8 +276,8 @@ public class TestMonths extends TestCase {
     }
     public void testNegated() {
         Months test = Months.months(12);
-        assertEquals(-12, test.negated().getMonths());
-        assertEquals(12, test.getMonths());
+        assertEquals(-12, test.negated().getValue());
+        assertEquals(12, test.getValue());
         
         try {
             Months.MIN_VALUE.negated();

@@ -40,30 +40,27 @@ public final class Minutes extends BaseSingleFieldPeriod {
         {
             Chronology chrono = DateTimeUtils.getChronology(start.getChronology());
             int minutes = chrono.minutes().getDifference(((LocalTime) end).getLocalMillis(), ((LocalTime) start).getLocalMillis());
-            return Minutes.minutes(minutes);
+            return minutes(minutes);
         }
 
         int amount = BaseSingleFieldPeriod.between(start, end, ZERO);
-        return Minutes.minutes(amount);
+        return minutes(amount);
     }
 
     @FromString public static Minutes parseMinutes(String periodStr) {
         if (periodStr == null)
         {
-            return Minutes.ZERO;
+            return ZERO;
         }
 
         Period p = PARSER.parsePeriod(periodStr);
-        return Minutes.minutes(p.getMinutes());
+        return minutes(p.getMinutes());
     }
 
     @Override protected Object readResolve() {
-        return Minutes.minutes(getValue());
+        return minutes(getValue());
     }
 
-    public int getMinutes() {
-        return getValue();
-    }
     @Override public DurationFieldType getFieldType() {
         return DurationFieldType.minutes();
     }
@@ -71,66 +68,29 @@ public final class Minutes extends BaseSingleFieldPeriod {
         return PeriodType.minutes();
     }
 
-    public boolean isGreaterThan(Minutes other) {
-        if (other == null)
-        {
-            return getValue() > 0;
-        }
-
-        return getValue() > other.getValue();
-    }
-    public boolean isLessThan(Minutes other) {
-        if (other == null)
-        {
-            return getValue() < 0;
-        }
-
-        return getValue() < other.getValue();
-    }
-
-    public Minutes plus(int minutes) {
+    @Override public Minutes plus(int minutes) {
         if (minutes == 0)
         {
             return this;
         }
 
-        return Minutes.minutes(FieldUtils.safeAdd(getValue(), minutes));
-    }
-    public Minutes plus(Minutes minutes) {
-        if (minutes == null)
-        {
-            return this;
-        }
-
-        return plus(minutes.getValue());
+        return minutes(FieldUtils.safeAdd(getValue(), minutes));
     }
 
-    public Minutes minus(int minutes) {
-        return plus(FieldUtils.safeNegate(minutes));
+    @Override public Minutes multipliedBy(int scalar) {
+        return minutes(FieldUtils.safeMultiply(getValue(), scalar));
     }
-    public Minutes minus(Minutes minutes) {
-        if (minutes == null)
-        {
-            return this;
-        }
-
-        return minus(minutes.getValue());
-    }
-
-    public Minutes multipliedBy(int scalar) {
-        return Minutes.minutes(FieldUtils.safeMultiply(getValue(), scalar));
-    }
-    public Minutes dividedBy(int divisor) {
+    @Override public Minutes dividedBy(int divisor) {
         if (divisor == 1)
         {
             return this;
         }
 
-        return Minutes.minutes(getValue() / divisor);
+        return minutes(getValue() / divisor);
     }
 
-    public Minutes negated() {
-        return Minutes.minutes(FieldUtils.safeNegate(getValue()));
+    @Override public Minutes negated() {
+        return minutes(FieldUtils.safeNegate(getValue()));
     }
 
     @Override @ToString public String toString() {
@@ -155,6 +115,6 @@ public final class Minutes extends BaseSingleFieldPeriod {
 
     public static Minutes standardMinutesIn(ReadablePeriod period) {
         int amount = BaseSingleFieldPeriod.standardPeriodIn(period, DateTimeConstants.MILLIS_PER_MINUTE);
-        return Minutes.minutes(amount);
+        return minutes(amount);
     }
 }

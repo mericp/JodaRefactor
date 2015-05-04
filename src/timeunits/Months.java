@@ -1,7 +1,6 @@
 package timeunits;
 
 import chronology.Chronology;
-import pool.MonthPool;
 import datetime.DateTimeUtils;
 import datetime.LocalDate;
 import duration.DurationFieldType;
@@ -14,6 +13,7 @@ import period.Format.ISOPeriodFormat;
 import period.Format.PeriodFormatter;
 import period.Period;
 import period.PeriodType;
+import pool.MonthPool;
 
 public final class Months extends BaseSingleFieldPeriod {
     public static final Months ZERO = MonthPool.get(0);
@@ -47,30 +47,27 @@ public final class Months extends BaseSingleFieldPeriod {
             Chronology chrono = DateTimeUtils.getChronology(start.getChronology());
 
             int months = chrono.months().getDifference(((LocalDate) end).getLocalMillis(), ((LocalDate) start).getLocalMillis());
-            return Months.months(months);
+            return months(months);
         }
 
         int amount = BaseSingleFieldPeriod.between(start, end, ZERO);
-        return Months.months(amount);
+        return months(amount);
     }
 
     @FromString public static Months parseMonths(String periodStr) {
         if (periodStr == null)
         {
-            return Months.ZERO;
+            return ZERO;
         }
 
         Period p = PARSER.parsePeriod(periodStr);
-        return Months.months(p.getMonths());
+        return months(p.getMonths());
     }
 
     @Override protected Object readResolve() {
-        return Months.months(getValue());
+        return months(getValue());
     }
 
-    public int getMonths() {
-        return getValue();
-    }
     public DurationFieldType getFieldType() {
         return DurationFieldType.months();
     }
@@ -78,66 +75,29 @@ public final class Months extends BaseSingleFieldPeriod {
         return PeriodType.months();
     }
 
-    public boolean isGreaterThan(Months other) {
-        if (other == null)
-        {
-            return getValue() > 0;
-        }
-
-        return getValue() > other.getValue();
-    }
-    public boolean isLessThan(Months other) {
-        if (other == null)
-        {
-            return getValue() < 0;
-        }
-
-        return getValue() < other.getValue();
-    }
-
-    public Months plus(int months) {
+    @Override public Months plus(int months) {
         if (months == 0)
         {
             return this;
         }
 
-        return Months.months(FieldUtils.safeAdd(getValue(), months));
-    }
-    public Months plus(Months months) {
-        if (months == null)
-        {
-            return this;
-        }
-
-        return plus(months.getValue());
+        return months(FieldUtils.safeAdd(getValue(), months));
     }
 
-    public Months minus(int months) {
-        return plus(FieldUtils.safeNegate(months));
+    @Override public Months multipliedBy(int scalar) {
+        return months(FieldUtils.safeMultiply(getValue(), scalar));
     }
-    public Months minus(Months months) {
-        if (months == null)
-        {
-            return this;
-        }
-
-        return minus(months.getValue());
-    }
-
-    public Months multipliedBy(int scalar) {
-        return Months.months(FieldUtils.safeMultiply(getValue(), scalar));
-    }
-    public Months dividedBy(int divisor) {
+    @Override public Months dividedBy(int divisor) {
         if (divisor == 1)
         {
             return this;
         }
 
-        return Months.months(getValue() / divisor);
+        return months(getValue() / divisor);
     }
 
-    public Months negated() {
-        return Months.months(FieldUtils.safeNegate(getValue()));
+    @Override public Months negated() {
+        return months(FieldUtils.safeNegate(getValue()));
     }
 
     @Override @ToString public String toString() {

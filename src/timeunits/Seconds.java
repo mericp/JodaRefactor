@@ -40,30 +40,27 @@ public final class Seconds extends BaseSingleFieldPeriod {
         {
             Chronology chrono = DateTimeUtils.getChronology(start.getChronology());
             int seconds = chrono.seconds().getDifference(((LocalTime) end).getLocalMillis(), ((LocalTime) start).getLocalMillis());
-            return Seconds.seconds(seconds);
+            return seconds(seconds);
         }
 
         int amount = BaseSingleFieldPeriod.between(start, end, ZERO);
-        return Seconds.seconds(amount);
+        return seconds(amount);
     }
 
     @FromString public static Seconds parseSeconds(String periodStr) {
         if (periodStr == null)
         {
-            return Seconds.ZERO;
+            return ZERO;
         }
 
         Period p = PARSER.parsePeriod(periodStr);
-        return Seconds.seconds(p.getSeconds());
+        return seconds(p.getSeconds());
     }
 
     @Override protected Object readResolve() {
-        return Seconds.seconds(getValue());
+        return seconds(getValue());
     }
 
-    public int getSeconds() {
-        return getValue();
-    }
     @Override public DurationFieldType getFieldType() {
         return DurationFieldType.seconds();
     }
@@ -71,66 +68,29 @@ public final class Seconds extends BaseSingleFieldPeriod {
         return PeriodType.seconds();
     }
 
-    public boolean isGreaterThan(Seconds other) {
-        if (other == null)
-        {
-            return getValue() > 0;
-        }
-
-        return getValue() > other.getValue();
-    }
-    public boolean isLessThan(Seconds other) {
-        if (other == null)
-        {
-            return getValue() < 0;
-        }
-
-        return getValue() < other.getValue();
-    }
-
-    public Seconds plus(int seconds) {
+    @Override public Seconds plus(int seconds) {
         if (seconds == 0)
         {
             return this;
         }
 
-        return Seconds.seconds(FieldUtils.safeAdd(getValue(), seconds));
-    }
-    public Seconds plus(Seconds seconds) {
-        if (seconds == null)
-        {
-            return this;
-        }
-
-        return plus(seconds.getValue());
+        return seconds(FieldUtils.safeAdd(getValue(), seconds));
     }
 
-    public Seconds minus(int seconds) {
-        return plus(FieldUtils.safeNegate(seconds));
+    @Override public Seconds multipliedBy(int scalar) {
+        return seconds(FieldUtils.safeMultiply(getValue(), scalar));
     }
-    public Seconds minus(Seconds seconds) {
-        if (seconds == null)
-        {
-            return this;
-        }
-
-        return minus(seconds.getValue());
-    }
-
-    public Seconds multipliedBy(int scalar) {
-        return Seconds.seconds(FieldUtils.safeMultiply(getValue(), scalar));
-    }
-    public Seconds dividedBy(int divisor) {
+    @Override public Seconds dividedBy(int divisor) {
         if (divisor == 1)
         {
             return this;
         }
 
-        return Seconds.seconds(getValue() / divisor);
+        return seconds(getValue() / divisor);
     }
 
-    public Seconds negated() {
-        return Seconds.seconds(FieldUtils.safeNegate(getValue()));
+    @Override public Seconds negated() {
+        return seconds(FieldUtils.safeNegate(getValue()));
     }
 
     @Override @ToString public String toString() {
@@ -155,6 +115,6 @@ public final class Seconds extends BaseSingleFieldPeriod {
 
     public static Seconds standardSecondsIn(ReadablePeriod period) {
         int amount = BaseSingleFieldPeriod.standardPeriodIn(period, DateTimeConstants.MILLIS_PER_SECOND);
-        return Seconds.seconds(amount);
+        return seconds(amount);
     }
 }

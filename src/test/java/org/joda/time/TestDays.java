@@ -33,16 +33,16 @@ public class TestDays extends TestCase {
     }
 
    public void testConstants() {
-        assertEquals(0, Days.ZERO.getDays());
-        assertEquals(1, Days.ONE.getDays());
-        assertEquals(2, Days.TWO.getDays());
-        assertEquals(3, Days.THREE.getDays());
-        assertEquals(4, Days.FOUR.getDays());
-        assertEquals(5, Days.FIVE.getDays());
-        assertEquals(6, Days.SIX.getDays());
-        assertEquals(7, Days.SEVEN.getDays());
-        assertEquals(Integer.MAX_VALUE, Days.MAX_VALUE.getDays());
-        assertEquals(Integer.MIN_VALUE, Days.MIN_VALUE.getDays());
+        assertEquals(0, Days.ZERO.getValue());
+        assertEquals(1, Days.ONE.getValue());
+        assertEquals(2, Days.TWO.getValue());
+        assertEquals(3, Days.THREE.getValue());
+        assertEquals(4, Days.FOUR.getValue());
+        assertEquals(5, Days.FIVE.getValue());
+        assertEquals(6, Days.SIX.getValue());
+        assertEquals(7, Days.SEVEN.getValue());
+        assertEquals(Integer.MAX_VALUE, Days.MAX_VALUE.getValue());
+        assertEquals(Integer.MIN_VALUE, Days.MIN_VALUE.getValue());
     }
 
     public void testFactory_days_int() {
@@ -56,8 +56,8 @@ public class TestDays extends TestCase {
         assertSame(Days.SEVEN, Days.days(7));
         assertSame(Days.MAX_VALUE, Days.days(Integer.MAX_VALUE));
         assertSame(Days.MIN_VALUE, Days.days(Integer.MIN_VALUE));
-        assertEquals(-1, Days.days(-1).getDays());
-        assertEquals(8, Days.days(8).getDays());
+        assertEquals(-1, Days.days(-1).getValue());
+        assertEquals(8, Days.days(8).getValue());
     }
 
     public void testFactory_daysBetween_RPartial_LocalDate() {
@@ -65,11 +65,11 @@ public class TestDays extends TestCase {
         LocalDate end1 = new LocalDate(2006, 6, 12);
         YearMonthDay end2 = new YearMonthDay(2006, 6, 15);
         
-        assertEquals(3, Days.daysBetween(start, end1).getDays());
-        assertEquals(0, Days.daysBetween(start, start).getDays());
-        assertEquals(0, Days.daysBetween(end1, end1).getDays());
-        assertEquals(-3, Days.daysBetween(end1, start).getDays());
-        assertEquals(6, Days.daysBetween(start, end2).getDays());
+        assertEquals(3, Days.daysBetween(start, end1).getValue());
+        assertEquals(0, Days.daysBetween(start, start).getValue());
+        assertEquals(0, Days.daysBetween(end1, end1).getValue());
+        assertEquals(-3, Days.daysBetween(end1, start).getValue());
+        assertEquals(6, Days.daysBetween(start, end2).getValue());
     }
     public void testFactory_daysBetween_RPartial_YearMonth() {
         YearMonth start1 = new YearMonth(2011, 1);
@@ -77,11 +77,11 @@ public class TestDays extends TestCase {
         YearMonth end1 = new YearMonth(2011, 3);
         YearMonth end2 = new YearMonth(2012, 3);
         
-        assertEquals(59, Days.daysBetween(start1, end1).getDays());
-        assertEquals(60, Days.daysBetween(start2, end2).getDays());
+        assertEquals(59, Days.daysBetween(start1, end1).getValue());
+        assertEquals(60, Days.daysBetween(start2, end2).getValue());
         
-        assertEquals(-59, Days.daysBetween(end1, start1).getDays());
-        assertEquals(-60, Days.daysBetween(end2, start2).getDays());
+        assertEquals(-59, Days.daysBetween(end1, start1).getValue());
+        assertEquals(-60, Days.daysBetween(end2, start2).getValue());
     }
     public void testFactory_daysBetween_RPartial_MonthDay() {
         MonthDay start1 = new MonthDay(2, 1);
@@ -89,27 +89,27 @@ public class TestDays extends TestCase {
         MonthDay end1 = new MonthDay(2, 28);
         MonthDay end2 = new MonthDay(2, 29);
         
-        assertEquals(27, Days.daysBetween(start1, end1).getDays());
-        assertEquals(28, Days.daysBetween(start1, end2).getDays());
-        assertEquals(0, Days.daysBetween(start2, end1).getDays());
-        assertEquals(1, Days.daysBetween(start2, end2).getDays());
+        assertEquals(27, Days.daysBetween(start1, end1).getValue());
+        assertEquals(28, Days.daysBetween(start1, end2).getValue());
+        assertEquals(0, Days.daysBetween(start2, end1).getValue());
+        assertEquals(1, Days.daysBetween(start2, end2).getValue());
         
-        assertEquals(-27, Days.daysBetween(end1, start1).getDays());
-        assertEquals(-28, Days.daysBetween(end2, start1).getDays());
-        assertEquals(0, Days.daysBetween(end1, start2).getDays());
-        assertEquals(-1, Days.daysBetween(end2, start2).getDays());
+        assertEquals(-27, Days.daysBetween(end1, start1).getValue());
+        assertEquals(-28, Days.daysBetween(end2, start1).getValue());
+        assertEquals(0, Days.daysBetween(end1, start2).getValue());
+        assertEquals(-1, Days.daysBetween(end2, start2).getValue());
     }
 
     public void testFactory_standardDaysIn_RPeriod() {
-        assertEquals(0, Days.standardDaysIn(null).getDays());
-        assertEquals(0, Days.standardDaysIn(Period.ZERO).getDays());
-        assertEquals(1, Days.standardDaysIn(new Period(0, 0, 0, 1, 0, 0, 0, 0)).getDays());
-        assertEquals(123, Days.standardDaysIn(Period.days(123)).getDays());
-        assertEquals(-987, Days.standardDaysIn(Period.days(-987)).getDays());
-        assertEquals(1, Days.standardDaysIn(Period.hours(47)).getDays());
-        assertEquals(2, Days.standardDaysIn(Period.hours(48)).getDays());
-        assertEquals(2, Days.standardDaysIn(Period.hours(49)).getDays());
-        assertEquals(14, Days.standardDaysIn(Period.weeks(2)).getDays());
+        assertEquals(0, Days.standardDaysIn(null).getValue());
+        assertEquals(0, Days.standardDaysIn(Period.ZERO).getValue());
+        assertEquals(1, Days.standardDaysIn(new Period(0, 0, 0, 1, 0, 0, 0, 0)).getValue());
+        assertEquals(123, Days.standardDaysIn(Period.days(123)).getValue());
+        assertEquals(-987, Days.standardDaysIn(Period.days(-987)).getValue());
+        assertEquals(1, Days.standardDaysIn(Period.hours(47)).getValue());
+        assertEquals(2, Days.standardDaysIn(Period.hours(48)).getValue());
+        assertEquals(2, Days.standardDaysIn(Period.hours(49)).getValue());
+        assertEquals(14, Days.standardDaysIn(Period.weeks(2)).getValue());
 
         try
         {
@@ -122,12 +122,12 @@ public class TestDays extends TestCase {
         }
     }
     public void testFactory_parseDays_String() {
-        assertEquals(0, Days.parseDays(null).getDays());
-        assertEquals(0, Days.parseDays("P0D").getDays());
-        assertEquals(1, Days.parseDays("P1D").getDays());
-        assertEquals(-3, Days.parseDays("P-3D").getDays());
-        assertEquals(2, Days.parseDays("P0Y0M2D").getDays());
-        assertEquals(2, Days.parseDays("P2DT0H0M").getDays());
+        assertEquals(0, Days.parseDays(null).getValue());
+        assertEquals(0, Days.parseDays("P0D").getValue());
+        assertEquals(1, Days.parseDays("P1D").getValue());
+        assertEquals(-3, Days.parseDays("P-3D").getValue());
+        assertEquals(2, Days.parseDays("P0Y0M2D").getValue());
+        assertEquals(2, Days.parseDays("P2DT0H0M").getValue());
 
         try
         {
@@ -152,7 +152,7 @@ public class TestDays extends TestCase {
 
     public void testGetMethods() {
         Days test = Days.days(20);
-        assertEquals(20, test.getDays());
+        assertEquals(20, test.getValue());
     }
     public void testGetFieldType() {
         Days test = Days.days(20);
@@ -255,10 +255,10 @@ public class TestDays extends TestCase {
     public void testPlus_int() {
         Days test2 = Days.days(2);
         Days result = test2.plus(3);
-        assertEquals(2, test2.getDays());
-        assertEquals(5, result.getDays());
+        assertEquals(2, test2.getValue());
+        assertEquals(5, result.getValue());
         
-        assertEquals(1, Days.ONE.plus(0).getDays());
+        assertEquals(1, Days.ONE.plus(0).getValue());
         
         try {
             Days.MAX_VALUE.plus(1);
@@ -270,13 +270,13 @@ public class TestDays extends TestCase {
     public void testPlus_Days() {
         Days test2 = Days.days(2);
         Days test3 = Days.days(3);
-        Days result = test2.plus(test3);
-        assertEquals(2, test2.getDays());
-        assertEquals(3, test3.getDays());
-        assertEquals(5, result.getDays());
+        Days result = (Days)test2.plus(test3);
+        assertEquals(2, test2.getValue());
+        assertEquals(3, test3.getValue());
+        assertEquals(5, result.getValue());
         
-        assertEquals(1, Days.ONE.plus(Days.ZERO).getDays());
-        assertEquals(1, Days.ONE.plus(null).getDays());
+        assertEquals(1, Days.ONE.plus(Days.ZERO).getValue());
+        assertEquals(1, Days.ONE.plus(null).getValue());
         
         try {
             Days.MAX_VALUE.plus(Days.ONE);
@@ -287,11 +287,11 @@ public class TestDays extends TestCase {
     }
     public void testMinus_int() {
         Days test2 = Days.days(2);
-        Days result = test2.minus(3);
-        assertEquals(2, test2.getDays());
-        assertEquals(-1, result.getDays());
+        Days result = (Days)test2.minus(3);
+        assertEquals(2, test2.getValue());
+        assertEquals(-1, result.getValue());
         
-        assertEquals(1, Days.ONE.minus(0).getDays());
+        assertEquals(1, Days.ONE.minus(0).getValue());
         
         try {
             Days.MIN_VALUE.minus(1);
@@ -303,13 +303,13 @@ public class TestDays extends TestCase {
     public void testMinus_Days() {
         Days test2 = Days.days(2);
         Days test3 = Days.days(3);
-        Days result = test2.minus(test3);
-        assertEquals(2, test2.getDays());
-        assertEquals(3, test3.getDays());
-        assertEquals(-1, result.getDays());
+        Days result = (Days)test2.minus(test3);
+        assertEquals(2, test2.getValue());
+        assertEquals(3, test3.getValue());
+        assertEquals(-1, result.getValue());
         
-        assertEquals(1, Days.ONE.minus(Days.ZERO).getDays());
-        assertEquals(1, Days.ONE.minus(null).getDays());
+        assertEquals(1, Days.ONE.minus(Days.ZERO).getValue());
+        assertEquals(1, Days.ONE.minus(null).getValue());
         
         try {
             Days.MIN_VALUE.minus(Days.ONE);
@@ -320,9 +320,9 @@ public class TestDays extends TestCase {
     }
     public void testMultipliedBy_int() {
         Days test = Days.days(2);
-        assertEquals(6, test.multipliedBy(3).getDays());
-        assertEquals(2, test.getDays());
-        assertEquals(-6, test.multipliedBy(-3).getDays());
+        assertEquals(6, test.multipliedBy(3).getValue());
+        assertEquals(2, test.getValue());
+        assertEquals(-6, test.multipliedBy(-3).getValue());
         assertSame(test, test.multipliedBy(1));
         
         Days halfMax = Days.days(Integer.MAX_VALUE / 2 + 1);
@@ -335,12 +335,12 @@ public class TestDays extends TestCase {
     }
     public void testDividedBy_int() {
         Days test = Days.days(12);
-        assertEquals(6, test.dividedBy(2).getDays());
-        assertEquals(12, test.getDays());
-        assertEquals(4, test.dividedBy(3).getDays());
-        assertEquals(3, test.dividedBy(4).getDays());
-        assertEquals(2, test.dividedBy(5).getDays());
-        assertEquals(2, test.dividedBy(6).getDays());
+        assertEquals(6, test.dividedBy(2).getValue());
+        assertEquals(12, test.getValue());
+        assertEquals(4, test.dividedBy(3).getValue());
+        assertEquals(3, test.dividedBy(4).getValue());
+        assertEquals(2, test.dividedBy(5).getValue());
+        assertEquals(2, test.dividedBy(6).getValue());
         assertSame(test, test.dividedBy(1));
         
         try {
@@ -352,8 +352,8 @@ public class TestDays extends TestCase {
     }
     public void testNegated() {
         Days test = Days.days(12);
-        assertEquals(-12, test.negated().getDays());
-        assertEquals(12, test.getDays());
+        assertEquals(-12, test.negated().getValue());
+        assertEquals(12, test.getValue());
         
         try {
             Days.MIN_VALUE.negated();

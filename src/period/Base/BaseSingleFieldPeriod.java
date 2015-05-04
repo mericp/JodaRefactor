@@ -42,7 +42,7 @@ public abstract class BaseSingleFieldPeriod implements ReadablePeriod, Comparabl
                 throw new IllegalArgumentException(strings.SAME_SET_OF_FIELDS_READABLEPARTIAL);
             }
         }
-        
+
         if (!DateTimeUtils.isContiguous(start))
         {
             throw new IllegalArgumentException(strings.NOT_CONTIGUOUS_READABLEPARTIAL);
@@ -73,8 +73,8 @@ public abstract class BaseSingleFieldPeriod implements ReadablePeriod, Comparabl
                 if (!field.isPrecise())
                 {
                     throw new IllegalArgumentException(
-                            "Cannot convert period to duration as " + field.getName() +
-                            " is not precise in the period " + period);
+                            "Cannot main.convert main.period to main.duration as " + field.getName() +
+                                    " is not precise in the main.period " + period);
                 }
 
                 duration = FieldUtils.safeAdd(duration, FieldUtils.safeMultiply(field.getUnitMillis(), value));
@@ -91,8 +91,7 @@ public abstract class BaseSingleFieldPeriod implements ReadablePeriod, Comparabl
 
         return 0;
     }
-
-    protected int getValue() {
+    public int getValue() {
         return iPeriod;
     }
     @Override public int getValue(int index) {
@@ -101,7 +100,6 @@ public abstract class BaseSingleFieldPeriod implements ReadablePeriod, Comparabl
         }
         return getValue();
     }
-
     public abstract DurationFieldType getFieldType();
     @Override public DurationFieldType getFieldType(int index) {
         if (index != 0) {
@@ -109,12 +107,77 @@ public abstract class BaseSingleFieldPeriod implements ReadablePeriod, Comparabl
         }
         return getFieldType();
     }
-
     @Override public abstract PeriodType getPeriodType();
 
     @Override public boolean isSupported(DurationFieldType type) {
         return (type == getFieldType());
     }
+    public boolean isGreaterThan(BaseSingleFieldPeriod other) {
+        boolean greater;
+
+        if (other == null)
+        {
+            greater = getValue() > 0;
+        }
+        else
+        {
+            greater = getValue() > other.getValue();
+        }
+
+        return greater;
+    }
+    public boolean isLessThan(BaseSingleFieldPeriod other) {
+        boolean lower;
+
+        if (other == null)
+        {
+            lower = getValue() < 0;
+        }
+        else
+        {
+            lower = getValue() < other.getValue();
+        }
+        return lower;
+    }
+
+    public BaseSingleFieldPeriod plus(BaseSingleFieldPeriod timeUnits) {
+        BaseSingleFieldPeriod result;
+
+        if (timeUnits == null)
+        {
+            result = this;
+        }
+        else
+        {
+            result = plus(timeUnits.getValue());
+        }
+
+        return result;
+    }
+    public abstract BaseSingleFieldPeriod plus(int years);
+
+    public BaseSingleFieldPeriod minus(int timeUnits) {
+        return plus(FieldUtils.safeNegate(timeUnits));
+    }
+    public BaseSingleFieldPeriod minus(BaseSingleFieldPeriod timeUnits) {
+        BaseSingleFieldPeriod result;
+
+        if (timeUnits == null)
+        {
+            result = this;
+        }
+        else
+        {
+            result = minus(timeUnits.getValue());
+        }
+
+        return result;
+    }
+
+    public abstract BaseSingleFieldPeriod multipliedBy(int scalar);
+    public abstract BaseSingleFieldPeriod dividedBy(int divisor);
+
+    public abstract BaseSingleFieldPeriod negated();
 
     @Override public int size() {
         return 1;

@@ -33,12 +33,12 @@ public class TestWeeks extends TestCase {
     }
 
     public void testConstants() {
-        assertEquals(0, Weeks.ZERO.getWeeks());
-        assertEquals(1, Weeks.ONE.getWeeks());
-        assertEquals(2, Weeks.TWO.getWeeks());
-        assertEquals(3, Weeks.THREE.getWeeks());
-        assertEquals(Integer.MAX_VALUE, Weeks.MAX_VALUE.getWeeks());
-        assertEquals(Integer.MIN_VALUE, Weeks.MIN_VALUE.getWeeks());
+        assertEquals(0, Weeks.ZERO.getValue());
+        assertEquals(1, Weeks.ONE.getValue());
+        assertEquals(2, Weeks.TWO.getValue());
+        assertEquals(3, Weeks.THREE.getValue());
+        assertEquals(Integer.MAX_VALUE, Weeks.MAX_VALUE.getValue());
+        assertEquals(Integer.MIN_VALUE, Weeks.MIN_VALUE.getValue());
     }
 
     public void testFactory_weeks_int() {
@@ -48,8 +48,8 @@ public class TestWeeks extends TestCase {
         assertSame(Weeks.THREE, Weeks.weeks(3));
         assertSame(Weeks.MAX_VALUE, Weeks.weeks(Integer.MAX_VALUE));
         assertSame(Weeks.MIN_VALUE, Weeks.weeks(Integer.MIN_VALUE));
-        assertEquals(-1, Weeks.weeks(-1).getWeeks());
-        assertEquals(4, Weeks.weeks(4).getWeeks());
+        assertEquals(-1, Weeks.weeks(-1).getValue());
+        assertEquals(4, Weeks.weeks(4).getValue());
     }
 
     public void testFactory_weeksBetween_RPartial() {
@@ -57,21 +57,21 @@ public class TestWeeks extends TestCase {
         LocalDate end1 = new LocalDate(2006, 6, 30);
         YearMonthDay end2 = new YearMonthDay(2006, 7, 21);
         
-        assertEquals(3, Weeks.weeksBetween(start, end1).getWeeks());
-        assertEquals(0, Weeks.weeksBetween(start, start).getWeeks());
-        assertEquals(0, Weeks.weeksBetween(end1, end1).getWeeks());
-        assertEquals(-3, Weeks.weeksBetween(end1, start).getWeeks());
-        assertEquals(6, Weeks.weeksBetween(start, end2).getWeeks());
+        assertEquals(3, Weeks.weeksBetween(start, end1).getValue());
+        assertEquals(0, Weeks.weeksBetween(start, start).getValue());
+        assertEquals(0, Weeks.weeksBetween(end1, end1).getValue());
+        assertEquals(-3, Weeks.weeksBetween(end1, start).getValue());
+        assertEquals(6, Weeks.weeksBetween(start, end2).getValue());
     }
     public void testFactory_standardWeeksIn_RPeriod() {
-        assertEquals(0, Weeks.standardWeeksIn(null).getWeeks());
-        assertEquals(0, Weeks.standardWeeksIn(Period.ZERO).getWeeks());
-        assertEquals(1, Weeks.standardWeeksIn(new Period(0, 0, 1, 0, 0, 0, 0, 0)).getWeeks());
-        assertEquals(123, Weeks.standardWeeksIn(Period.weeks(123)).getWeeks());
-        assertEquals(-987, Weeks.standardWeeksIn(Period.weeks(-987)).getWeeks());
-        assertEquals(1, Weeks.standardWeeksIn(Period.days(13)).getWeeks());
-        assertEquals(2, Weeks.standardWeeksIn(Period.days(14)).getWeeks());
-        assertEquals(2, Weeks.standardWeeksIn(Period.days(15)).getWeeks());
+        assertEquals(0, Weeks.standardWeeksIn(null).getValue());
+        assertEquals(0, Weeks.standardWeeksIn(Period.ZERO).getValue());
+        assertEquals(1, Weeks.standardWeeksIn(new Period(0, 0, 1, 0, 0, 0, 0, 0)).getValue());
+        assertEquals(123, Weeks.standardWeeksIn(Period.weeks(123)).getValue());
+        assertEquals(-987, Weeks.standardWeeksIn(Period.weeks(-987)).getValue());
+        assertEquals(1, Weeks.standardWeeksIn(Period.days(13)).getValue());
+        assertEquals(2, Weeks.standardWeeksIn(Period.days(14)).getValue());
+        assertEquals(2, Weeks.standardWeeksIn(Period.days(15)).getValue());
         try {
             Weeks.standardWeeksIn(Period.months(1));
             fail();
@@ -80,12 +80,12 @@ public class TestWeeks extends TestCase {
         }
     }
     public void testFactory_parseWeeks_String() {
-        assertEquals(0, Weeks.parseWeeks(null).getWeeks());
-        assertEquals(0, Weeks.parseWeeks("P0W").getWeeks());
-        assertEquals(1, Weeks.parseWeeks("P1W").getWeeks());
-        assertEquals(-3, Weeks.parseWeeks("P-3W").getWeeks());
-        assertEquals(2, Weeks.parseWeeks("P0Y0M2W").getWeeks());
-        assertEquals(2, Weeks.parseWeeks("P2WT0H0M").getWeeks());
+        assertEquals(0, Weeks.parseWeeks(null).getValue());
+        assertEquals(0, Weeks.parseWeeks("P0W").getValue());
+        assertEquals(1, Weeks.parseWeeks("P1W").getValue());
+        assertEquals(-3, Weeks.parseWeeks("P-3W").getValue());
+        assertEquals(2, Weeks.parseWeeks("P0Y0M2W").getValue());
+        assertEquals(2, Weeks.parseWeeks("P2WT0H0M").getValue());
         try {
             Weeks.parseWeeks("P1Y1D");
             fail();
@@ -102,7 +102,7 @@ public class TestWeeks extends TestCase {
 
     public void testGetMethods() {
         Weeks test = Weeks.weeks(20);
-        assertEquals(20, test.getWeeks());
+        assertEquals(20, test.getValue());
     }
     public void testGetFieldType() {
         Weeks test = Weeks.weeks(20);
@@ -213,10 +213,10 @@ public class TestWeeks extends TestCase {
     public void testPlus_int() {
         Weeks test2 = Weeks.weeks(2);
         Weeks result = test2.plus(3);
-        assertEquals(2, test2.getWeeks());
-        assertEquals(5, result.getWeeks());
+        assertEquals(2, test2.getValue());
+        assertEquals(5, result.getValue());
         
-        assertEquals(1, Weeks.ONE.plus(0).getWeeks());
+        assertEquals(1, Weeks.ONE.plus(0).getValue());
         
         try {
             Weeks.MAX_VALUE.plus(1);
@@ -228,13 +228,13 @@ public class TestWeeks extends TestCase {
     public void testPlus_Weeks() {
         Weeks test2 = Weeks.weeks(2);
         Weeks test3 = Weeks.weeks(3);
-        Weeks result = test2.plus(test3);
-        assertEquals(2, test2.getWeeks());
-        assertEquals(3, test3.getWeeks());
-        assertEquals(5, result.getWeeks());
+        Weeks result = (Weeks)test2.plus(test3);
+        assertEquals(2, test2.getValue());
+        assertEquals(3, test3.getValue());
+        assertEquals(5, result.getValue());
         
-        assertEquals(1, Weeks.ONE.plus(Weeks.ZERO).getWeeks());
-        assertEquals(1, Weeks.ONE.plus(null).getWeeks());
+        assertEquals(1, Weeks.ONE.plus(Weeks.ZERO).getValue());
+        assertEquals(1, Weeks.ONE.plus(null).getValue());
         
         try {
             Weeks.MAX_VALUE.plus(Weeks.ONE);
@@ -245,11 +245,11 @@ public class TestWeeks extends TestCase {
     }
     public void testMinus_int() {
         Weeks test2 = Weeks.weeks(2);
-        Weeks result = test2.minus(3);
-        assertEquals(2, test2.getWeeks());
-        assertEquals(-1, result.getWeeks());
+        Weeks result = (Weeks)test2.minus(3);
+        assertEquals(2, test2.getValue());
+        assertEquals(-1, result.getValue());
         
-        assertEquals(1, Weeks.ONE.minus(0).getWeeks());
+        assertEquals(1, Weeks.ONE.minus(0).getValue());
         
         try {
             Weeks.MIN_VALUE.minus(1);
@@ -261,13 +261,13 @@ public class TestWeeks extends TestCase {
     public void testMinus_Weeks() {
         Weeks test2 = Weeks.weeks(2);
         Weeks test3 = Weeks.weeks(3);
-        Weeks result = test2.minus(test3);
-        assertEquals(2, test2.getWeeks());
-        assertEquals(3, test3.getWeeks());
-        assertEquals(-1, result.getWeeks());
+        Weeks result = (Weeks)test2.minus(test3);
+        assertEquals(2, test2.getValue());
+        assertEquals(3, test3.getValue());
+        assertEquals(-1, result.getValue());
         
-        assertEquals(1, Weeks.ONE.minus(Weeks.ZERO).getWeeks());
-        assertEquals(1, Weeks.ONE.minus(null).getWeeks());
+        assertEquals(1, Weeks.ONE.minus(Weeks.ZERO).getValue());
+        assertEquals(1, Weeks.ONE.minus(null).getValue());
         
         try {
             Weeks.MIN_VALUE.minus(Weeks.ONE);
@@ -278,9 +278,9 @@ public class TestWeeks extends TestCase {
     }
     public void testMultipliedBy_int() {
         Weeks test = Weeks.weeks(2);
-        assertEquals(6, test.multipliedBy(3).getWeeks());
-        assertEquals(2, test.getWeeks());
-        assertEquals(-6, test.multipliedBy(-3).getWeeks());
+        assertEquals(6, test.multipliedBy(3).getValue());
+        assertEquals(2, test.getValue());
+        assertEquals(-6, test.multipliedBy(-3).getValue());
         assertSame(test, test.multipliedBy(1));
         
         Weeks halfMax = Weeks.weeks(Integer.MAX_VALUE / 2 + 1);
@@ -293,12 +293,12 @@ public class TestWeeks extends TestCase {
     }
     public void testDividedBy_int() {
         Weeks test = Weeks.weeks(12);
-        assertEquals(6, test.dividedBy(2).getWeeks());
-        assertEquals(12, test.getWeeks());
-        assertEquals(4, test.dividedBy(3).getWeeks());
-        assertEquals(3, test.dividedBy(4).getWeeks());
-        assertEquals(2, test.dividedBy(5).getWeeks());
-        assertEquals(2, test.dividedBy(6).getWeeks());
+        assertEquals(6, test.dividedBy(2).getValue());
+        assertEquals(12, test.getValue());
+        assertEquals(4, test.dividedBy(3).getValue());
+        assertEquals(3, test.dividedBy(4).getValue());
+        assertEquals(2, test.dividedBy(5).getValue());
+        assertEquals(2, test.dividedBy(6).getValue());
         assertSame(test, test.dividedBy(1));
         
         try {
@@ -310,8 +310,8 @@ public class TestWeeks extends TestCase {
     }
     public void testNegated() {
         Weeks test = Weeks.weeks(12);
-        assertEquals(-12, test.negated().getWeeks());
-        assertEquals(12, test.getWeeks());
+        assertEquals(-12, test.negated().getValue());
+        assertEquals(12, test.getValue());
         
         try {
             Weeks.MIN_VALUE.negated();

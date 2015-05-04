@@ -46,30 +46,27 @@ public final class Hours extends BaseSingleFieldPeriod {
             Chronology chrono = DateTimeUtils.getChronology(start.getChronology());
 
             int hours = chrono.hours().getDifference(((LocalTime) end).getLocalMillis(), ((LocalTime) start).getLocalMillis());
-            return Hours.hours(hours);
+            return hours(hours);
         }
 
         int amount = BaseSingleFieldPeriod.between(start, end, ZERO);
-        return Hours.hours(amount);
+        return hours(amount);
     }
 
     @FromString public static Hours parseHours(String periodStr) {
         if (periodStr == null)
         {
-            return Hours.ZERO;
+            return ZERO;
         }
 
         Period p = PARSER.parsePeriod(periodStr);
-        return Hours.hours(p.getHours());
+        return hours(p.getHours());
     }
 
     @Override protected Object readResolve() {
-        return Hours.hours(getValue());
+        return hours(getValue());
     }
 
-    public int getHours() {
-        return getValue();
-    }
     @Override public DurationFieldType getFieldType() {
         return DurationFieldType.hours();
     }
@@ -77,66 +74,29 @@ public final class Hours extends BaseSingleFieldPeriod {
         return PeriodType.hours();
     }
 
-    public boolean isGreaterThan(Hours other) {
-        if (other == null)
-        {
-            return getValue() > 0;
-        }
-
-        return getValue() > other.getValue();
-    }
-    public boolean isLessThan(Hours other) {
-        if (other == null)
-        {
-            return getValue() < 0;
-        }
-
-        return getValue() < other.getValue();
-    }
-
-    public Hours plus(int hours) {
+    @Override public Hours plus(int hours) {
         if (hours == 0)
         {
             return this;
         }
 
-        return Hours.hours(FieldUtils.safeAdd(getValue(), hours));
-    }
-    public Hours plus(Hours hours) {
-        if (hours == null)
-        {
-            return this;
-        }
-
-        return plus(hours.getValue());
+        return hours(FieldUtils.safeAdd(getValue(), hours));
     }
 
-    public Hours minus(int hours) {
-        return plus(FieldUtils.safeNegate(hours));
+    @Override public Hours multipliedBy(int scalar) {
+        return hours(FieldUtils.safeMultiply(getValue(), scalar));
     }
-    public Hours minus(Hours hours) {
-        if (hours == null)
-        {
-            return this;
-        }
-
-        return minus(hours.getValue());
-    }
-
-    public Hours multipliedBy(int scalar) {
-        return Hours.hours(FieldUtils.safeMultiply(getValue(), scalar));
-    }
-    public Hours dividedBy(int divisor) {
+    @Override public Hours dividedBy(int divisor) {
         if (divisor == 1)
         {
             return this;
         }
 
-        return Hours.hours(getValue() / divisor);
+        return hours(getValue() / divisor);
     }
 
-    public Hours negated() {
-        return Hours.hours(FieldUtils.safeNegate(getValue()));
+    @Override public Hours negated() {
+        return hours(FieldUtils.safeNegate(getValue()));
     }
 
     @ToString
@@ -162,7 +122,6 @@ public final class Hours extends BaseSingleFieldPeriod {
 
     public static Hours standardHoursIn(ReadablePeriod period) {
         int amount = BaseSingleFieldPeriod.standardPeriodIn(period, DateTimeConstants.MILLIS_PER_HOUR);
-        return Hours.hours(amount);
+        return hours(amount);
     }
-
 }
