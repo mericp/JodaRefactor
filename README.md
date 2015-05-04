@@ -1,4 +1,6 @@
-En este ejercicio me he centrado en: 1. Las clases Years, Months, Weeks, Days, Hours, Minutes y Seconds. 2. El pool.
+En este ejercicio me he centrado en: 
+1. Las clases Years, Months, Weeks, Days, Hours, Minutes y Seconds. 
+2. El pool.
 
 Primero he eliminado todas las clases y métodos que no tuvieran relación con las mencionadas arriba (incluyendo los tests). Luego he extraido todos los comentarios que eran más bien documentación a ficheros txt en la carpeta "doc". No me he querido liar demasiado con eso pero supongo que ya se entiende que esa carpeta contendría toda la documentación del programa.
 
