@@ -8,21 +8,24 @@ import duration.DurationFieldType;
 import org.joda.convert.ToString;
 import partial.ReadablePartial;
 import period.Base.BaseSingleFieldPeriod;
-import dao.Pool;
 import period.Format.ISOPeriodFormat;
 import period.Format.PeriodFormatter;
 import period.Period;
 import period.PeriodType;
 import chronology.Chronology;
+import pool.YearPool;
 
 public final class Years extends BaseSingleFieldPeriod {
-    public static final Years ZERO = Pool.retrieveYears(0);
-    public static final Years ONE = Pool.retrieveYears(1);
-    public static final Years TWO = Pool.retrieveYears(2);
-    public static final Years THREE = Pool.retrieveYears(3);
-    public static final Years MAX_VALUE = Pool.retrieveYears(Integer.MAX_VALUE);
-    public static final Years MIN_VALUE = Pool.retrieveYears(Integer.MIN_VALUE);
+    public static final Years ZERO = YearPool.get(0);
+    public static final Years ONE = YearPool.get(1);
+    public static final Years TWO = YearPool.get(2);
+    public static final Years THREE = YearPool.get(3);
+
+    public static final Years MAX_VALUE = YearPool.get(Integer.MAX_VALUE);
+    public static final Years MIN_VALUE = YearPool.get(Integer.MIN_VALUE);
+
     private static final PeriodFormatter PARSER = ISOPeriodFormat.standard().withParseType(PeriodType.years());
+
     private static final long serialVersionUID = 87525275727380868L;
 
     public Years(int years) {
@@ -30,7 +33,7 @@ public final class Years extends BaseSingleFieldPeriod {
     }
 
     public static Years years(int years) {
-        return Pool.retrieveYears(years);
+        return YearPool.get(years);
     }
     public static Years yearsBetween(ReadablePartial start, ReadablePartial end) {
         Years result;
@@ -54,7 +57,7 @@ public final class Years extends BaseSingleFieldPeriod {
 
         if (periodStr == null)
         {
-            result = Years.ZERO;
+            result = ZERO;
         }
         else
         {
@@ -65,7 +68,7 @@ public final class Years extends BaseSingleFieldPeriod {
         return result;
     }
 
-    private Object readResolve() {
+    @Override protected Object readResolve() {
         return Years.years(getValue());
     }
 

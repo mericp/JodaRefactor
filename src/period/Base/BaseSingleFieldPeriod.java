@@ -188,4 +188,6 @@ public abstract class BaseSingleFieldPeriod implements ReadablePeriod, Comparabl
 
         return result;
     }
+
+    protected abstract Object readResolve();
 }

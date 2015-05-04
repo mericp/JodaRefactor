@@ -2,7 +2,6 @@ package timeunits;
 
 import Local.LocalTime;
 import chronology.Chronology;
-import dao.Pool;
 import datetime.DateTimeConstants;
 import datetime.DateTimeUtils;
 import duration.Duration;
@@ -17,14 +16,15 @@ import period.Format.PeriodFormatter;
 import period.Period;
 import period.PeriodType;
 import period.ReadablePeriod;
+import pool.MinutePool;
 
 public final class Minutes extends BaseSingleFieldPeriod {
-    public static final Minutes ZERO = Pool.retrieveMinutes(0);
-    public static final Minutes ONE = Pool.retrieveMinutes(1);
-    public static final Minutes TWO = Pool.retrieveMinutes(2);
-    public static final Minutes THREE = Pool.retrieveMinutes(3);
-    public static final Minutes MAX_VALUE = Pool.retrieveMinutes(Integer.MAX_VALUE);
-    public static final Minutes MIN_VALUE = Pool.retrieveMinutes(Integer.MIN_VALUE);
+    public static final Minutes ZERO = MinutePool.get(0);
+    public static final Minutes ONE = MinutePool.get(1);
+    public static final Minutes TWO = MinutePool.get(2);
+    public static final Minutes THREE = MinutePool.get(3);
+    public static final Minutes MAX_VALUE = MinutePool.get(Integer.MAX_VALUE);
+    public static final Minutes MIN_VALUE = MinutePool.get(Integer.MIN_VALUE);
     private static final PeriodFormatter PARSER = ISOPeriodFormat.standard().withParseType(PeriodType.minutes());
     private static final long serialVersionUID = 87525275727380863L;
 
@@ -33,7 +33,7 @@ public final class Minutes extends BaseSingleFieldPeriod {
     }
 
     public static Minutes minutes(int minutes) {
-        return Pool.retrieveMinutes(minutes);
+        return MinutePool.get(minutes);
     }
     public static Minutes minutesBetween(ReadablePartial start, ReadablePartial end) {
         if (start instanceof LocalTime && end instanceof LocalTime)
@@ -57,7 +57,7 @@ public final class Minutes extends BaseSingleFieldPeriod {
         return Minutes.minutes(p.getMinutes());
     }
 
-    private Object readResolve() {
+    @Override protected Object readResolve() {
         return Minutes.minutes(getValue());
     }
 

@@ -2,7 +2,6 @@ package timeunits;
 
 import Local.LocalTime;
 import chronology.Chronology;
-import dao.Pool;
 import datetime.DateTimeConstants;
 import datetime.DateTimeUtils;
 import duration.Duration;
@@ -17,19 +16,20 @@ import period.Format.PeriodFormatter;
 import period.Period;
 import period.PeriodType;
 import period.ReadablePeriod;
+import pool.HourPool;
 
 public final class Hours extends BaseSingleFieldPeriod {
-    public static final Hours ZERO = Pool.retrieveHours(0);
-    public static final Hours ONE = Pool.retrieveHours(1);
-    public static final Hours TWO = Pool.retrieveHours(2);
-    public static final Hours THREE = Pool.retrieveHours(3);
-    public static final Hours FOUR = Pool.retrieveHours(4);
-    public static final Hours FIVE = Pool.retrieveHours(5);
-    public static final Hours SIX = Pool.retrieveHours(6);
-    public static final Hours SEVEN = Pool.retrieveHours(7);
-    public static final Hours EIGHT = Pool.retrieveHours(8);
-    public static final Hours MAX_VALUE = Pool.retrieveHours(Integer.MAX_VALUE);
-    public static final Hours MIN_VALUE = Pool.retrieveHours(Integer.MIN_VALUE);
+    public static final Hours ZERO = HourPool.get(0);
+    public static final Hours ONE = HourPool.get(1);
+    public static final Hours TWO = HourPool.get(2);
+    public static final Hours THREE = HourPool.get(3);
+    public static final Hours FOUR = HourPool.get(4);
+    public static final Hours FIVE = HourPool.get(5);
+    public static final Hours SIX = HourPool.get(6);
+    public static final Hours SEVEN = HourPool.get(7);
+    public static final Hours EIGHT = HourPool.get(8);
+    public static final Hours MAX_VALUE = HourPool.get(Integer.MAX_VALUE);
+    public static final Hours MIN_VALUE = HourPool.get(Integer.MIN_VALUE);
     private static final PeriodFormatter PARSER = ISOPeriodFormat.standard().withParseType(PeriodType.hours());
     private static final long serialVersionUID = 87525275727380864L;
 
@@ -38,7 +38,7 @@ public final class Hours extends BaseSingleFieldPeriod {
     }
 
     public static Hours hours(int hours) {
-        return Pool.retrieveHours(hours);
+        return HourPool.get(hours);
     }
     public static Hours hoursBetween(ReadablePartial start, ReadablePartial end) {
         if (start instanceof LocalTime && end instanceof LocalTime)
@@ -63,7 +63,7 @@ public final class Hours extends BaseSingleFieldPeriod {
         return Hours.hours(p.getHours());
     }
 
-    private Object readResolve() {
+    @Override protected Object readResolve() {
         return Hours.hours(getValue());
     }
 

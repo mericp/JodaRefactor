@@ -2,7 +2,6 @@ package timeunits;
 
 import Local.LocalTime;
 import chronology.Chronology;
-import dao.Pool;
 import datetime.DateTimeConstants;
 import datetime.DateTimeUtils;
 import duration.Duration;
@@ -17,14 +16,15 @@ import period.Format.PeriodFormatter;
 import period.Period;
 import period.PeriodType;
 import period.ReadablePeriod;
+import pool.SecondPool;
 
 public final class Seconds extends BaseSingleFieldPeriod {
-    public static final Seconds ZERO = Pool.retrieveSeconds(0);
-    public static final Seconds ONE = Pool.retrieveSeconds(1);
-    public static final Seconds TWO = Pool.retrieveSeconds(2);
-    public static final Seconds THREE = Pool.retrieveSeconds(3);
-    public static final Seconds MAX_VALUE = Pool.retrieveSeconds(Integer.MAX_VALUE);
-    public static final Seconds MIN_VALUE = Pool.retrieveSeconds(Integer.MIN_VALUE);
+    public static final Seconds ZERO = SecondPool.get(0);
+    public static final Seconds ONE = SecondPool.get(1);
+    public static final Seconds TWO = SecondPool.get(2);
+    public static final Seconds THREE = SecondPool.get(3);
+    public static final Seconds MAX_VALUE = SecondPool.get(Integer.MAX_VALUE);
+    public static final Seconds MIN_VALUE = SecondPool.get(Integer.MIN_VALUE);
     private static final PeriodFormatter PARSER = ISOPeriodFormat.standard().withParseType(PeriodType.seconds());
     private static final long serialVersionUID = 87525275727380862L;
 
@@ -33,7 +33,7 @@ public final class Seconds extends BaseSingleFieldPeriod {
     }
 
     public static Seconds seconds(int seconds) {
-        return Pool.retrieveSeconds(seconds);
+        return SecondPool.get(seconds);
     }
     public static Seconds secondsBetween(ReadablePartial start, ReadablePartial end) {
         if (start instanceof LocalTime && end instanceof LocalTime)
@@ -57,7 +57,7 @@ public final class Seconds extends BaseSingleFieldPeriod {
         return Seconds.seconds(p.getSeconds());
     }
 
-    private Object readResolve() {
+    @Override protected Object readResolve() {
         return Seconds.seconds(getValue());
     }
 

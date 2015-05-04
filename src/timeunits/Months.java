@@ -1,7 +1,7 @@
 package timeunits;
 
 import chronology.Chronology;
-import dao.Pool;
+import pool.MonthPool;
 import datetime.DateTimeUtils;
 import datetime.LocalDate;
 import duration.DurationFieldType;
@@ -16,21 +16,21 @@ import period.Period;
 import period.PeriodType;
 
 public final class Months extends BaseSingleFieldPeriod {
-    public static final Months ZERO = Pool.retrieveMonths(0);
-    public static final Months ONE = Pool.retrieveMonths(1);
-    public static final Months TWO = Pool.retrieveMonths(2);
-    public static final Months THREE = Pool.retrieveMonths(3);
-    public static final Months FOUR = Pool.retrieveMonths(4);
-    public static final Months FIVE = Pool.retrieveMonths(5);
-    public static final Months SIX = Pool.retrieveMonths(6);
-    public static final Months SEVEN = Pool.retrieveMonths(7);
-    public static final Months EIGHT = Pool.retrieveMonths(8);
-    public static final Months NINE = Pool.retrieveMonths(9);
-    public static final Months TEN = Pool.retrieveMonths(10);
-    public static final Months ELEVEN = Pool.retrieveMonths(11);
-    public static final Months TWELVE = Pool.retrieveMonths(12);
-    public static final Months MAX_VALUE = Pool.retrieveMonths(Integer.MAX_VALUE);
-    public static final Months MIN_VALUE = Pool.retrieveMonths(Integer.MIN_VALUE);
+    public static final Months ZERO = MonthPool.get(0);
+    public static final Months ONE = MonthPool.get(1);
+    public static final Months TWO = MonthPool.get(2);
+    public static final Months THREE = MonthPool.get(3);
+    public static final Months FOUR = MonthPool.get(4);
+    public static final Months FIVE = MonthPool.get(5);
+    public static final Months SIX = MonthPool.get(6);
+    public static final Months SEVEN = MonthPool.get(7);
+    public static final Months EIGHT = MonthPool.get(8);
+    public static final Months NINE = MonthPool.get(9);
+    public static final Months TEN = MonthPool.get(10);
+    public static final Months ELEVEN = MonthPool.get(11);
+    public static final Months TWELVE = MonthPool.get(12);
+    public static final Months MAX_VALUE = MonthPool.get(Integer.MAX_VALUE);
+    public static final Months MIN_VALUE = MonthPool.get(Integer.MIN_VALUE);
     private static final PeriodFormatter PARSER = ISOPeriodFormat.standard().withParseType(PeriodType.months());
     private static final long serialVersionUID = 87525275727380867L;
 
@@ -39,7 +39,7 @@ public final class Months extends BaseSingleFieldPeriod {
     }
 
     public static Months months(int months) {
-        return Pool.retrieveMonths(months);
+        return MonthPool.get(months);
     }
     public static Months monthsBetween(ReadablePartial start, ReadablePartial end) {
         if (start instanceof LocalDate && end instanceof LocalDate)
@@ -64,7 +64,7 @@ public final class Months extends BaseSingleFieldPeriod {
         return Months.months(p.getMonths());
     }
 
-    private Object readResolve() {
+    @Override protected Object readResolve() {
         return Months.months(getValue());
     }
 

@@ -1,7 +1,6 @@
 package timeunits;
 
 import chronology.Chronology;
-import dao.Pool;
 import datetime.DateTimeConstants;
 import datetime.DateTimeUtils;
 import datetime.LocalDate;
@@ -17,18 +16,19 @@ import period.Format.PeriodFormatter;
 import period.Period;
 import period.PeriodType;
 import period.ReadablePeriod;
+import pool.DayPool;
 
 public final class Days extends BaseSingleFieldPeriod {
-    public static final Days ZERO = Pool.retrieveDays(0);
-    public static final Days ONE = Pool.retrieveDays(1);
-    public static final Days TWO = Pool.retrieveDays(2);
-    public static final Days THREE = Pool.retrieveDays(3);
-    public static final Days FOUR = Pool.retrieveDays(4);
-    public static final Days FIVE = Pool.retrieveDays(5);
-    public static final Days SIX = Pool.retrieveDays(6);
-    public static final Days SEVEN = Pool.retrieveDays(7);
-    public static final Days MAX_VALUE = Pool.retrieveDays(Integer.MAX_VALUE);
-    public static final Days MIN_VALUE = Pool.retrieveDays(Integer.MIN_VALUE);
+    public static final Days ZERO = DayPool.get(0);
+    public static final Days ONE = DayPool.get(1);
+    public static final Days TWO = DayPool.get(2);
+    public static final Days THREE = DayPool.get(3);
+    public static final Days FOUR = DayPool.get(4);
+    public static final Days FIVE = DayPool.get(5);
+    public static final Days SIX = DayPool.get(6);
+    public static final Days SEVEN = DayPool.get(7);
+    public static final Days MAX_VALUE = DayPool.get(Integer.MAX_VALUE);
+    public static final Days MIN_VALUE = DayPool.get(Integer.MIN_VALUE);
     private static final PeriodFormatter PARSER = ISOPeriodFormat.standard().withParseType(PeriodType.days());
     private static final long serialVersionUID = 87525275727380865L;
 
@@ -37,7 +37,7 @@ public final class Days extends BaseSingleFieldPeriod {
     }
 
     public static Days days(int days) {
-        return Pool.retrieveDays(days);
+        return DayPool.get(days);
     }
     public static Days daysBetween(ReadablePartial start, ReadablePartial end) {
         if (start instanceof LocalDate && end instanceof LocalDate)
@@ -66,7 +66,7 @@ public final class Days extends BaseSingleFieldPeriod {
         return Days.days(p.getDays());
     }
 
-    private Object readResolve() {
+    @Override protected Object readResolve() {
         return Days.days(getValue());
     }
 

@@ -1,7 +1,6 @@
 package timeunits;
 
 import chronology.Chronology;
-import dao.Pool;
 import datetime.DateTimeConstants;
 import datetime.DateTimeUtils;
 import datetime.LocalDate;
@@ -17,14 +16,15 @@ import period.Format.PeriodFormatter;
 import period.Period;
 import period.PeriodType;
 import period.ReadablePeriod;
+import pool.WeekPool;
 
 public final class Weeks extends BaseSingleFieldPeriod {
-    public static final Weeks ZERO = Pool.retrieveWeeks(0);
-    public static final Weeks ONE = Pool.retrieveWeeks(1);
-    public static final Weeks TWO = Pool.retrieveWeeks(2);
-    public static final Weeks THREE = Pool.retrieveWeeks(3);
-    public static final Weeks MAX_VALUE = Pool.retrieveWeeks(Integer.MAX_VALUE);
-    public static final Weeks MIN_VALUE = Pool.retrieveWeeks(Integer.MIN_VALUE);
+    public static final Weeks ZERO = WeekPool.get(0);
+    public static final Weeks ONE = WeekPool.get(1);
+    public static final Weeks TWO = WeekPool.get(2);
+    public static final Weeks THREE = WeekPool.get(3);
+    public static final Weeks MAX_VALUE = WeekPool.get(Integer.MAX_VALUE);
+    public static final Weeks MIN_VALUE = WeekPool.get(Integer.MIN_VALUE);
     private static final PeriodFormatter PARSER = ISOPeriodFormat.standard().withParseType(PeriodType.weeks());
     private static final long serialVersionUID = 87525275727380866L;
 
@@ -33,7 +33,7 @@ public final class Weeks extends BaseSingleFieldPeriod {
     }
 
     public static Weeks weeks(int weeks) {
-        return Pool.retrieveWeeks(weeks);
+        return WeekPool.get(weeks);
     }
     public static Weeks weeksBetween(ReadablePartial start, ReadablePartial end) {
         if (start instanceof LocalDate && end instanceof LocalDate)
@@ -57,7 +57,7 @@ public final class Weeks extends BaseSingleFieldPeriod {
         return Weeks.weeks(p.getWeeks());
     }
 
-    private Object readResolve() {
+    @Override protected Object readResolve() {
         return Weeks.weeks(getValue());
     }
 
