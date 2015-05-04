@@ -1,0 +1,55 @@
+ConverterManager controls the date and time converters.
+ * <p>
+ * This class enables additional conversion classes to be added via
+ * {@link #addInstantConverter(InstantConverter)}, which may replace an
+ * existing converter. Similar methods exist for duration, time period and
+ * interval converters.
+ * <p>
+ * This class is threadsafe, so adding/removing converters can be done at any
+ * time. Updating the set of converters is relatively expensive, and so should
+ * not be performed often.
+ * <p>
+ * The default instant converters are:
+ * <ul>
+ * <li>ReadableInstant
+ * <li>String
+ * <li>Calendar
+ * <li>Date (includes sql package subclasses)
+ * <li>Long (milliseconds)
+ * <li>null (now)
+ * </ul>
+ *
+ * The default partial converters are:
+ * <ul>
+ * <li>ReadablePartial
+ * <li>ReadableInstant
+ * <li>String
+ * <li>Calendar
+ * <li>Date (includes sql package subclasses)
+ * <li>Long (milliseconds)
+ * <li>null (now)
+ * </ul>
+ *
+ * The default duration converters are:
+ * <ul>
+ * <li>ReadableDuration
+ * <li>ReadableInterval
+ * <li>String
+ * <li>Long (milliseconds)
+ * <li>null (zero ms)
+ * </ul>
+ *
+ * The default time period converters are:
+ * <ul>
+ * <li>ReadablePeriod
+ * <li>ReadableInterval
+ * <li>String
+ * <li>null (zero)
+ * </ul>
+ *
+ * The default interval converters are:
+ * <ul>
+ * <li>ReadableInterval
+ * <li>String
+ * <li>null (zero-length from now to now)
+ * </ul>

@@ -1,0 +1,12 @@
+A placeholder implementation to use when a datetime field is not supported.
+ * <p>
+ * UnsupportedDateTimeField is thread-safe and immutable.
+
+ public static synchronized UnsupportedDateTimeField getInstance:
+ Gets an instance of UnsupportedDateTimeField for a specific named field.
+      * Names should be of standard format, such as 'monthOfYear' or 'hourOfDay'.
+      * The returned instance is cached.
+      *
+      * @param type  the type to obtain
+      * @return the instance
+      * @throws IllegalArgumentException if durationField is null

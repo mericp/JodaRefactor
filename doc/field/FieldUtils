@@ -1,0 +1,65 @@
+General utilities that don't fit elsewhere.
+ * <p>
+ * FieldUtils is thread-safe and immutable.
+
+public static int safeNegate(int value):
+Negates the input throwing an exception if it can't negate it.
+     *
+     * @param value  the value to negate
+     * @return the negated value
+     * @throws ArithmeticException if the value is Integer.MIN_VALUE
+
+public static int safeAdd(int val1, int val2):
+Add two values throwing an exception if overflow occurs.
+     *
+     * @param val1  the first value
+     * @param val2  the second value
+     * @return the new total
+     * @throws ArithmeticException if the value is too big or too small
+
+public static long safeAdd(long val1, long val2):
+Add two values throwing an exception if overflow occurs.
+     *
+     * @param val1  the first value
+     * @param val2  the second value
+     * @return the new total
+     * @throws ArithmeticException if the value is too big or too small
+
+public static long safeSubtract(long val1, long val2):
+Subtracts two values throwing an exception if overflow occurs.
+     *
+     * @param val1  the first value, to be taken away from
+     * @param val2  the second value, the amount to take away
+     * @return the new total
+     * @throws ArithmeticException if the value is too big or too small
+
+ public static int safeMultiply(int val1, int val2):
+ Multiply two values throwing an exception if overflow occurs.
+      *
+      * @param val1  the first value
+      * @param val2  the second value
+      * @return the new total
+      * @throws ArithmeticException if the value is too big or too small
+
+public static long safeMultiply(long val1, int val2):
+Multiply two values throwing an exception if overflow occurs.
+     *
+     * @param val1  the first value
+     * @param val2  the second value
+     * @return the new total
+     * @throws ArithmeticException if the value is too big or too small
+
+  public static int getWrappedValue(int currentValue, int wrapValue, int minValue, int maxValue):
+  Utility method used by addWrapField implementations to ensure the new
+       * value lies within the field's legal value range.
+       *
+       * @param currentValue the current value of the data, which may lie outside
+       * the wrapped value range
+       * @param wrapValue  the value to add to current value before
+       *  wrapping.  This may be negative.
+       * @param minValue the wrap range minimum value.
+       * @param maxValue the wrap range maximum value.  This must be
+       *  greater than minValue (checked by the method).
+       * @return the wrapped value
+       * @throws IllegalArgumentException if minValue is greater
+       *  than or equal to maxValue

@@ -1,0 +1,25 @@
+Defines an instant in time that can be queried and modified using datetime fields.
+ * <p>
+ * The implementation of this interface will be mutable.
+ * It may provide more advanced methods than those in the interface.
+ * <p>
+ * Methods in your application should be defined using <code>ReadWritableDateTime</code>
+ * as a parameter if the method wants to manipulate and change a date in simple ways.
+
+void setYear(int year):
+Set the year to the specified value.
+     *
+     * @param year  the year
+     * @throws IllegalArgumentException if the value is invalid
+
+void addYears(int years):
+Add a number of years to the date.
+     *
+     * @param years  the years to add
+     * @throws IllegalArgumentException if the value is invalid
+
+void setWeekyear(int weekyear):
+Set the weekyear to the specified value.
+     *
+     * @param weekyear  the weekyear
+     * @throws IllegalArgumentException if the value is invalid

@@ -1,0 +1,21 @@
+Writable interface for an interval.
+
+void setInterval(long startInstant, long endInstant):
+Sets this interval from two millisecond instants.
+     *
+     * @param startInstant  the start of the time interval
+     * @param endInstant  the start of the time interval
+     * @throws IllegalArgumentException if the end is before the start
+
+void setInterval(ReadableInterval interval):
+Sets this interval to be the same as another.
+     *
+     * @param interval  the interval to copy
+     * @throws IllegalArgumentException if the end is before the start
+
+void setInterval(ReadableInstant startInstant, ReadableInstant endInstant):
+Sets this interval from two instants.
+     *
+     * @param startInstant  the start of the time interval
+     * @param endInstant  the start of the time interval
+     * @throws IllegalArgumentException if the end is before the start

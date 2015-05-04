@@ -1,0 +1,57 @@
+DateTime is the standard implementation of an unmodifiable datetime class.
+ * <p>
+ * <code>DateTime</code> is the most widely used implementation of
+ * {@link ReadableInstant}. As with all instants, it represents an exact
+ * point on the time-line, but limited to the precision of milliseconds.
+ * A <code>DateTime</code> calculates its fields with respect to a
+ * {@link DateTimeZone time zone}.
+ * <p>
+ * Internally, the class holds two pieces of data. Firstly, it holds the
+ * datetime as milliseconds from the Java epoch of 1970-01-01T00:00:00Z.
+ * Secondly, it holds a {@link Chronology} which determines how the
+ * millisecond instant value is converted into the date time fields.
+ * The default Chronology is {@link ISOChronology} which is the agreed
+ * international standard and compatible with the modern Gregorian calendar.
+ * <p>
+ * Each individual field can be queried in two ways:
+ * <ul>
+ * <li><code>getHourOfDay()</code>
+ * <li><code>hourOfDay().get()</code>
+ * </ul>
+ * The second technique also provides access to other useful methods on the
+ * field:
+ * <ul>
+ * <li>numeric value
+ * <li>text value
+ * <li>short text value
+ * <li>maximum/minimum values
+ * <li>add/subtract
+ * <li>set
+ * <li>rounding
+ * </ul>
+ * <p>
+ * DateTime is thread-safe and immutable, provided that the Chronology is as well.
+ * All standard Chronology classes supplied are thread-safe and immutable.
+
+ public static DateTime parse(String str):
+ Parses a {@code DateTime} from the specified string.
+      * <p>
+      * This uses {@link ISODateTimeFormat#dateTimeParser().withOffsetParsed()}
+      * which is different to passing a {@code String} to the constructor.
+      * <p>
+      * Sometimes this method and {@code new DateTime(str)} return different results.
+      * This can be confusing as the different is not visible in {@link #toString()}.
+      * <p>
+      * When passed a date-time string without an offset, such as '2010-06-30T01:20',
+      * both the constructor and this method use the default time-zone.
+      * As such, {@code DateTime.parse("2010-06-30T01:20")} and
+      * {@code new DateTime("2010-06-30T01:20"))} are equal.
+      * <p>
+      * However, when this method is passed a date-time string with an offset,
+      * the offset is directly parsed and stored.
+      * As such, {@code DateTime.parse("2010-06-30T01:20+02:00")} and
+      * {@code new DateTime("2010-06-30T01:20+02:00"))} are NOT equal.
+      * The object produced via this method has a zone of {@code DateTimeZone.forOffsetHours(1)}.
+      * The object produced via the constructor has a zone of {@code DateTimeZone.getDefault()}.
+      *
+      * @param str  the string to parse, not null

@@ -1,0 +1,43 @@
+AbstractReadableInstantFieldProperty is a base class for binding a
+ * ReadableInstant to a DateTimeField.
+ * <p>
+ * It allows the date and time manipulation code to be field based yet
+ * still easy to use.
+ * <p>
+ * AbstractReadableInstantFieldProperty itself is thread-safe and immutable,
+ * but the ReadableInstant being operated on may be mutable and not
+ * thread-safe.
+
+public int get():
+Gets the value of this property from the instant.
+     * <p>
+     * For example, the following two lines of code are equivalent:
+     * <pre>
+     * datetime.getDayOfMonth();
+     * datetime.dayOfMonth().get();
+     * </pre>
+     *
+     * @return the current value
+     * @see DateTimeField#get
+
+public String getAsString():
+Gets the value of this property from the instant as a string.
+     * <p>
+     * This method returns the value converted to a <code>String</code>
+     * using <code>Integer.toString</code>. This method does NOT return
+     * textual descriptions such as 'Monday' or 'January'.
+     * See {@link #getAsText()} and {@link #getAsShortText()} for those.
+     *
+     * @return the current value
+     * @see DateTimeField#get
+
+public String getAsText():
+Gets the textual value of this property from the instant as a
+     * string in the default locale.
+     * <p>
+     * This method returns the value converted to a <code>String</code>
+     * returning the appropriate textual description wherever possible.
+     * Thus, a day of week of 1 would return 'Monday' in English.
+     *
+     * @return the current text value
+     * @see DateTimeField#getAsText

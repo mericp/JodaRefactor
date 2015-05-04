@@ -1,0 +1,21 @@
+Wraps another Chronology to add support for time zones.
+ * <p>
+ * ZonedChronology is thread-safe and immutable.
+
+ public static ZonedChronology getInstance(Chronology base, DateTimeZone zone):
+ Create a ZonedChronology for any chronology, overriding any time zone it
+      * may already have.
+      *
+      * @param base base chronology to wrap
+      * @param zone the time zone
+      * @throws IllegalArgumentException if chronology or time zone is null
+
+static boolean useTimeArithmetic(DurationField field):
+Use time of day arithmetic rules for unit durations less than typical time zone offsets.
+
+static class ZonedDurationField extends BaseDurationField :
+ Because time durations are typically smaller than time zone offsets, the
+     * arithmetic methods subtract the original offset. This produces a more
+     * expected behavior when crossing time zone offset transitions. For dates,
+     * the new offset is subtracted off. This behavior, if applied to time
+     * fields, can nullify or reverse an add when crossing a transition.

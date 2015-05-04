@@ -1,0 +1,96 @@
+MutableDateTime is the standard implementation of a modifiable datetime class.
+ * It holds the datetime as milliseconds from the Java epoch of 1970-01-01T00:00:00Z.
+ * <p>
+ * This class uses a Chronology internally. The Chronology determines how the
+ * millisecond instant value is converted into the date time fields.
+ * The default Chronology is <code>ISOChronology</code> which is the agreed
+ * international standard and compatible with the modern Gregorian calendar.
+ * <p>
+ * Each individual field can be accessed in two ways:
+ * <ul>
+ * <li><code>getHourOfDay()</code>
+ * <li><code>hourOfDay().get()</code>
+ * </ul>
+ * The second technique also provides access to other useful methods on the
+ * field:
+ * <ul>
+ * <li>get numeric value
+ * <li>set numeric value
+ * <li>add to numeric value
+ * <li>add to numeric value wrapping with the field
+ * <li>get text value
+ * <li>get short text value
+ * <li>set text value
+ * <li>field maximum value
+ * <li>field minimum value
+ * </ul>
+ *
+ * <p>
+ * MutableDateTime is mutable and not thread-safe, unless concurrent threads
+ * are not invoking mutator methods.
+
+public static MutableDateTime now():
+Obtains a {@code MutableDateTime} set to the current system millisecond time
+     * using <code>ISOChronology</code> in the default time zone.
+     *
+     * @return the current date-time, not null
+
+ public static MutableDateTime now(DateTimeZone zone):
+ Obtains a {@code MutableDateTime} set to the current system millisecond time
+      * using <code>ISOChronology</code> in the specified time zone.
+      *
+      * @param zone  the time zone, not null
+      * @return the current date-time, not null
+
+public static MutableDateTime parse(String str):
+Parses a {@code MutableDateTime} from the specified string.
+     * <p>
+     * This uses {@link ISODateTimeFormat#dateTimeParser()}.
+     *
+     * @param str  the string to parse, not null
+
+public static MutableDateTime parse(String str, DateTimeFormatter formatter):
+Parses a {@code MutableDateTime} from the specified string using a formatter.
+     *
+     * @param str  the string to parse, not null
+     * @param formatter  the formatter to use, not null
+
+public MutableDateTime():
+Constructs an instance set to the current system millisecond time
+     * using <code>ISOChronology</code> in the default time zone.
+     *
+     * @see #now()
+
+public MutableDateTime(Object instant):
+Constructs an instance from an Object that represents a datetime.
+     * <p>
+     * If the object implies a chronology (such as GregorianCalendar does),
+     * then that chronology will be used. Otherwise, ISO default is used.
+     * Thus if a GregorianCalendar is passed in, the chronology used will
+     * be GJ, but if a Date is passed in the chronology will be ISO.
+     * <p>
+     * The recognised object types are defined in
+     * {@link org.joda.time.convert.ConverterManager ConverterManager} and
+     * include ReadableInstant, String, Calendar and Date.
+     *
+     * @param instant  the datetime object, null means now
+     * @throws IllegalArgumentException if the instant is invalid
+
+public MutableDateTime(Object instant, DateTimeZone zone):
+Constructs an instance from an Object that represents a datetime,
+     * forcing the time zone to that specified.
+     * <p>
+     * If the object implies a chronology (such as GregorianCalendar does),
+     * then that chronology will be used, but with the time zone adjusted.
+     * Otherwise, ISO is used in the specified time zone.
+     * If the specified time zone is null, the default zone is used.
+     * Thus if a GregorianCalendar is passed in, the chronology used will
+     * be GJ, but if a Date is passed in the chronology will be ISO.
+     * <p>
+     * The recognised object types are defined in
+     * {@link org.joda.time.convert.ConverterManager ConverterManager} and
+     * include ReadableInstant, String, Calendar and Date.
+     *
+     * @param instant  the datetime object, null means now
+     * @param zone  the time zone, null means default time zone
+     * @throws IllegalArgumentException if the instant is invalid

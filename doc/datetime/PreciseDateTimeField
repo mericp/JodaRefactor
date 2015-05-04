@@ -1,0 +1,42 @@
+Precise datetime field, composed of two precise duration fields.
+ * <p>
+ * This DateTimeField is useful for defining DateTimeFields that are composed
+ * of precise durations, like time of day fields. If either duration field is
+ * imprecise, then an {@link ImpreciseDateTimeField} may be used instead.
+ * <p>
+ * PreciseDateTimeField is thread-safe and immutable.
+
+ public PreciseDateTimeField(DateTimeFieldType type, DurationField unit, DurationField range):
+ Constructor.
+      *
+      * @param type  the field type this field uses
+      * @param unit  precise unit duration, like "seconds()".
+      * @param range precise range duration, preferably a multiple of the unit,
+      * like "minutes()".
+      * @throws IllegalArgumentException if either duration field is imprecise
+      * @throws IllegalArgumentException if unit milliseconds is less than one
+      * or effective value range is less than two.
+
+public int get(long instant):
+Get the amount of fractional units from the specified time instant.
+     *
+     * @param instant  the milliseconds from 1970-01-01T00:00:00Z to query
+     * @return the amount of fractional units extracted from the input.
+
+public long addWrapField(long instant, int amount):
+Add to the component of the specified time instant, wrapping around
+     * within that component if necessary.
+     *
+     * @param instant  the milliseconds from 1970-01-01T00:00:00Z to add to
+     * @param amount  the amount of units to add (can be negative).
+     * @return the updated time instant.
+
+public long set(long instant, int value):
+Set the specified amount of units to the specified time instant.
+     *
+     * @param instant  the milliseconds from 1970-01-01T00:00:00Z to set in
+     * @param value  value of units to set.
+     * @return the updated time instant.
+     * @throws IllegalArgumentException if value is too large or too small.
+
+public DurationField getRangeDurationField():

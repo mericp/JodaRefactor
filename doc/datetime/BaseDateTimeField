@@ -1,0 +1,196 @@
+BaseDateTimeField provides the common behaviour for DateTimeField
+ * implementations.
+ * <p>
+ * This class should generally not be used directly by API users. The
+ * DateTimeField class should be used when different kinds of DateTimeField
+ * objects are to be referenced.
+ * <p>
+ * BaseDateTimeField is thread-safe and immutable, and its subclasses must
+ * be as well.
+
+ public abstract int get(long instant):
+ Get the value of this field from the milliseconds.
+      *
+      * @param instant  the milliseconds from 1970-01-01T00:00:00Z to query
+      * @return the value of the field, in the units of the field
+
+public String getAsText(long instant, Locale locale):
+Get the human-readable, text value of this field from the milliseconds.
+     * If the specified locale is null, the default locale is used.
+     * <p>
+     * The default implementation returns getAsText(get(instant), locale).
+     *
+     * @param instant  the milliseconds from 1970-01-01T00:00:00Z to query
+     * @param locale the locale to use for selecting a text symbol, null means default
+     * @return the text value of the field
+
+public final String getAsText(long instant):
+Get the human-readable, text value of this field from the milliseconds.
+     * <p>
+     * The default implementation calls {@link #getAsText(long, Locale)}.
+     *
+     * @param instant  the milliseconds from 1970-01-01T00:00:00Z to query
+     * @return the text value of the field
+
+public String getAsText(ReadablePartial partial, int fieldValue, Locale locale):
+Get the human-readable, text value of this field from a partial instant.
+     * If the specified locale is null, the default locale is used.
+     * <p>
+     * The default implementation returns getAsText(fieldValue, locale).
+     *
+     * @param partial  the partial instant to query
+     * @param fieldValue  the field value of this field, provided for performance
+     * @param locale  the locale to use for selecting a text symbol, null for default
+     * @return the text value of the field
+
+public final String getAsText(ReadablePartial partial, Locale locale):
+Get the human-readable, text value of this field from a partial instant.
+     * If the specified locale is null, the default locale is used.
+     * <p>
+     * The default implementation calls {@link ReadablePartial#get(DateTimeFieldType)}
+     * and {@link #getAsText(ReadablePartial, int, Locale)}.
+     *
+     * @param partial  the partial instant to query
+     * @param locale  the locale to use for selecting a text symbol, null for default
+     * @return the text value of the field
+
+public String getAsText(int fieldValue, Locale locale):
+Get the human-readable, text value of this field from the field value.
+     * If the specified locale is null, the default locale is used.
+     * <p>
+     * The default implementation returns Integer.toString(get(instant)).
+     * <p>
+     * Note: subclasses that override this method should also override
+     * getMaximumTextLength.
+     *
+     * @param fieldValue  the numeric value to convert to text
+     * @param locale the locale to use for selecting a text symbol, null for default
+     * @return the text value of the field
+
+public String getAsShortText(long instant, Locale locale):
+Get the human-readable, short text value of this field from the milliseconds.
+     * If the specified locale is null, the default locale is used.
+     * <p>
+     * The default implementation returns getAsShortText(get(instant), locale).
+     *
+     * @param instant  the milliseconds from 1970-01-01T00:00:00Z to query
+     * @param locale the locale to use for selecting a text symbol, null means default
+     * @return the text value of the field
+
+public final String getAsShortText(long instant):
+Get the human-readable, short text value of this field from the milliseconds.
+     * <p>
+     * The default implementation calls {@link #getAsShortText(long, Locale)}.
+     *
+     * @param instant  the milliseconds from 1970-01-01T00:00:00Z to query
+     * @return the text value of the field
+
+public String getAsShortText(ReadablePartial partial, int fieldValue, Locale locale):
+Get the human-readable, short text value of this field from a partial instant.
+     * If the specified locale is null, the default locale is used.
+     * <p>
+     * The default implementation returns getAsShortText(fieldValue, locale).
+     *
+     * @param partial  the partial instant to query
+     * @param fieldValue  the field value of this field, provided for performance
+     * @param locale  the locale to use for selecting a text symbol, null for default
+     * @return the text value of the field
+
+public final String getAsShortText(ReadablePartial partial, Locale locale):
+Get the human-readable, short text value of this field from a partial instant.
+     * If the specified locale is null, the default locale is used.
+     * <p>
+     * The default implementation calls {@link ReadablePartial#get(DateTimeFieldType)}
+     * and {@link #getAsText(ReadablePartial, int, Locale)}.
+     *
+     * @param partial  the partial instant to query
+     * @param locale  the locale to use for selecting a text symbol, null for default
+     * @return the text value of the field
+
+public String getAsShortText(int fieldValue, Locale locale):
+Get the human-readable, short text value of this field from the field value.
+     * If the specified locale is null, the default locale is used.
+     * <p>
+     * The default implementation returns getAsText(fieldValue, locale).
+     * <p>
+     * Note: subclasses that override this method should also override
+     * getMaximumShortTextLength.
+     *
+     * @param fieldValue  the numeric value to convert to text
+     * @param locale the locale to use for selecting a text symbol, null for default
+     * @return the text value of the field
+
+public long add(long instant, int value):
+Adds a value (which may be negative) to the instant value,
+     * overflowing into larger fields if necessary.
+     * <p>
+     * The value will be added to this field. If the value is too large to be
+     * added solely to this field, larger fields will increase as required.
+     * Smaller fields should be unaffected, except where the result would be
+     * an invalid value for a smaller field. In this case the smaller field is
+     * adjusted to be in range.
+     * <p>
+     * For example, in the ISO chronology:<br>
+     * 2000-08-20 add six months is 2001-02-20<br>
+     * 2000-08-20 add twenty months is 2002-04-20<br>
+     * 2000-08-20 add minus nine months is 1999-11-20<br>
+     * 2001-01-31 add one month  is 2001-02-28<br>
+     * 2001-01-31 add two months is 2001-03-31<br>
+     *
+     * @param instant  the milliseconds from 1970-01-01T00:00:00Z to add to
+     * @param value  the value to add, in the units of the field
+     * @return the updated milliseconds
+
+public int[] add(ReadablePartial instant, int fieldIndex, int[] values, int valueToAdd):
+Adds a value (which may be negative) to the partial instant,
+     * throwing an exception if the maximum size of the instant is reached.
+     * <p>
+     * The value will be added to this field, overflowing into larger fields
+     * if necessary. Smaller fields should be unaffected, except where the
+     * result would be an invalid value for a smaller field. In this case the
+     * smaller field is adjusted to be in range.
+     * <p>
+     * Partial instants only contain some fields. This may result in a maximum
+     * possible value, such as TimeOfDay being limited to 23:59:59:999. If this
+     * limit is breached by the add an exception is thrown.
+     * <p>
+     * For example, in the ISO chronology:<br>
+     * 2000-08-20 add six months is 2000-02-20<br>
+     * 2000-08-20 add twenty months is 2000-04-20<br>
+     * 2000-08-20 add minus nine months is 2000-11-20<br>
+     * 2001-01-31 add one month  is 2001-02-28<br>
+     * 2001-01-31 add two months is 2001-03-31<br>
+     *
+     * @param instant  the partial instant
+     * @param fieldIndex  the index of this field in the partial
+     * @param values  the values of the partial instant which should be updated
+     * @param valueToAdd  the value to add, in the units of the field
+     * @return the passed in values
+     * @throws IllegalArgumentException if the value is invalid or the maximum instant is reached
+
+public int[] addWrapPartial(ReadablePartial instant, int fieldIndex, int[] values, int valueToAdd):
+Adds a value (which may be negative) to the partial instant,
+     * wrapping the whole partial if the maximum size of the partial is reached.
+     * <p>
+     * The value will be added to this field, overflowing into larger fields
+     * if necessary. Smaller fields should be unaffected, except where the
+     * result would be an invalid value for a smaller field. In this case the
+     * smaller field is adjusted to be in range.
+     * <p>
+     * Partial instants only contain some fields. This may result in a maximum
+     * possible value, such as TimeOfDay normally being limited to 23:59:59:999.
+     * If ths limit is reached by the addition, this method will wrap back to
+     * 00:00:00.000. In fact, you would generally only use this method for
+     * classes that have a limitation such as this.
+     * <p>
+     * For example, in the ISO chronology:<br>
+     * 10:20:30 add 20 minutes is 10:40:30<br>
+     * 10:20:30 add 45 minutes is 11:05:30<br>
+     * 10:20:30 add 16 hours is 02:20:30<br>
+     *
+     * @param instant  the partial instant
+     * @param fieldIndex  the index of this field in the partial
+     * @param values  the values of the partial instant which should be updated
+     * @param valueToAdd  the value to add, in the units of the field
+     * @return the passed in values
+     * @throws IllegalArgumentException if the value is invalid or the maximum instant is reached

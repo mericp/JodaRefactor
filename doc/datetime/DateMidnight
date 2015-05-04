@@ -1,0 +1,68 @@
+DateMidnight defines a date where the time component is fixed at midnight.
+ * The class uses a time zone, thus midnight is local unless a UTC time zone is used.
+ * <p>
+ * It is important to emphasise that this class represents the time of midnight on
+ * any given day.
+ * Note that midnight is defined as 00:00, which is at the very start of a day.
+ * <p>
+ * This class does not represent a day, but the millisecond instant at midnight.
+ * If you need a class that represents the whole day, then an {@link Interval} or
+ * a {@link LocalDate} may be more suitable.
+ * <p>
+ * This class uses a Chronology internally. The Chronology determines how the
+ * millisecond instant value is converted into the date time fields.
+ * The default Chronology is <code>ISOChronology</code> which is the agreed
+ * international standard and compatable with the modern Gregorian calendar.
+ *
+ * <p>Each individual field can be queried in two ways:
+ * <ul>
+ * <li><code>getDayOfMonth()</code>
+ * <li><code>dayOfMonth().get()</code>
+ * </ul>
+ * The second technique also provides access to other useful methods on the
+ * field:
+ * <ul>
+ * <li>numeric value
+ * <li>text value
+ * <li>short text value
+ * <li>maximum/minimum values
+ * <li>add/subtract
+ * <li>set
+ * <li>rounding
+ * </ul>
+ *
+ * <p>
+ * DateMidnight is thread-safe and immutable, provided that the Chronology is as well.
+ * All standard Chronology classes supplied are thread-safe and immutable.
+ *
+ * @author Stephen Colebourne
+ * @since 1.0
+ * @deprecated The time of midnight does not exist in some time zones
+ * where the daylight saving time forward shift skips the midnight hour.
+ * Use {@link LocalDate} to represent a date without a time zone.
+ * Or use {@link DateTime} to represent a full date and time, perhaps
+ * using {@link DateTime#withTimeAtStartOfDay()} to get an instant at the
+ * start of a day.
+
+ public static DateMidnight now():
+ Obtains a {@code DateMidnight} set to the current system millisecond time
+      * using <code>ISOChronology</code> in the default time zone.
+      * The constructed object will have a local time of midnight.
+      *
+      * @return the current date, not null
+
+public static DateMidnight now:
+Obtains a {@code DateMidnight} set to the current system millisecond time
+     * using <code>ISOChronology</code> in the specified time zone.
+     * The constructed object will have a local time of midnight.
+     *
+     * @param zone  the time zone, not null
+     * @return the current date, not null
+
+public static DateMidnight now:
+Obtains a {@code DateMidnight} set to the current system millisecond time
+     * using the specified chronology.
+     * The constructed object will have a local time of midnight.
+     *
+     * @param chronology  the chronology, not null
+     * @return the current date, not null

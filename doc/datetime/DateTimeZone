@@ -1,0 +1,181 @@
+DateTimeZone represents a time zone.
+ * <p>
+ * A time zone is a system of rules to convert time from one geographic
+ * location to another. For example, Paris, France is one hour ahead of
+ * London, England. Thus when it is 10:00 in London, it is 11:00 in Paris.
+ * <p>
+ * All time zone rules are expressed, for historical reasons, relative to
+ * Greenwich, London. Local time in Greenwich is referred to as Greenwich Mean
+ * Time (GMT).  This is similar, but not precisely identical, to Universal
+ * Coordinated Time, or UTC. This library only uses the term UTC.
+ * <p>
+ * Using this system, America/Los_Angeles is expressed as UTC-08:00, or UTC-07:00
+ * in the summer. The offset -08:00 indicates that America/Los_Angeles time is
+ * obtained from UTC by adding -08:00, that is, by subtracting 8 hours.
+ * <p>
+ * The offset differs in the summer because of daylight saving time, or DST.
+ * The following definitions of time are generally used:
+ * <ul>
+ * <li>UTC - The reference time.
+ * <li>Standard Time - The local time without a daylight saving time offset.
+ * For example, in Paris, standard time is UTC+01:00.
+ * <li>Daylight Saving Time - The local time with a daylight saving time
+ * offset. This offset is typically one hour, but not always. It is typically
+ * used in most countries away from the equator.  In Paris, daylight saving
+ * time is UTC+02:00.
+ * <li>Wall Time - This is what a local clock on the wall reads. This will be
+ * either Standard Time or Daylight Saving Time depending on the time of year
+ * and whether the location uses Daylight Saving Time.
+ * </ul>
+ * <p>
+ * Unlike the Java TimeZone class, DateTimeZone is immutable. It also only
+ * supports long format time zone ids. Thus EST and ECT are not accepted.
+ * However, the factory that accepts a TimeZone will attempt to convert from
+ * the old short id to a suitable long id.
+ * <p>
+ * There are four approaches to loading time-zone data, which are tried in this order:
+ * <ol>
+ * <li>load the specific {@link Provider} specified by the system property
+ *   {@code org.joda.time.DateTimeZone.Provider}.
+ * <li>load {@link ZoneInfoProvider} using the data in the filing system folder
+ *   pointed to by system property {@code org.joda.time.DateTimeZone.Folder}.
+ * <li>load {@link ZoneInfoProvider} using the data in the classpath location
+ *   {@code org/joda/time/tz/data}.
+ * <li>load {@link UTCProvider}
+ * </ol>
+ * <p>
+ * Unless you override the standard behaviour, the default if the third approach.
+ * <p>
+ * DateTimeZone is thread-safe and immutable, and all subclasses must be as
+ * well.
+
+public static DateTimeZone getDefault():
+Gets the default time zone.
+     * <p>
+     * The default time zone is derived from the system property {@code user.timezone}.
+     * If that is {@code null} or is not a valid identifier, then the value of the
+     * JDK {@code TimeZone} default is converted. If that fails, {@code UTC} is used.
+     * <p>
+     * NOTE: If the {@code java.util.TimeZone} default is updated <i>after</i> calling this
+     * method, then the change will not be picked up here.
+
+public static void setDefault(DateTimeZone zone):
+Sets the default time zone.
+     * <p>
+     * NOTE: Calling this method does <i>not</i> set the {@code java.util.TimeZone} default.
+
+public static DateTimeZone forID(String id):
+Gets a time zone instance for the specified time zone id.
+     * <p>
+     * The time zone id may be one of those returned by getAvailableIDs.
+     * Short ids, as accepted by {@link TimeZone}, are not accepted.
+     * All IDs must be specified in the long format.
+     * The exception is UTC, which is an acceptable id.
+     * <p>
+     * Alternatively a locale independent, fixed offset, datetime zone can
+     * be specified. The form <code>[+-]hh:mm</code> can be used.
+     *
+     * @param id  the ID of the datetime zone, null means default
+     * @return the DateTimeZone object for the ID
+     * @throws IllegalArgumentException if the ID is not recognised
+
+public static DateTimeZone forOffsetHours(int hoursOffset):
+Gets a time zone instance for the specified offset to UTC in hours.
+     * This method assumes standard length hours.
+     * <p>
+     * This factory is a convenient way of constructing zones with a fixed offset.
+     *
+     * @param hoursOffset  the offset in hours from UTC, from -23 to +23
+     * @return the DateTimeZone object for the offset
+     * @throws IllegalArgumentException if the offset is too large or too small
+
+public static DateTimeZone forOffsetHoursMinutes(int hoursOffset, int minutesOffset):
+Gets a time zone instance for the specified offset to UTC in hours and minutes.
+     * This method assumes 60 minutes in an hour, and standard length minutes.
+     * <p>
+     * This factory is a convenient way of constructing zones with a fixed offset.
+     * The hours value must be in the range -23 to +23.
+     * The minutes value must be in the range -59 to +59.
+     * The following combinations of sign for the hour and minute are possible:
+     * <pre>
+     *  Hour    Minute    Example    Result
+     *
+     *  +ve     +ve       (2, 15)    +02:15
+     *  +ve     zero      (2, 0)     +02:00
+     *  +ve     -ve       (2, -15)   IllegalArgumentException
+     *
+     *  zero    +ve       (0, 15)    +00:15
+     *  zero    zero      (0, 0)     +00:00
+     *  zero    -ve       (0, -15)   -00:15
+     *
+     *  -ve     +ve       (-2, 15)   -02:15
+     *  -ve     zero      (-2, 0)    -02:00
+     *  -ve     -ve       (-2, -15)  -02:15
+     * </pre>
+     * Note that in versions before 2.3, the minutes had to be zero or positive.
+     *
+     * @param hoursOffset  the offset in hours from UTC, from -23 to +23
+     * @param minutesOffset  the offset in minutes from UTC, from -59 to +59
+     * @return the DateTimeZone object for the offset
+     * @throws IllegalArgumentException if any value is out of range, the minutes are negative
+     *  when the hours are positive, or the resulting offset exceeds +/- 23:59:59.000
+
+public static DateTimeZone forOffsetMillis(int millisOffset):
+Gets a time zone instance for the specified offset to UTC in milliseconds.
+     *
+     * @param millisOffset  the offset in millis from UTC, from -23:59:59.999 to +23:59:59.999
+     * @return the DateTimeZone object for the offset
+
+ private static Provider getDefaultProvider():
+ Gets the default zone provider.
+      * <p>
+      * This tries four approaches to loading data:
+      * <ol>
+      * <li>loads the provider identifier by the system property
+      *   <code>org.joda.time.DateTimeZone.Provider</code>.
+      * <li>load <code>ZoneInfoProvider</code> using the data in the filing system folder
+      *   pointed to by system property <code>org.joda.time.DateTimeZone.Folder</code>.
+      * <li>loads <code>ZoneInfoProvider</code> using the data in the classpath location
+      *   <code>org/joda/time/tz/data</code>.
+      * <li>loads <code>UTCProvider</code>.
+      * </ol>
+      * <p>
+      * Unless you override the standard behaviour, the default if the third approach.
+      *
+      * @return the default name provider
+
+public int getOffsetFromLocal(long instantLocal):
+Gets the millisecond offset to subtract from local time to get UTC time.
+     * This offset can be used to undo adding the offset obtained by getOffset.
+     *
+     * <pre>
+     * millisLocal == millisUTC   + getOffset(millisUTC)
+     * millisUTC   == millisLocal - getOffsetFromLocal(millisLocal)
+     * </pre>
+     *
+     * NOTE: After calculating millisLocal, some error may be introduced. At
+     * offset transitions (due to DST or other historical changes), ranges of
+     * local times may map to different UTC times.
+     * <p>
+     * For overlaps (where the local time is ambiguous), this method returns the
+     * offset applicable before the gap. The effect of this is that any instant
+     * calculated using the offset from an overlap will be in "summer" time.
+     * <p>
+     * For gaps, this method returns the offset applicable before the gap, ie "winter" offset.
+     * However, the effect of this is that any instant calculated using the offset
+     * from a gap will be after the gap, in "summer" time.
+     * <p>
+     * For example, consider a zone with a gap from 01:00 to 01:59:<br />
+     * Input: 00:00 (before gap) Output: Offset applicable before gap  DateTime: 00:00<br />
+     * Input: 00:30 (before gap) Output: Offset applicable before gap  DateTime: 00:30<br />
+     * Input: 01:00 (in gap)     Output: Offset applicable before gap  DateTime: 02:00<br />
+     * Input: 01:30 (in gap)     Output: Offset applicable before gap  DateTime: 02:30<br />
+     * Input: 02:00 (after gap)  Output: Offset applicable after gap   DateTime: 02:00<br />
+     * Input: 02:30 (after gap)  Output: Offset applicable after gap   DateTime: 02:30<br />
+     * <p>
+     * NOTE: Prior to v2.0, the DST overlap behaviour was not defined and varied by hemisphere.
+     * Prior to v1.5, the DST gap behaviour was also not defined.
+     * In v2.4, the documentation was clarified again.
+     *
+     * @param instantLocal  the millisecond instant, relative to this time zone, to get the offset for
+     * @return the millisecond offset to subtract from local time to get UTC time

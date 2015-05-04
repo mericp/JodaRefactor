@@ -1,0 +1,49 @@
+BaseDurationField provides the common behaviour for DurationField
+ * implementations.
+ * <p>
+ * This class should generally not be used directly by API users. The
+ * DurationField class should be used when different kinds of DurationField
+ * objects are to be referenced.
+ * <p>
+ * BaseDurationField is thread-safe and immutable, and its subclasses must
+ * be as well.
+
+ public int getValue(long duration):
+ Get the value of this field from the milliseconds, which is approximate
+      * if this field is imprecise.
+      *
+      * @param duration  the milliseconds to query, which may be negative
+      * @return the value of the field, in the units of the field, which may be
+      * negative
+
+public long getValueAsLong(long duration):
+Get the value of this field from the milliseconds, which is approximate
+     * if this field is imprecise.
+     *
+     * @param duration  the milliseconds to query, which may be negative
+     * @return the value of the field, in the units of the field, which may be
+     * negative
+
+public int getValue(long duration, long instant):
+Get the value of this field from the milliseconds relative to an
+     * instant.
+     *
+     * <p>If the milliseconds is positive, then the instant is treated as a
+     * "start instant". If negative, the instant is treated as an "end
+     * instant".
+     *
+     * <p>The default implementation returns
+     * <code>Utils.safeToInt(getAsLong(millisDuration, instant))</code>.
+     *
+     * @param duration  the milliseconds to query, which may be negative
+     * @param instant  the start instant to calculate relative to
+     * @return the value of the field, in the units of the field, which may be
+     * negative
+
+public long getMillis(int value):
+Get the millisecond duration of this field from its value, which is
+     * approximate if this field is imprecise.
+     *
+     * @param value  the value of the field, which may be negative
+     * @return the milliseconds that the field represents, which may be
+     * negative
